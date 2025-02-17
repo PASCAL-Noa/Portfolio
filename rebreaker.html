@@ -20,53 +20,108 @@
             </ul>
         </div>
     </nav>
-    <section id="project-showcase">
-        <h1 class="title">Rebreaker</h1>
-        
-        <div class="carousel">
-            <button class="prev-btn">&#10094;</button>
-    
-            <div class="carousel-container">
-                <div class="carousel-item active">
-                    <img src="./assets/projet-rebreaker.png" alt="Screenshot 1">
-                </div>
-                <div class="carousel-item">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/RJzi27_0S90" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
+   
+
+    <section id="game-info">
+        <div class="game-container">
+            <!-- Partie gauche : Carousel -->
+            <div class="game-media">
+                <div class="carousel">
+                    <button class="prev-btn">&#10094;</button>
+                    <div class="carousel-container">
+                        <!-- Ajout de la vidéo -->
+                        <div class="carousel-item active">
+                            <div class="video-wrapper">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/RJzi27_0S90"  
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/Rebreaker/rebreaker2.png" alt="Screenshot 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/Rebreaker/rebreaker3.png" alt="Screenshot 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/Rebreaker/rebreaker4.png" alt="Screenshot 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/Rebreaker/rebreaker5.png" alt="Screenshot 4">
+                        </div>    
                     </div>
+                    <button class="next-btn">&#10095;</button>
                 </div>
-                <div class="carousel-item">
-                    <img src="./assets/rebreaker3.png" alt="Screenshot 3">
+        
+                <!-- Miniatures -->
+                <div class="game-thumbnails">
+                    <img src="./assets/Rebreaker/rebreaker-video.png" class="thumbnail active" data-index="0" alt="Thumb 1">
+                    <img src="./assets/Rebreaker/rebreaker2.png" class="thumbnail" data-index="1" alt="Thumb 2">
+                    <img src="./assets/Rebreaker/rebreaker3.png" class="thumbnail" data-index="2" alt="Thumb 3">
+                    <img src="./assets/Rebreaker/rebreaker4.png" class="thumbnail" data-index="3" alt="Thumb 4">
+                    <img src="./assets/Rebreaker/rebreaker5.png" class="thumbnail" data-index="4" alt="Thumb 5">
                 </div>
-                <div class="carousel-item">
-                    <img src="./assets/rebreaker4.png" alt="Screenshot 4">
-                </div>
-                <div class="carousel-item">
-                    <img src="./assets/rebreaker5.png" alt="Screenshot 5">
-                </div>
-                <div class="carousel-item">
-                    <img src="./assets/rebreaker6.png" alt="Screenshot 6">
-                </div>
+
+                <div class="download-section">
+                    <a href="https://github.com/Razar30/Rebreaker/releases" target="_blank" class="download-btn" download>
+                        ⬇ Télécharger Rebreaker
+                    </a>
+                    <a href="./assets/Rebreaker/cdc-rebreaker.pdf" class="download-btn-doc" download>
+                        ⬇ Télécharger le Cahier des Charges
+                    </a>
+                </div>  
             </div>
     
-            <button class="next-btn">&#10095;</button>
-        </div>
-    
-        <div class="carousel-thumbnails">
-            <img src="./assets/projet-rebreaker.png" class="thumbnail active" data-index="0" alt="Thumb 1">
-            <img src="./assets/rebreaker2.png" class="thumbnail" data-index="1" alt="Thumb 2">
-            <img src="./assets/rebreaker3.png" class="thumbnail" data-index="2" alt="Thumb 3">
-            <img src="./assets/rebreaker4.png" class="thumbnail" data-index="3" alt="Thumb 4">
-            <img src="./assets/rebreaker5.png" class="thumbnail" data-index="4" alt="Thumb 5">
-            <img src="./assets/rebreaker6.png" class="thumbnail" data-index="5" alt="Thumb 6">
+            <!-- Partie droite : Description -->
+            <div class="game-details">
+                <img src="./assets/Rebreaker/projet-rebreaker.png" class="game-banner" alt="Rebreaker Logo">
+                <p class="game-description">
+                    <strong>Rebreaker</strong> est l'un de mes projets d'école les plus ambitieux.
+                    Développé lors de ma deuxième année de Bachelor, ce projet s'est rapidement imposé comme l'un de mes plus grandes réussites.
+                    Il m'a permis d'explorer des concepts avancés en programmation, notamment en introduisant les bases d'un ECS, l'intégration de shaders (hors cdc) et ma première approche avec SFML.                  
+                    Ce projet a également marqué ma première utilisation approfondie de la STL, renforçant ainsi mes compétences en gestion de données et structures algorithmiques.
+                    Grâce à Rebreaker, j'ai acquis des bases solides qui ont structuré mon apprentissage et m'ont préparé aux défis plus complexes de ma seconde année.
+                     
+                </p>
+                
+                <p class="game-meta">
+                    <span>📅 Temps :</span> <strong>2 semaines</strong> <br>
+                    <span>🛠 Développement :</span> <strong>PASCAL Noa, GILOTIN Ethan, VILLARD-HERNANDEZ Mithaniel</strong> <br>
+                    <span>🏷 Tags :</span> 
+                    <span class="tag" style="background: purple;">École</span> 
+                    <span class="tag">C++</span> 
+                    <span class="tag">Rider</span>
+                    <span class="tag">SFML</span>
+                    <span class="tag">Équipe de 3</span> 
+                </p>
+            </div>
         </div>
     </section>
     
+    <!-- Fenêtre de zoom -->
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="zoomed-image">
+    </div>
+
+    <footer>
+        <nav>
+          <div class="nav-links-container">
+            <ul class="nav-links">
+              <li><a href="./index.html#About">À propos</a></li>
+              <li><a href="./index.html#experience">Compétences</a></li>
+              <li><a href="./index.html#projects">Projets</a></li>
+              <li><a href="./index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <p>Copyright &#169; 2025 PASCAL Noa. Tout droit réservé.</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -5,18 +5,32 @@ function toggleMenu() {
   icon.classList.toggle("open");
 }
 
+
 document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
     const items = document.querySelectorAll(".carousel-item");
     const totalItems = items.length;
     const prevBtn = document.querySelector(".prev-btn");
     const nextBtn = document.querySelector(".next-btn");
-    const thumbnails = document.querySelectorAll(".carousel-thumbnails img");
+    const thumbnails = document.querySelectorAll(".game-thumbnails img");
+    let autoScroll = setInterval(nextSlide, 5000);
+
+    function isVideoSlide(index) {
+        return items[index].querySelector("iframe") !== null; // Vérifie si la slide contient une vidéo
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScroll);
+    }
+
+    function startAutoScroll() {
+        stopAutoScroll();
+        autoScroll = setInterval(nextSlide, 5000);
+    }
 
     function showSlide(index) {
         items.forEach((item, i) => {
             item.classList.remove("active", "previous", "next");
-
             if (i === index) {
                 item.classList.add("active");
             } else if (i < index) {
@@ -29,6 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
         thumbnails.forEach((thumb, i) => {
             thumb.classList.toggle("active", i === index);
         });
+
+        // 🚀 STOP AUTO-SCROLL SI LA VIDÉO EST AFFICHÉE
+        if (isVideoSlide(index)) {
+            stopAutoScroll();
+        } else {
+            startAutoScroll();
+        }
     }
 
     function nextSlide() {
@@ -51,23 +72,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Auto-play 
-    let autoPlayInterval = setInterval(nextSlide, 5000);
-
-    function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
-    }
-
-    function startAutoPlay() {
-        stopAutoPlay();
-        autoPlayInterval = setInterval(nextSlide, 5000);
-    }
-
-    // Pause autoplay sur hover
-    document.querySelector(".carousel").addEventListener("mouseenter", stopAutoPlay);
-    document.querySelector(".carousel").addEventListener("mouseleave", startAutoPlay);
-
-    showSlide(currentIndex); // Initialise l'affichage
+    showSlide(currentIndex);
 });
+
+
+const modal = document.getElementById("image-modal");
+const modalImg = document.getElementById("zoomed-image");
+const closeBtn = document.querySelector(".close");
+
+// Ouvrir le zoom en cliquant sur une image du carousel
+document.querySelectorAll(".carousel-item img").forEach(img => {
+    img.addEventListener("click", function () {
+        modal.style.display = "flex";
+        modalImg.src = this.src;
+    });
+});
+
+// Fermer le zoom en cliquant sur la croix ou en dehors de l’image
+closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+
 
 

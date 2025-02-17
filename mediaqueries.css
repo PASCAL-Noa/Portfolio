@@ -10,6 +10,8 @@
   #projects {
     height: fit-content;
   }
+
+  
 }
 
 @media screen and (max-width: 1200px) {
@@ -44,6 +46,47 @@
   }
   .about-containers {
     margin-top: 0;
+  }
+
+  #game-info {
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .game-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-media,
+  .game-details {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .game-thumbnails img {
+    width: 80px;
+    height: 50px;
+  }
+
+  .game-meta,
+  .game-description {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .download-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .download-btn,
+  .download-btn-doc {
+    width: 90%;
+    text-align: center;
   }
 }
 
@@ -99,5 +142,65 @@
   }
   .text-container {
     text-align: justify;
+  }
+
+  #game-info {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .game-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-media {
+    width: 100%;
+  }
+
+  .carousel {
+    height: 250px;
+  }
+
+  .carousel-item img {
+    max-height: 250px;
+  }
+
+  .video-wrapper iframe {
+    max-height: 250px;
+  }
+
+  .game-thumbnails {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .game-thumbnails img {
+    width: 60px;
+    height: 40px;
+  }
+
+  .game-details {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .game-banner {
+    max-height: 200px;
+  }
+
+  .game-description {
+    font-size: 0.9rem;
+  }
+
+  .game-meta {
+    font-size: 0.85rem;
+  }
+
+  .download-btn,
+  .download-btn-doc {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
   }
 }

@@ -439,28 +439,57 @@ footer p {
   text-align: center;
 }
 
-/* --- Conteneur principal du carousel --- */
-.carousel {
-  position: relative;
+
+/* --- Conteneur global de la section --- */
+#game-info {
+  background: #0f1923;
+  color: white;
+  padding: 40px;
   width: 80%;
   margin: auto;
-  overflow: hidden;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: -20px;
+}
+
+/* --- Conteneur principal (images + description) --- */
+.game-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* --- Partie gauche : Le carousel --- */
+.game-media {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Styles du carousel --- */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 5px;
   background-color: black;
 }
 
-/* --- Conteneur des slides --- */
 .carousel-container {
   display: flex;
   width: 100%;
-  height: 500px; 
+  height: 100%;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
 }
 
-/* --- Slide individuel --- */
+/* --- Ajustement des slides --- */
 .carousel-item {
   flex: 0 0 100%;
   width: 100%;
@@ -468,54 +497,52 @@ footer p {
   position: absolute;
   top: 0;
   left: 100%;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 0;
 }
 
-/* --- Slide actif (au centre) --- */
 .carousel-item.active {
   left: 0;
   transform: translateX(0%);
+  opacity: 1;
 }
 
-/* --- Slide précédente (déplacement vers la gauche) --- */
+/* Slide précédente */
 .carousel-item.previous {
   left: -100%;
   transform: translateX(-100%);
+  opacity: 0;
 }
 
-/* --- Slide suivante (déplacement vers la droite) --- */
+/* Slide suivante */
 .carousel-item.next {
   left: 100%;
   transform: translateX(100%);
+  opacity: 0;
 }
 
-/* --- Images du carousel --- */
 .carousel-item img {
   width: 100%;
   height: 100%;
-  object-fit: contain; 
+  object-fit: contain;
 }
 
-
-/* --- Vidéo adaptée --- */
+/* --- Vidéo responsive --- */
 .video-wrapper {
-  position: relative;
   width: 100%;
-  height: 100%; 
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-
 .video-wrapper iframe {
   width: 100%;
   height: 100%;
-  max-height: 500px; 
-  object-fit: contain;
+  max-height: 350px;
 }
 
-/* --- Navigation --- */
+/* --- Boutons de navigation --- */
 .prev-btn, .next-btn {
   position: absolute;
   top: 50%;
@@ -527,38 +554,170 @@ footer p {
   cursor: pointer;
   font-size: 2rem;
   z-index: 10;
-  transition: background 0.3s;
-}
-
-.prev-btn:hover, .next-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
 }
 
 .prev-btn { left: 10px; }
 .next-btn { right: 10px; }
 
 /* --- Miniatures --- */
-.carousel-thumbnails {
+.game-thumbnails {
   display: flex;
-  justify-content: center;
+  gap: 5px;
   margin-top: 10px;
   overflow-x: auto;
-  padding: 10px 0;
-  gap: 10px;
-  width: 100%;
 }
 
-.carousel-thumbnails img {
-  width: 80px;
-  height: 50px;
+.game-thumbnails img {
+  width: 100px;
+  height: 60px;
   object-fit: cover;
   cursor: pointer;
+  border-radius: 5px;
   border: 2px solid transparent;
   transition: border 0.3s;
 }
 
-.carousel-thumbnails img.active {
-  border: 2px solid #007bff;
+.game-thumbnails img.active {
+  border: 2px solid #00aaff;
 }
 
+
+/* --- Modal (Zoom) --- */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Image zoomée --- */
+.modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+/* --- Bouton de fermeture --- */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+/* --- Partie droite --- */
+
+/* --- Conteneur des détails du jeu --- */
+.game-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /
+  text-align: center;
+  padding: 20px;
+  background: #0d1b2a; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px; 
+}
+
+/* --- Bannière du jeu --- */
+.game-banner {
+  width: 100%; 
+  max-height: 300px; 
+  object-fit: contain; 
+  margin-bottom: 15px;
+}
+
+/* --- Description du jeu --- */
+.game-description {
+  font-size: 1.1rem;
+  text-align: left;
+  line-height: 1.5;
+  color: white;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* --- Métadonnées du jeu --- */
+.game-meta {
+  font-size: 1.1rem;
+  text-align: left;
+  color: white;
+  margin-left: 20px;
+
+}
+
+/* --- Tags --- */
+.tag {
+  background: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin: 5px 2px;
+  
+}
+
+/* --- Section du bouton de téléchargement --- */
+.download-section {
+  margin-top: 80px;
+  text-align: center;
+}
+
+/* --- Bouton Télécharger --- */
+.download-btn {
+  display: inline-block;
+  background: #ff9800; 
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(255, 152, 0, 0.3);
+}
+
+.download-btn:hover {
+  background: #e68900;
+  transform: scale(1.05);
+  color: #138496;
+}
+
+.download-btn:active {
+  transform: scale(0.95);
+}
+
+
+/* --- Bouton de téléchargement du document --- */
+.download-btn-doc {
+  display: inline-block;
+  background: #17a2b8; 
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+  margin-top: 10px;
+  box-shadow: 0 4px 6px rgba(23, 162, 184, 0.3);
+}
+
+.download-btn-doc:hover {
+  background: #138496;
+  transform: scale(1.05);
+  color: #ff9800; 
+}
 
