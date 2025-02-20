@@ -452,6 +452,7 @@ footer p {
   display: flex;
   justify-content: center;
   margin-top: -20px;
+  flex-wrap: wrap;
 }
 
 /* --- Conteneur principal (images + description) --- */
@@ -628,7 +629,8 @@ footer p {
   background: #0d1b2a; 
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 600px; 
+  max-width: 600px;
+  height: max-content; 
 }
 
 /* --- Bannière du jeu --- */
