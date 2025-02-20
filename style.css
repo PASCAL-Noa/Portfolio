@@ -353,7 +353,8 @@ section {
 article {
   display: flex;
   width: 10rem;
-  justify-content: space-around;
+  justify-content: flex-start;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -621,7 +622,7 @@ footer p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /
+  align-items: center; 
   text-align: center;
   padding: 20px;
   background: #0d1b2a; 
