@@ -111,6 +111,11 @@
   .btn-container {
     flex-wrap: wrap;
   }
+  
+  .about-containers-bis{
+    flex-direction: column;
+  }
+
   .contact-info-container {
     margin: 0;
   }
@@ -140,9 +145,7 @@
   .title {
     font-size: 2rem;
   }
-  .text-container {
-    text-align: justify;
-  }
+ 
 
   #game-info {
     width: 95%;
