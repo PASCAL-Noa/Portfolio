@@ -99,6 +99,61 @@ modal.addEventListener("click", (event) => {
     }
 });
 
+const carousel = document.querySelector('.carousel-container');
+const items = document.querySelectorAll('.carousel-item');
+const thumbnails = document.querySelectorAll('.thumbnail');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+const thumbnailsContainer = document.querySelector('.game-thumbnails');
 
+let currentIndex = 0;
+const totalItems = items.length;
 
+// ➡️ Fonction pour changer la slide active
+function updateCarousel(index) {
+    currentIndex = index;
+
+    // Changement d'image dans le carousel
+    items.forEach((item, i) => {
+        item.classList.remove('active', 'previous', 'next');
+        if (i === index) {
+            item.classList.add('active');
+        } else if (i < index) {
+            item.classList.add('previous');
+        } else {
+            item.classList.add('next');
+        }
+    });
+
+    // Mise à jour des miniatures
+    thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+    });
+
+    // ➡️ Scroll automatique de la miniature sélectionnée
+    thumbnailsContainer.scrollLeft = thumbnails[index].offsetLeft - thumbnailsContainer.offsetWidth / 2 + thumbnails[index].offsetWidth / 2;
+}
+
+// ➡️ Fonction suivante
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalItems;
+    updateCarousel(currentIndex);
+}
+
+// ➡️ Fonction précédente
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+    updateCarousel(currentIndex);
+}
+
+// ➡️ Navigation avec les flèches
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+// ➡️ Navigation via les miniatures
+thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+        updateCarousel(index);
+    });
+});
 
