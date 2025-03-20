@@ -590,7 +590,7 @@ footer p {
   display: flex;
   gap: 5px;
   margin-top: 10px;
-  overflow-x: hidden; /* Cache le défilement horizontal, afin qu'il ne soit visible que si nécessaire */
+  overflow-x: auto; /* Cache le défilement horizontal, afin qu'il ne soit visible que si nécessaire */
   width: 100%; /* Assurez-vous que le conteneur occupe toute la largeur disponible */
   position: relative;
 }
