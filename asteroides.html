@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projets | Asteroides</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+</head>
+<body>
+    <nav id="desktop-nav">
+        <div class="logo">PASCAL Noa</div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="index.html#about">À propos</a></li>
+                <li><a href="index.html#experience">Compétences</a></li>
+                <li><a href="index.html#projects">Projets</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section id="game-info">
+        <div class="game-container">
+            <!-- Partie gauche : Carousel -->
+            <div class="game-media">
+                <div class="carousel">
+                    <button class="prev-btn">&#10094;</button>
+                    <div class="carousel-container">
+                        <!-- Ajout de la vidéo -->
+                        <div class="carousel-item active">
+                            <div class="video-wrapper">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/uzoz1nUycOs?si=kRX1r70IjMmOk-kP" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/Asteroides/projet-asteroides.webp" alt="Screenshot 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/Asteroides/asteroides.webp" alt="Screenshot 2">
+                        </div>  
+                    </div>
+                    <button class="next-btn">&#10095;</button>
+                </div>
+        
+                <!-- Miniatures -->
+                <div class="game-thumbnails">
+                    <img src="./assets/Asteroides/asteroides-video.webp" class="thumbnail active" data-index="0" alt="Thumb 1">
+                    <img src="./assets/Asteroides/projet-asteroides.webp" class="thumbnail" data-index="1" alt="Thumb 2">
+                    <img src="./assets/Asteroides/asteroides.webp" class="thumbnail" data-index="2" alt="Thumb 3">
+                </div>
+
+                <div class="download-section">
+                    <a href="https://github.com/PASCAL-Noa/Asteroides/releases" target="_blank" class="download-btn" download>
+                        ⬇ Télécharger Astéroides
+                    </a>
+                    <a href="./assets/Asteroides/certificat.jpg" class="download-btn-doc" download>
+                        ⬇ Télécharger le certificat de formation
+                    </a>
+                </div>  
+            </div>
+    
+            <!-- Partie droite : Description -->
+            <div class="game-details">
+                <img src="./assets/Asteroides/projet-asteroides.webp" class="game-banner" alt="Rebreaker Logo">
+                <p class="game-description">
+                    <strong>Astéroides</strong> est mon tout premier projet en C++ et avec SFML.
+                    Développé en complément de mes études, j'ai décidé de prendre de l'avance sur 
+                    le programme en me formant en amont pour être plus à l'aise sur les projets de mon école.</br></br>
+                    Réalisé grâce à une formation de 9 heures sur Udemy, ce projet m'a permis de me préparer 
+                    à mon année scolaire tout en découvrant comment configurer un projet avec SFML et utiliser des bibliothèques externes.</br></br>
+                    Le gameplay est simple : le joueur contrôle un vaisseau qui doit tirer sur des astéroïdes. 
+                    S'il entre en collision avec l'un d'eux, la partie est perdue.</br></br>
+                     
+                </p>
+                
+                <p class="game-meta">
+                    <span>📅 Temps :</span> <strong>1 semaine</strong> <br>
+                    <span>🛠 Développement :</span> <strong>PASCAL Noa</strong> <br>
+                    <span>🏷 Tags :</span> 
+                    <span class="tag" style="background: purple;">Formation Udemy</span> 
+                    <span class="tag">C++</span> 
+                    <span class="tag">Visual Studio 2022</span>
+                    <span class="tag">SFML</span>
+                    <span class="tag">Solo</span> 
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Fenêtre de zoom -->
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="zoomed-image">
+    </div>
+
+    <footer>
+        <nav>
+          <div class="nav-links-container">
+            <ul class="nav-links">
+              <li><a href="./index.html#About">À propos</a></li>
+              <li><a href="./index.html#experience">Compétences</a></li>
+              <li><a href="./index.html#projects">Projets</a></li>
+              <li><a href="./index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <p>Copyright &#169; 2025 PASCAL Noa. Tout droit réservé.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
