@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projets | Galaxy</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+</head>
+<body>
+    <nav id="desktop-nav">
+        <div class="logo">PASCAL Noa</div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="index.html#about">À propos</a></li>
+                <li><a href="index.html#experience">Compétences</a></li>
+                <li><a href="index.html#projects">Projets</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section id="game-info">
+        <div class="game-container">
+            <!-- Partie gauche : Carousel -->
+            <div class="game-media">
+                <div class="carousel">
+                    <button class="prev-btn">&#10094;</button>
+                    <div class="carousel-container">
+                        <!-- Ajout de la vidéo -->
+                        <div class="carousel-item active">
+                            <div class="video-wrapper">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/3VK_R7oXihw?si=4mUyerccT5g_S7TH" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/Galaxy/galaxy2.webp" alt="Screenshot 1">
+                        </div>  
+                        <div class="carousel-item">
+                            <img src="./assets/Galaxy/galaxy3.webp" alt="Screenshot 2">
+                        </div>  
+                        <div class="carousel-item">
+                            <img src="./assets/Galaxy/galaxy4.webp" alt="Screenshot 3">
+                        </div>  
+                    </div>
+                    <button class="next-btn">&#10095;</button>
+                </div>
+        
+                <!-- Miniatures -->
+                <div class="game-thumbnails">
+                    <img src="./assets/Galaxy/galaxy-video.webp" class="thumbnail active" data-index="0" alt="Thumb 1">
+                    <img src="./assets/Galaxy/galaxy2.webp" class="thumbnail" data-index="1" alt="Thumb 2">
+                    <img src="./assets/Galaxy/galaxy3.webp" class="thumbnail" data-index="2" alt="Thumb 3">
+                    <img src="./assets/Galaxy/galaxy4.webp" class="thumbnail" data-index="2" alt="Thumb 3">
+                </div>
+
+                <div class="download-section">
+                    <a href="https://github.com/PASCAL-Noa/Galaxy" target="_blank" class="download-btn" download>
+                        ⬇ Télécharger Galaxy
+                    </a>
+                    <!--<a href="./assets/Asteroides/certificat.jpg" class="download-btn-doc" download>
+                        ⬇ Télécharger le certificat de formation
+                    </a>-->
+                </div>  
+            </div>
+    
+            <!-- Partie droite : Description -->
+            <div class="game-details">
+                <img src="./assets/Galaxy/projet-galaxy.webp" class="game-banner" alt="Galaxy Logo">
+                <p class="game-description">
+                    <strong>Galaxy</strong> est un projet Python développé avec le framework Kivy, créé dans le cadre d'un cours pour apprendre les bases de la programmation en Python. </br></br>
+                    Dans ce jeu, vous pilotez un vaisseau spatial qui doit suivre une trajectoire générée aléatoirement à travers la galaxie.
+                    Le but ? Aller le plus loin possible en naviguant entre les étoiles ! </br></br>
+                    Ce projet m'a permis de m'exercer à la gestion des événements, au rendu graphique dynamique avec Kivy, et à la logique de gameplay de base.
+                    C'est une première étape dans mon apprentissage du développement de jeux avec Python !      
+                </p>
+                
+                <p class="game-meta">
+                    <span>📅 Temps :</span> <strong>8 heures</strong> <br>
+                    <span>🛠 Développement :</span> <strong>PASCAL Noa</strong> <br>
+                    <span>🏷 Tags :</span> 
+                    <span class="tag" style="background: purple;">Formation Udemy</span> 
+                    <span class="tag">Python</span> 
+                    <span class="tag">Pycharm</span>
+                    <span class="tag">Kivy</span>
+                    <span class="tag">Solo</span> 
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Fenêtre de zoom -->
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="zoomed-image">
+    </div>
+
+    <footer>
+        <nav>
+          <div class="nav-links-container">
+            <ul class="nav-links">
+              <li><a href="./index.html#About">À propos</a></li>
+              <li><a href="./index.html#experience">Compétences</a></li>
+              <li><a href="./index.html#projects">Projets</a></li>
+              <li><a href="./index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <p>Copyright &#169; 2025 PASCAL Noa. Tout droit réservé.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
