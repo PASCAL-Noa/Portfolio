@@ -802,3 +802,17 @@ button.scroll-left:hover, button.scroll-right:hover {
   color: #ff9800; 
 }
 
+.title-42 {
+  /*font-size: 2rem;*/
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #00aaff;
+  height: fit-content;
+}
+
+.title-42 h1, h2{
+  color: white;
+  text-align: center;
+}
+
