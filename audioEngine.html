@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projets | Audio Engine</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+</head>
+<body>
+    <nav id="desktop-nav">
+        <div class="logo">PASCAL Noa</div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="index.html#about">À propos</a></li>
+                <li><a href="index.html#experience">Compétences</a></li>
+                <li><a href="index.html#projects">Projets</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section id="game-info">
+        <div class="game-container">
+            <!-- Partie gauche : Carousel -->
+            <div class="game-media">
+                <div class="carousel">
+                    <div class="carousel-container">
+                        <!-- Ajout de la vidéo -->
+                        <div class="carousel-item active">
+                            <div class="video-wrapper">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/VfV3-HmY9aU?si=mZV4AtlpVdp0fUyA"  
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+
+                <div class="download-section">
+                    <a href="https://github.com/PASCAL-Noa/AudioEngine/releases/tag/v1.0" target="_blank" class="download-btn" download>
+                        ⬇ Télécharger Audio Engine
+                    </a>
+                    <a href="./assets/CDC_EditeurAudio.pdf" class="download-btn-doc" download>
+                        ⬇ Télécharger le Cahier des Charges
+                    </a>
+                </div>  
+            </div>
+    
+            <!-- Partie droite : Description -->
+            <div class="game-details">
+                <img src="./assets/audioEngine2.png" class="game-banner" alt="Rebreaker Logo">
+                <p class="game-description">
+                    <strong>Audio Engine</strong> 
+                    est un moteur audio développé en C++, accompagné d'une interface d'édition graphique complète. Il permet le mixage, le traitement DSP et la spatialisation sonore en temps réel sur plateforme Windows.
+
+Construit nativement sur l'API XAudio2 et X3DAudio, le moteur est conçu pour offrir une latence minimale et une gestion précise de l'audio 3D.
+                </p>
+                
+                <p class="game-meta">
+                    <span>📅 Temps :</span> <strong>1 semaines</strong> <br>
+                    <span>🛠 Développement :</span> <strong>PASCAL Noa, GILOTIN Ethan, VILLARD-HERNANDEZ Mithaniel</strong> <br>
+                    <span>🏷 Tags :</span> 
+                    <span class="tag" style="background: purple;">École</span> 
+                    <span class="tag">C++</span> 
+                    <span class="tag">Clion</span>
+                    <span class="tag">Xaudio2</span>
+                    <span class="tag">X3Daudio</span>
+                    <span class="tag">ImGui</span>
+                    <span class="tag">Cmake</span>
+                    <span class="tag">Équipe de 3</span> 
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Fenêtre de zoom -->
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="zoomed-image">
+    </div>
+
+    <footer>
+        <nav>
+          <div class="nav-links-container">
+            <ul class="nav-links">
+              <li><a href="./index.html#About">À propos</a></li>
+              <li><a href="./index.html#experience">Compétences</a></li>
+              <li><a href="./index.html#projects">Projets</a></li>
+              <li><a href="./index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <p>Copyright &#169; 2025 PASCAL Noa. Tout droit réservé.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
