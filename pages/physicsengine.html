@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projets | Physics Engine</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../mediaqueries.css" />
+</head>
+<body>
+    <nav id="desktop-nav">
+        <div class="logo">PASCAL Noa</div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">À propos</a></li>
+                <li><a href="../index.html#experience">Compétences</a></li>
+                <li><a href="../index.html#projects">Projets</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section id="game-info">
+        <div class="game-container">
+            <!-- Partie gauche : Carousel -->
+            <div class="game-media">
+                <div class="carousel">
+                    <button class="prev-btn">&#10094;</button>
+                    <div class="carousel-container">
+                        <!-- Ajout de la vidéo -->
+                        <div class="carousel-item active">
+                            <div class="video-wrapper">
+                                <iframe 
+                                    src="/assets/PhysicsEngine/Standard.mp4"  
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="video-wrapper">
+                                <iframe 
+                                    src="/assets/PhysicsEngine/Orbital.mp4"  
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="next-btn">&#10095;</button>
+                </div>
+
+                <div class="game-thumbnails">
+                    <img src="../assets/PhysicsEngine/standard.png" class="thumbnail active" data-index="0" alt="Thumb 1">
+                    <img src="../assets/PhysicsEngine/orbital.png" class="thumbnail" data-index="1" alt="Thumb 2">
+                </div>
+
+
+                <div class="download-section">
+                    <a href="https://github.com/PASCAL-Noa/Physics-Engine-DX12" target="_blank" class="download-btn" download>
+                        ⬇ Télécharger Physics Engine
+                    </a>
+                </div>  
+            </div>
+    
+            <!-- Partie droite : Description -->
+            <div class="game-details">
+                <img src="../assets/PhysicsEngine/projet-physicsengine.jpg" class="game-banner" alt="Physics Engine Logo">
+                <p class="game-description">
+                    <strong>Physics Engine</strong> est un moteur de physique développé en C++ et DirectX12, conçu pour simuler des interactions physiques réalistes dans des environnements 3D. Il intègre des fonctionnalités telles que la détection de collisions et la gestion des forces.
+                    Ce projet m'a permis de mieux comprendre les principes de la physique en informatique, de revoir l'architecture d'un moteur 3D et d'approfondir mes compétences en C++.
+                </p>
+                
+                <p class="game-meta">
+                    <span>📅 Temps :</span> <strong>2 semaines</strong> <br>
+                    <span>🛠 Développement :</span> <strong>PASCAL Noa, VANNIER Hugo, CAPITAINE Hugo</strong> <br>
+                    <span>🏷 Tags :</span> 
+                    <span class="tag" style="background: purple;">École</span> 
+                    <span class="tag">C++</span> 
+                    <span class="tag">Clion</span>
+                    <span class="tag">DirectX12</span>
+                    <span class="tag">Physics</span>
+                    <span class="tag">3D</span>
+                    <span class="tag">Cmake</span>
+                    <span class="tag">Équipe de 3</span> 
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Fenêtre de zoom -->
+    <div id="image-modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="zoomed-image">
+    </div>
+
+    <footer>
+        <nav>
+          <div class="nav-links-container">
+            <ul class="nav-links">
+              <li><a href="../index.html#About">À propos</a></li>
+              <li><a href="../index.html#experience">Compétences</a></li>
+              <li><a href="../index.html#projects">Projets</a></li>
+              <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <p>Copyright &#169; 2026 PASCAL Noa. Tout droit réservé.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
