@@ -75,73 +75,134 @@
         </div>
       </div>
     </section>
+
     <section id="about">
       <p class="section__text__p1">Apprenez-en davantage</p>
       <h1 class="title">Sur moi</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="../assets/Utils/profile2.webp"
-            alt="Profile picture"
-            class="about-pic"
-          />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/icons/experience.webp"
-                alt="Experience icon"
-                class="icon"
-              />
-              <h3>Expérience</h3>
-              <p>Employé commercial confirmé depuis avril 2024 à Intermarché</p>
-              <p>Piscine d'Août 2025 à <b>42</b> Lyon</p>
-              <p>Stage de développeur front-end en été 2025</p>
-              <p>Stage de 48h avec, <a href="https://www.gamecodeur.fr/qui-suis-je/" target="_blank">David Mekersa</a></p>
-            </div>
-            <div class="details-container">
-              <img
-                src="./assets/icons/education.webp"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Formation</h3>
-              <p><b>Bachelor</b> développeur informatique, option jeu vidéo à <b>Gaming Campus</b></p>
-              <p>Développeur fullstack sur le site <a href="https://www.ecole-du-web.net/" target="_blank">école du web</a>.</p>
-              <p>Formation <a href="https://www.udemy.com/course/developpeur-python-formation-complete/" target="_blank">Python</a>,
-                <a href="https://www.udemy.com/course/le-cpp-moderne-par-le-developpement-de-jeux/" target="_blank"> C++</a> et <a href="https://www.udemy.com/course/developpeur-cs-formation-complete/" target="_blank">C#</a> sur le site Udemy.</p>
-            </div>
+
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item left">
+          <div class="timeline-dot dot-edu"></div>
+
+          <div class="timeline-content card-glass">
+            <span class="date-badge">2023 - Présent</span>
+            <h3>Bachelor Gaming Campus</h3>
+            <p>Développeur informatique option JV. Pédagogie par projet et travail en équipe.</p>
           </div>
-          <div>
-            <p style="text-align: justify;">
-              Étudiant en troisième année au <a href="https://gamingcampus.fr/" target="_blank">Gaming Campus</a> de Lyon, je me forme à travers une <b>pédagogie par projet,</b> 
-              privilégiant la pratique et le travail en équipe.</br></br>
+          <div class="timeline-media">
+            <img src="../assets/Timeline/gamingcampus.jpg" alt="Gaming Campus">
+          </div>
+        </div>
 
-              Lors de ma <b>première année</b>, j'ai travaillé sur divers projets dans des <b>domaines variés</b> : six semaines dédiées au développement web, 
-              suivies d'une initiation à Unity, Blender, la gestion de projet, ainsi qu'aux bases de Python et du C.<br><br>
+        <div class="timeline-item right">
+          <div class="timeline-dot dot-pro"></div>
+          <div class="timeline-content card-glass">
+            <span class="date-badge">2024 - Présent</span>
+            <h3>Employé Commercial</h3>
+            <p>Intermarché : Autonomie et sens des responsabilités en milieu professionnel.</p>
+          </div>
+          <div class="timeline-media">
+            <img src="../assets/Timeline/intermarché.png" alt="Gaming Campus">
+          </div>
+        </div>
 
-              Ma <b>seconde année</b> est entièrement spécialisée en <b>C++</b>, me permettant d'explorer différentes facettes du langage à travers plusieurs projets :
-              <b>Programmation réseau</b> avec les sockets UDP pour un <b>projet multijoueur</b>,
-              développement d'un <b>Moteur</b> avec <b>DirectX12</b> pour un projet axé sur le <b>rendu</b>,
-              création de jeux avec <b>SFML</b>,
-              <b>collaboration</b> sur un projet commandé par le musée de l'automobile<a href="https://www.musee-malartre.com/" target="_blank"> Henri Malartre</a>.</br></br>
 
-              Et ma <b>troisième année</b>, qui à marquer un tournant dans ma formation, m'a permis de me spécialiser davantage en <b>C++</b>, en choisissant le <b>pôle moteur</b>. Cette année,
-              j'ai eu l'opportunité de travailler sur des projets plus complexes, notamment un projet moteur de <b>physique 3D</b>, un <b>éditeur audio en temps réel</b> et surtout le <b>grand projet commun</b>, mon projet de <b>fin de Bachelor</b>.<br><br>
+        <div class="timeline-item left">
+          <div class="timeline-dot dot-online"></div>
 
-              Cette approche m'aide à renforcer mes <b>compétences techniques</b>, mon <b>autonomie</b> et ma <b>capacité à collaborer</b> avec des profils variés,
-              notamment des <b>artistes</b> et des <b>commerciaux</b>.</br>
-             </p>
+          <div class="timeline-content card-glass">
+            <span class="date-badge">2025 - Présent</span>
+            <h3>École du web</h3>
+            <p>Formation en ligne sur le développement web, je suis actuellement formé à HTML, CSS, Js et bientôt React.
+              J'ai également des bases en back-end, j'ai déjà touché à SQL, PhP et Python avec Django</p>
+          </div>
+          <div class="timeline-media">
+            <img src="../assets/Timeline/ecoleduweb.png" alt="Gaming Campus">
+          </div>
+        </div>
+
+        <div class="timeline-item right">
+          <div class="timeline-dot dot-edu"></div>
+          <div class="timeline-content card-glass">
+            <span class="date-badge">Août 2025</span>
+            <h3>Piscine 42 Lyon</h3>
+            <p>Immersion intensive en langage C. Logique algorithmique poussée.</p>
+          </div>
+          <div class="timeline-media">
+            <img src="./assets/42/42.webp" alt="42 Lyon">
+          </div>
+        </div>
+
+        <div class="timeline-item left">
+          <div class="timeline-dot dot-tech"></div>
+          <div class="timeline-content card-glass">
+            <span class="date-badge">Juin - Août 2025</span>
+            <h3>Stage de seconde année</h3>
+            <p>Stage de développeur font-end et réalisation d'une maquette Figma, en distancielle. Créer un site vitrine pour un studio d'enregistrement</p>
+          </div>
+          <div class="timeline-media">
+            <img src="./assets/Stage-2025/stage.webp" alt="Engine Dev">
+          </div>
+        </div>
+
+        <div class="timeline-item right">
+          <div class="timeline-dot dot-online"></div>
+          <div class="timeline-content card-glass">
+            <span class="date-badge">2024</span>
+            <h3>Formation Python</h3>
+            <p>Formation Udemy, j'ai appris les bases de python et réalisé deux projets : Galaxy et Mr.Beat</p>
+          </div>
+          <div class="timeline-media">
+            <img src="./assets/Timeline/formation_python.jpg" alt="Engine Dev">
+          </div>
+        </div>
+
+        <div class="timeline-item left">
+          <div class="timeline-dot dot-online"></div>
+          <div class="timeline-content card-glass">
+            <span class="date-badge">2024</span>
+            <h3>Formation C++</h3>
+            <p>Formation Udemy, j'ai appris les bases du C++ et réalisé mon tout premier projet en cpp Astéroides</p>
+          </div>
+          <div class="timeline-media">
+            <img src="./assets/Timeline/c++.webp" alt="Engine Dev">
+          </div>
+        </div>
+
+        <div class="timeline-item right">
+          <div class="timeline-dot dot-edu"></div>
+          <div class="timeline-content card-glass">
+            <span class="date-badge">2023</span>
+            <h3>Bootcamp</h3>
+            <p>Petit stage de 48h avec David Mekersa, faire un jeu en Lua.</p>
+          </div>
+          <div class="timeline-media">
+            <img src="./assets/Timeline/gamingcampus2.jpg" alt="Engine Dev">
+          </div>
+        </div>
+
+        <div class="timeline-item left">
+          <div class="timeline-dot dot-online"></div>
+          <div class="timeline-content card-glass">
+            <span class="date-badge">2021</span>
+            <h3>Formation C#</h3>
+            <p>Formation Udemy, j'ai appris les bases du C#. Il s'agit de ma toute première formation et du commencement pour mon intérêt à la programmation</p>
+          </div>
+          <div class="timeline-media">
+            <img src="./assets/Timeline/formation_cs.jpg" alt="Engine Dev">
           </div>
         </div>
       </div>
+
       <img
         src="./assets/icons/arrow.webp"
         alt="Arrow icon"
         class="icon arrow"
         onclick="location.href='./#projects'"
-      />
+        />
+
     </section>
 
     <section id="projects">
