@@ -1,116 +1,167 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projets | ASCII Art</title>
+    <title>ASCII Art 3D | Rendu géométrique en C++ - PASCAL Noa</title>
+    <meta
+      name="description"
+      content="Générateur de formes 3D en caractères ASCII développé en C++ : projection perspective, z-buffering mathématique et calcul d'illumination diffuse."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.noa-pascal.com/pages/asciiart.html" />
+
+    <meta property="og:site_name" content="PASCAL Noa Portfolio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.noa-pascal.com/pages/asciiart.html" />
+    <meta property="og:title" content="ASCII Art 3D | Rendu géométrique en C++ - PASCAL Noa" />
+    <meta
+      property="og:description"
+      content="Projet de rendu 3D mathématique dans la console système en caractères ASCII avec gestion du tampon de profondeur (Z-buffer) et éclairage dynamique."
+    />
+    <meta property="og:image" content="https://www.noa-pascal.com/assets/AsciiArt/projet-asciiart.png" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.noa-pascal.com/pages/asciiart.html" />
+    <meta name="twitter:title" content="ASCII Art 3D | Rendu géométrique en C++" />
+    <meta
+      name="twitter:description"
+      content="Moteur de projection 3D en mode texte ASCII développé en C++."
+    />
+    <meta name="twitter:image" content="https://www.noa-pascal.com/assets/AsciiArt/projet-asciiart.png" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/Utils/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/Utils/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/Utils/favicon.png" />
+    <link rel="shortcut icon" href="../assets/Utils/favicon.png" />
+
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../mediaqueries.css" />
-</head>
-<body>
-    <nav id="desktop-nav">
-        <div class="logo">PASCAL Noa</div>
-        <div>
-            <ul class="nav-links">
-                <li><a href="../index.html#about">À propos</a></li>
-                <li><a href="../index.html#projects">Projets</a></li>
-                <li><a href="../index.html#experience">Compétences</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-    <section id="game-info">
-        <div class="game-container">
-            <!-- Partie gauche : Carousel -->
-            <div class="game-media">
-                <div class="carousel">
-                    <button class="prev-btn">&#10094;</button>
-                    <div class="carousel-container">
-                        <!-- Ajout de la vidéo -->
-                        <div class="carousel-item active">
-                            <div class="video-wrapper">
-                                <iframe 
-                                    src="../assets/AsciiArt/Torus.mp4"  
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="video-wrapper">
-                                <iframe 
-                                    src="../assets/AsciiArt/Cube.mp4"  
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-                       
-                    </div>
-                    <button class="next-btn">&#10095;</button>
-                </div>
-        
-                <!-- Miniatures -->
-                <div class="game-thumbnails">
-                    <img src="../assets/AsciiArt/projet-asciiart.png" class="thumbnail active" data-index="0" alt="Thumb 1">
-                    <img src="../assets/AsciiArt/Cube.png" class="thumbnail" data-index="1" alt="Thumb 2">
-                </div>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
-                <div class="download-section">
-                    <a href="https://github.com/PASCAL-Noa/ASCII-ART" target="_blank" class="download-btn" download>
-                        ⬇ Télécharger ASCII-ART
-                    </a>
-                </div>  
-            </div>
-    
-            <!-- Partie droite : Description -->
-            <div class="game-details">
-                <img src="../assets/AsciiArt/projet-asciiart.png" class="game-banner" alt="Rebreaker Logo">
-                <p class="game-description">
-                    <strong>ASCII-ART</strong> génère des formes géométriques (Torus, Cube) en caractères ASCII avec gestion de l'éclairage, 
-                    projection en perspective et Z-buffering. L'objectif est de comprendre les bases du rendu 3D en C++ et de travailler 
-                    sur les concepts mathématiques liés à la projection 3D. Le projet s'inspire fortement du tutoriel de <a href="https://www.a1k0n.net/2011/07/20/donut-math.html" style="color: blue;" target="_blank">A1k0n</a>.
-                </p>
-                
-                <p class="game-meta">
-                    <span>📅 Temps :</span> <strong>1 semaines</strong> <br>
-                    <span>🛠 Développement :</span> <strong>PASCAL Noa, GILOTIN Ethan, ROSLET Thomas</strong> <br>
-                    <span>🏷 Tags :</span> 
-                    <span class="tag" style="background: purple;">École</span> 
-                    <span class="tag">C++</span> 
-                    <span class="tag">Rider</span>
-                    <span class="tag">Math</span>
-                    <span class="tag">Équipe de 3</span> 
-                </p>
-            </div>
+    <header class="site-header">
+      <nav id="desktop-nav" aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="../index.html#about">À propos</a></li>
+          <li><a href="../index.html#projects">Projets</a></li>
+          <li><a href="../index.html#experience">Compétences</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav id="hamburger-nav" aria-label="Navigation mobile">
+        <div class="hamburger-menu">
+          <button
+            type="button"
+            class="hamburger-icon"
+            aria-label="Ouvrir le menu de navigation"
+            aria-expanded="false"
+            aria-controls="mobile-menu-links"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu-links" id="mobile-menu-links">
+            <li><a href="../index.html#about">À propos</a></li>
+            <li><a href="../index.html#projects">Projets</a></li>
+            <li><a href="../index.html#experience">Compétences</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
         </div>
-    </section>
-    
-    <!-- Fenêtre de zoom -->
-    <div id="image-modal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="zoomed-image">
-    </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section id="game-info" aria-labelledby="project-main-title">
+        <div class="game-container">
+          <div class="game-media">
+            <div class="carousel" role="region" aria-label="Galerie média du projet ASCII Art">
+              <button type="button" class="prev-btn" aria-label="Slide précédente">&#10094;</button>
+              <div class="carousel-container">
+                <div class="carousel-item active">
+                  <div class="video-wrapper">
+                    <video controls playsinline preload="metadata">
+                      <source src="../assets/AsciiArt/Torus.mp4" type="video/mp4" />
+                      Votre navigateur ne supporte pas la lecture de cette vidéo.
+                    </video>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="video-wrapper">
+                    <video controls playsinline preload="metadata">
+                      <source src="../assets/AsciiArt/Cube.mp4" type="video/mp4" />
+                      Votre navigateur ne supporte pas la lecture de cette vidéo.
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="next-btn" aria-label="Slide suivante">&#10095;</button>
+            </div>
+
+            <div class="game-thumbnails" aria-label="Miniatures de la galerie">
+              <img src="../assets/AsciiArt/projet-asciiart.png" class="thumbnail active" data-index="0" alt="Miniature animation tore ASCII" />
+              <img src="../assets/AsciiArt/Cube.png" class="thumbnail" data-index="1" alt="Miniature animation cube ASCII" />
+            </div>
+
+            <div class="download-section">
+              <a
+                href="https://github.com/PASCAL-Noa/ASCII-ART"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="download-btn"
+              >
+                &#11015; Télécharger ASCII-ART
+              </a>
+            </div>
+          </div>
+
+          <article class="game-details">
+            <img src="../assets/AsciiArt/projet-asciiart.png" class="game-banner" alt="Rendu tore ASCII" />
+            <h1 id="project-main-title" class="title-project">ASCII ART</h1>
+            <p class="game-description">
+              <strong>ASCII-ART</strong> est un moteur de rendu géométrique en mode console qui projette des formes 3D (Tore, Cube) à l'aide de caractères typographiques.<br><br>
+              Le projet implémente les équations trigonométriques de rotation spatiale, une projection en perspective mathématique, un tampon de profondeur (Z-buffering) pour éliminer les surfaces cachées et un modèle d'ombrage calculant l'incidence de la lumière sur chaque normale.<br><br>
+              Inspiré par les travaux pionniers d'A1k0n, ce projet a constitué un exercice approfondi de mathématiques appliquées à l'infographie en C++.
+            </p>
+
+            <div class="game-meta">
+              <p><span>Temps :</span> <strong>1 semaine</strong></p>
+              <p><span>Développement :</span> <strong>PASCAL Noa, GILOTIN Ethan, ROSLET Thomas</strong></p>
+              <div>
+                <span>Tags :</span>
+                <span class="tag tag-purple">École</span>
+                <span class="tag">C++</span>
+                <span class="tag">Rider</span>
+                <span class="tag">Math</span>
+                <span class="tag">Équipe de 3</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Image agrandie" aria-hidden="true">
+        <button type="button" class="close" aria-label="Fermer l'image">&times;</button>
+        <img class="modal-content" id="zoomed-image" alt="" />
+      </div>
+    </main>
 
     <footer>
-        <nav>
-          <div class="nav-links-container">
-            <ul class="nav-links">
-              <li><a href="../index.html#About">À propos</a></li>
-                <li><a href="../index.html#projects">Projets</a></li>
-              <li><a href="../index.html#experience">Compétences</a></li>
-              <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
-        <p>Copyright &#169; 2026 PASCAL Noa. Tout droit réservé.</p>
+      <nav aria-label="Navigation pied de page">
+        <ul class="nav-links">
+          <li><a href="../index.html#about">À propos</a></li>
+          <li><a href="../index.html#projects">Projets</a></li>
+          <li><a href="../index.html#experience">Compétences</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p>&copy; 2026 PASCAL Noa. Tous droits réservés.</p>
     </footer>
 
     <script src="../script.js"></script>
-</body>
+  </body>
 </html>

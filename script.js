@@ -1,159 +1,204 @@
-function toggleMenu() {
-  const menu = document.querySelector(".menu-links");
-  const icon = document.querySelector(".hamburger-icon");
-  menu.classList.toggle("open");
-  icon.classList.toggle("open");
-}
+(function () {
+  "use strict";
 
+  function initNavigation() {
+    const hamburgerButton = document.querySelector(".hamburger-icon");
+    const menuLinks = document.querySelector(".menu-links");
 
-document.addEventListener("DOMContentLoaded", function () {
-    let currentIndex = 0;
-    const items = document.querySelectorAll(".carousel-item");
-    const totalItems = items.length;
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
-    const thumbnails = document.querySelectorAll(".game-thumbnails img");
-    let autoScroll = setInterval(nextSlide, 5000);
+    if (!hamburgerButton || !menuLinks) return;
 
-    function isVideoSlide(index) {
-        return items[index].querySelector("iframe") !== null; // Vérifie si la slide contient une vidéo
+    function toggleNavigation(forceState) {
+      const isOpen = typeof forceState === "boolean"
+        ? forceState
+        : !menuLinks.classList.contains("open");
+
+      menuLinks.classList.toggle("open", isOpen);
+      hamburgerButton.classList.toggle("open", isOpen);
+      hamburgerButton.setAttribute("aria-expanded", String(isOpen));
     }
 
-    function stopAutoScroll() {
-        clearInterval(autoScroll);
+    hamburgerButton.addEventListener("click", () => toggleNavigation());
+
+    menuLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        toggleNavigation(false);
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      const isClickInside = hamburgerButton.contains(event.target) || menuLinks.contains(event.target);
+      if (!isClickInside && menuLinks.classList.contains("open")) {
+        toggleNavigation(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menuLinks.classList.contains("open")) {
+        toggleNavigation(false);
+        hamburgerButton.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1200 && menuLinks.classList.contains("open")) {
+        toggleNavigation(false);
+      }
+    });
+  }
+
+  function initImageModal() {
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("zoomed-image");
+    const closeButton = modal ? modal.querySelector(".close") : null;
+    const carouselImages = document.querySelectorAll(".carousel-item img");
+
+    if (!modal || !modalImg) return;
+
+    function openModal(imageSource, imageAlt) {
+      modalImg.src = imageSource;
+      modalImg.alt = imageAlt || "Image agrandie";
+      modal.classList.add("modal-visible");
+      modal.setAttribute("aria-hidden", "false");
+      if (closeButton) closeButton.focus();
     }
 
-    function startAutoScroll() {
-        stopAutoScroll();
-        autoScroll = setInterval(nextSlide, 5000);
+    function closeModal() {
+      modal.classList.remove("modal-visible");
+      modal.setAttribute("aria-hidden", "true");
+      modalImg.src = "";
     }
 
-    function showSlide(index) {
-        items.forEach((item, i) => {
-            item.classList.remove("active", "previous", "next");
-            if (i === index) {
-                item.classList.add("active");
-            } else if (i < index) {
-                item.classList.add("previous");
-            } else {
-                item.classList.add("next");
-            }
-        });
+    carouselImages.forEach((image) => {
+      image.addEventListener("click", () => {
+        openModal(image.currentSrc || image.src, image.alt);
+      });
+    });
 
-        thumbnails.forEach((thumb, i) => {
-            thumb.classList.toggle("active", i === index);
-        });
+    if (closeButton) {
+      closeButton.addEventListener("click", closeModal);
+    }
 
-        // 🚀 STOP AUTO-SCROLL SI LA VIDÉO EST AFFICHÉE
-        if (isVideoSlide(index)) {
-            stopAutoScroll();
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("modal-visible")) {
+        closeModal();
+      }
+    });
+  }
+
+  function initCarousel() {
+    const carouselContainer = document.querySelector(".carousel");
+    if (!carouselContainer) return;
+
+    const slides = Array.from(carouselContainer.querySelectorAll(".carousel-item"));
+    if (slides.length <= 1) return;
+
+    const prevButton = carouselContainer.querySelector(".prev-btn");
+    const nextButton = carouselContainer.querySelector(".next-btn");
+    const thumbnails = Array.from(document.querySelectorAll(".game-thumbnails .thumbnail"));
+    const thumbnailsContainer = document.querySelector(".game-thumbnails");
+
+    let activeIndex = 0;
+    let autoPlayTimerId = null;
+
+    function hasInteractiveMedia(slideElement) {
+      return Boolean(slideElement.querySelector("iframe, video"));
+    }
+
+    function syncThumbnailsScroll(index) {
+      const activeThumb = thumbnails[index];
+      if (!thumbnailsContainer || !activeThumb) return;
+
+      const offset = activeThumb.offsetLeft - (thumbnailsContainer.offsetWidth / 2) + (activeThumb.offsetWidth / 2);
+      thumbnailsContainer.scrollTo({ left: offset, behavior: "smooth" });
+    }
+
+    function updateSlides(targetIndex) {
+      slides.forEach((slide, index) => {
+        slide.classList.remove("active", "previous", "next");
+        if (index === targetIndex) {
+          slide.classList.add("active");
+        } else if (index < targetIndex) {
+          slide.classList.add("previous");
         } else {
-            startAutoScroll();
+          slide.classList.add("next");
         }
+      });
+
+      thumbnails.forEach((thumb, index) => {
+        thumb.classList.toggle("active", index === targetIndex);
+      });
+
+      syncThumbnailsScroll(targetIndex);
     }
 
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalItems;
-        showSlide(currentIndex);
+    function stopAutoPlay() {
+      if (autoPlayTimerId !== null) {
+        clearInterval(autoPlayTimerId);
+        autoPlayTimerId = null;
+      }
     }
 
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-        showSlide(currentIndex);
+    function startAutoPlay() {
+      stopAutoPlay();
+      if (hasInteractiveMedia(slides[activeIndex])) return;
+      autoPlayTimerId = setInterval(() => {
+        goToSlide((activeIndex + 1) % slides.length);
+      }, 5000);
     }
 
-    prevBtn.addEventListener("click", prevSlide);
-    nextBtn.addEventListener("click", nextSlide);
+    function goToSlide(newIndex) {
+      activeIndex = (newIndex + slides.length) % slides.length;
+      updateSlides(activeIndex);
+      startAutoPlay();
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", () => goToSlide(activeIndex - 1));
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", () => goToSlide(activeIndex + 1));
+    }
 
     thumbnails.forEach((thumbnail, index) => {
-        thumbnail.addEventListener("click", () => {
-            currentIndex = index;
-            showSlide(currentIndex);
-        });
+      thumbnail.addEventListener("click", () => goToSlide(index));
     });
 
-    showSlide(currentIndex);
-});
+    carouselContainer.addEventListener("mouseenter", stopAutoPlay);
+    carouselContainer.addEventListener("mouseleave", startAutoPlay);
 
-
-const modal = document.getElementById("image-modal");
-const modalImg = document.getElementById("zoomed-image");
-const closeBtn = document.querySelector(".close");
-
-// Ouvrir le zoom en cliquant sur une image du carousel
-document.querySelectorAll(".carousel-item img").forEach(img => {
-    img.addEventListener("click", function () {
-        modal.style.display = "flex";
-        modalImg.src = this.src;
-    });
-});
-
-// Fermer le zoom en cliquant sur la croix ou en dehors de l’image
-closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-});
-
-const carousel = document.querySelector('.carousel-container');
-const items = document.querySelectorAll('.carousel-item');
-const thumbnails = document.querySelectorAll('.thumbnail');
-const prevBtn = document.querySelector('.prev-btn');
-const nextBtn = document.querySelector('.next-btn');
-const thumbnailsContainer = document.querySelector('.game-thumbnails');
-
-let currentIndex = 0;
-const totalItems = items.length;
-
-// ➡️ Fonction pour changer la slide active
-function updateCarousel(index) {
-    currentIndex = index;
-
-    // Changement d'image dans le carousel
-    items.forEach((item, i) => {
-        item.classList.remove('active', 'previous', 'next');
-        if (i === index) {
-            item.classList.add('active');
-        } else if (i < index) {
-            item.classList.add('previous');
-        } else {
-            item.classList.add('next');
-        }
+    carouselContainer.setAttribute("tabindex", "0");
+    carouselContainer.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goToSlide(activeIndex - 1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goToSlide(activeIndex + 1);
+      }
     });
 
-    // Mise à jour des miniatures
-    thumbnails.forEach((thumb, i) => {
-        thumb.classList.toggle('active', i === index);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoPlay();
+      } else {
+        startAutoPlay();
+      }
     });
 
-    // ➡️ Scroll automatique de la miniature sélectionnée
-    thumbnailsContainer.scrollLeft = thumbnails[index].offsetLeft - thumbnailsContainer.offsetWidth / 2 + thumbnails[index].offsetWidth / 2;
-}
+    updateSlides(0);
+    startAutoPlay();
+  }
 
-// ➡️ Fonction suivante
-function nextSlide() {
-    currentIndex = (currentIndex + 1) % totalItems;
-    updateCarousel(currentIndex);
-}
-
-// ➡️ Fonction précédente
-function prevSlide() {
-    currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-    updateCarousel(currentIndex);
-}
-
-// ➡️ Navigation avec les flèches
-prevBtn.addEventListener('click', prevSlide);
-nextBtn.addEventListener('click', nextSlide);
-
-// ➡️ Navigation via les miniatures
-thumbnails.forEach((thumbnail, index) => {
-    thumbnail.addEventListener('click', () => {
-        updateCarousel(index);
-    });
-});
-
+  document.addEventListener("DOMContentLoaded", () => {
+    initNavigation();
+    initImageModal();
+    initCarousel();
+  });
+})();
