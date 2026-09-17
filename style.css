@@ -265,7 +265,7 @@ section {
   font-size: 2.2rem;
   font-weight: 600;
   text-align: center;
-  margin-bottom: var(--spacing-xl);
+  /*margin-bottom: var(--spacing-xl);*/
   color: var(--color-text-main);
 }
 
@@ -1107,10 +1107,6 @@ footer p {
     width: 400px;
     height: 400px;
     margin: auto 0;
-  }
-
-  .section__text {
-    align-items: flex-start;
   }
 
   .section__text__p2 {
