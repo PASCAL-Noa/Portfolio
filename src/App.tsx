@@ -13,7 +13,7 @@ import { projects } from './data/projects';
 export const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-white text-black">
-      <Navbar name={personalInfo.name} />
+      <Navbar />
       <main>
         <Hero info={personalInfo} />
         <About items={timelineItems} />

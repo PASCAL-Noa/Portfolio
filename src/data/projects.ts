@@ -9,8 +9,7 @@ export const projects: Project[] = [
     description: "Casse-brique moderne développé en équipe avec moteur physique et mécaniques revisitées.",
     technologies: ["C++", "SFML", "Game Dev"],
     githubUrl: "https://github.com/Razar30/Rebreaker",
-    detailUrl: "/pages/rebreaker.html",
-    featured: true
+    detailUrl: "/pages/rebreaker.html"
   },
   {
     id: "ruins-of-hestia",
@@ -20,40 +19,47 @@ export const projects: Project[] = [
     description: "Jeu d'aventure action complet conçu avec une équipe pluridisciplinaire au Gaming Campus.",
     technologies: ["C++", "Moteur Maison", "Architecture"],
     githubUrl: "https://github.com/PASCAL-Noa/Ruins-of-Hestia",
-    detailUrl: "/pages/roh.html",
-    featured: true
+    detailUrl: "/pages/roh.html"
   },
   {
     id: "moteur-3d",
     title: "Moteur 3D",
-    category: "engine",
+    category: "software",
     image: "/assets/Moteur/projet-moteur.webp",
     description: "Moteur de rendu 3D temps réel explorant le pipeline programmable et l'éclairage moderne.",
     technologies: ["C++", "DirectX12", "Shaders", "Physique"],
     githubUrl: "https://github.com/PASCAL-Noa/Moteur",
-    detailUrl: "/pages/moteur.html",
-    featured: true
+    detailUrl: "/pages/moteur.html"
   },
   {
     id: "physics-engine",
     title: "Physics Engine DX12",
-    category: "engine",
+    category: "software",
     image: "/assets/PhysicsEngine/projet-physicsengine.jpg",
     description: "Moteur physique haute performance couplé à DirectX12 pour simulation et collision temps réel.",
     technologies: ["C++", "DirectX12", "Maths", "Physique 3D"],
     githubUrl: "https://github.com/PASCAL-Noa/Physics-Engine-DX12",
-    detailUrl: "/pages/physicsengine.html",
-    featured: true
+    detailUrl: "/pages/physicsengine.html"
   },
   {
     id: "audio-engine",
     title: "Éditeur Audio (AudioEngine)",
-    category: "engine",
+    category: "software",
     image: "/assets/AudioEngine/projet-audioengine.png",
     description: "Système et éditeur audio temps réel exploitant les API audio bas-niveau pour les jeux.",
     technologies: ["C++", "XAudio2", "RtAudio", "ImGui"],
     githubUrl: "https://github.com/PASCAL-Noa/AudioEngine/releases/tag/v1.0",
     detailUrl: "/pages/audioEngine.html"
+  },
+  {
+    id: "mr-beat",
+    title: "Mr. Beat",
+    category: "software",
+    image: "/assets/MrBeat/projet-mrbeat.webp",
+    description: "Boîte à rythmes et séquenceur interactif avec traitement audio temps réel et interface moderne.",
+    technologies: ["Python", "Kivy", "SoundDevice", "NumPy"],
+    githubUrl: "https://github.com/PASCAL-Noa/MrBeat",
+    detailUrl: "/pages/mrbeat.html"
   },
   {
     id: "asteroides",
@@ -114,16 +120,6 @@ export const projects: Project[] = [
     technologies: ["Python", "Pygame"],
     githubUrl: "https://github.com/PASCAL-Noa/Galaxy",
     detailUrl: "/pages/galaxy.html"
-  },
-  {
-    id: "mr-beat",
-    title: "Mr Beat",
-    category: "game",
-    image: "/assets/MrBeat/projet-mrbeat.webp",
-    description: "Jeu de rythme musical mettant en jeu le tempo et des graphismes réactifs.",
-    technologies: ["Python", "Audio", "Pygame"],
-    githubUrl: "https://github.com/PASCAL-Noa/MrBeat",
-    detailUrl: "/pages/mrbeat.html"
   },
   {
     id: "piscine-42",

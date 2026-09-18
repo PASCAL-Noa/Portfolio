@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 
-interface NavbarProps {
-  name: string;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ name }) => {
+export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -16,15 +12,10 @@ export const Navbar: React.FC<NavbarProps> = ({ name }) => {
 
   return (
     <header className="sticky top-0 z-50 h-20 bg-white/95 backdrop-blur-md border-b border-[#e2e8f0]">
-      <div className="max-w-[1300px] h-full mx-auto px-[5%] flex items-center justify-between">
-        {/* Logo / Name */}
-        <a href="#" className="text-2xl md:text-3xl font-semibold text-black tracking-tight hover:opacity-80 transition-opacity">
-          {name}
-        </a>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-8 list-none m-0 p-0 text-xl font-normal">
+      <div className="max-w-[1300px] h-full mx-auto px-[5%] flex items-center justify-center md:justify-center relative">
+        {/* Desktop Navigation (centrée sans logo, exactement comme à l'origine) */}
+        <nav className="hidden md:flex items-center justify-center w-full">
+          <ul className="flex items-center justify-center gap-12 list-none m-0 p-0 text-2xl font-normal">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
@@ -38,8 +29,8 @@ export const Navbar: React.FC<NavbarProps> = ({ name }) => {
           </ul>
         </nav>
 
-        {/* Mobile Hamburger Button */}
-        <div className="md:hidden relative">
+        {/* Mobile Hamburger Button (aligné à droite sur mobile) */}
+        <div className="md:hidden flex justify-end w-full relative">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

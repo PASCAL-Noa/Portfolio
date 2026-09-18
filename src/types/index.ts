@@ -1,9 +1,11 @@
 export type TimelineCategory = 'edu' | 'pro' | 'online' | 'tech';
 
+export type ProjectCategory = 'game' | 'software' | 'web' | 'other';
+
 export interface Project {
   id: string;
   title: string;
-  category: 'engine' | 'game' | 'web' | 'other';
+  category: ProjectCategory;
   image: string;
   description?: string;
   technologies: string[];
@@ -28,7 +30,7 @@ export interface TimelineItem {
   subtitle?: string;
   description: string;
   image?: string;
-  type: TimelineCategory; // Flag discriminant pour l'icône et le style (badge/pastille)
+  type: TimelineCategory;
   link?: string;
   linkText?: string;
 }
