@@ -1,0 +1,12 @@
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001s;
+    animation-duration: 0.001s;
+  }
+}

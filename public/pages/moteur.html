@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moteur 3D DX12 | Moteur de jeu C++ & DirectX12 - PASCAL Noa</title>
+    <meta
+      name="description"
+      content="Moteur de jeu 3D développé de zéro en C++ et DirectX12 : architecture ECS, pipeline de rendu moderne, importateur OBJ et système de scripts personnalisés."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.noa-pascal.com/pages/moteur.html" />
+
+    <meta property="og:site_name" content="PASCAL Noa Portfolio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.noa-pascal.com/pages/moteur.html" />
+    <meta property="og:title" content="Moteur 3D DX12 | Moteur de jeu C++ & DirectX12 - PASCAL Noa" />
+    <meta
+      property="og:description"
+      content="Développement d'un moteur 3D en C++ avec DirectX12, architecture ECS complète et importateur de maillages 3D."
+    />
+    <meta property="og:image" content="https://www.noa-pascal.com/assets/Moteur/projet-moteur.webp" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.noa-pascal.com/pages/moteur.html" />
+    <meta name="twitter:title" content="Moteur 3D DX12 | Moteur de jeu C++ & DirectX12" />
+    <meta
+      name="twitter:description"
+      content="Moteur de jeu 3D temps réel conçu en C++ avec DirectX12 et architecture ECS."
+    />
+    <meta name="twitter:image" content="https://www.noa-pascal.com/assets/Moteur/projet-moteur.webp" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/Utils/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/Utils/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/Utils/favicon.png" />
+    <link rel="shortcut icon" href="../assets/Utils/favicon.png" />
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../mediaqueries.css" />
+  </head>
+  <body class="project-page">
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <header class="site-header">
+      <nav id="desktop-nav" aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="../index.html#about">À propos</a></li>
+          <li><a href="../index.html#projects">Projets</a></li>
+          <li><a href="../index.html#experience">Compétences</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav id="hamburger-nav" aria-label="Navigation mobile">
+        <div class="hamburger-menu">
+          <button
+            type="button"
+            class="hamburger-icon"
+            aria-label="Ouvrir le menu de navigation"
+            aria-expanded="false"
+            aria-controls="mobile-menu-links"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu-links" id="mobile-menu-links">
+            <li><a href="../index.html#about">À propos</a></li>
+            <li><a href="../index.html#projects">Projets</a></li>
+            <li><a href="../index.html#experience">Compétences</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <nav class="breadcrumb-nav" aria-label="Retour à l'accueil">
+        <a href="../index.html#projects" class="back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Retour aux projets</span>
+        </a>
+      </nav>
+
+      <section id="game-info" aria-labelledby="project-main-title">
+        <div class="game-container">
+          <div class="game-media">
+            <div class="carousel" role="region" aria-label="Galerie média du moteur 3D">
+              <button type="button" class="prev-btn" aria-label="Slide précédente">&#10094;</button>
+              <div class="carousel-container">
+                <div class="carousel-item active">
+                  <div class="video-wrapper">
+                    <iframe
+                      src="https://www.youtube.com/embed/L92Q-DnGABE"
+                      title="Démonstration du rendu et des fonctionnalités du moteur 3D DirectX12"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur2.webp" alt="Rendu de mesh complexe dans le moteur DirectX12" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur3.webp" alt="Gestion des caméras et de la perspective 3D" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur4.webp" alt="Éclairage directionnel et ombrage des surfaces" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur5.webp" alt="Visualisation du frustum culling et du pipeline" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur6.webp" alt="Affichage multifenêtre et débogage graphique" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur7.webp" alt="Simulation d'objets multiples dans la scène" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur8.webp" alt="Structure de scène et hiérarchie d'entités ECS" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur9.webp" alt="Gestion des textures et mapping UV" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur10.webp" alt="Visualisation filaire des polygones" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur11.webp" alt="Rendu de reflets et matériaux spéculaires" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur12.webp" alt="Test de charge avec des milliers de géométries" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Moteur/moteur13.webp" alt="Scène finale complète avec scripts C++" loading="lazy" />
+                </div>
+              </div>
+              <button type="button" class="next-btn" aria-label="Slide suivante">&#10095;</button>
+            </div>
+
+            <div class="game-thumbnails" aria-label="Miniatures de la galerie">
+              <img src="../assets/Moteur/moteur-video.webp" class="thumbnail active" data-index="0" alt="Miniature de la vidéo de démonstration" />
+              <img src="../assets/Moteur/moteur2.webp" class="thumbnail" data-index="1" alt="Miniature capture 2" />
+              <img src="../assets/Moteur/moteur3.webp" class="thumbnail" data-index="2" alt="Miniature capture 3" />
+              <img src="../assets/Moteur/moteur4.webp" class="thumbnail" data-index="3" alt="Miniature capture 4" />
+              <img src="../assets/Moteur/moteur5.webp" class="thumbnail" data-index="4" alt="Miniature capture 5" />
+              <img src="../assets/Moteur/moteur6.webp" class="thumbnail" data-index="5" alt="Miniature capture 6" />
+              <img src="../assets/Moteur/moteur7.webp" class="thumbnail" data-index="6" alt="Miniature capture 7" />
+              <img src="../assets/Moteur/moteur8.webp" class="thumbnail" data-index="7" alt="Miniature capture 8" />
+              <img src="../assets/Moteur/moteur9.webp" class="thumbnail" data-index="8" alt="Miniature capture 9" />
+              <img src="../assets/Moteur/moteur10.webp" class="thumbnail" data-index="9" alt="Miniature capture 10" />
+              <img src="../assets/Moteur/moteur11.webp" class="thumbnail" data-index="10" alt="Miniature capture 11" />
+              <img src="../assets/Moteur/moteur12.webp" class="thumbnail" data-index="11" alt="Miniature capture 12" />
+            </div>
+
+            <div class="download-section">
+              <a
+                href="https://github.com/PASCAL-Noa/Moteur/releases"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="download-btn"
+              >
+                &#11015; Télécharger le moteur
+              </a>
+              <a
+                href="../assets/Moteur/cdc-moteur.pdf"
+                class="download-btn-doc"
+                download
+              >
+                &#11015; Télécharger le Cahier des Charges
+              </a>
+            </div>
+          </div>
+
+          <article class="game-details">
+            <img src="../assets/Moteur/projet-moteur.webp" class="game-banner" alt="Logo du Moteur 3D DirectX12" />
+            <h1 id="project-main-title" class="title-project">Moteur 3D DX12</h1>
+            <p class="game-description">
+              Le projet <strong>Moteur</strong>, en plus d'être l'un des défis les plus ambitieux de mon parcours scolaire, compte parmi mes réalisations techniques les plus significatives.<br><br>
+              Durant un mois intensif, nous avons développé de zéro un moteur de jeu 3D en utilisant l'API bas niveau DirectX12. Le processus a débuté par l'initialisation du pipeline graphique DX12 et l'affichage d'un premier polygone, avant d'intégrer un analyseur de fichiers .obj pour importer des modèles 3D complexes.<br><br>
+              Nous avons ensuite implémenté une architecture logicielle modulaire basée sur un système ECS et un système d'attachement de composants de script en C++ inspiré de la structure d'Unity.
+            </p>
+
+            <div class="game-meta">
+              <p><span>Temps :</span> <strong>4 semaines</strong></p>
+              <p><span>Développement :</span> <strong>PASCAL Noa, COLUCCI Zian, FOURNIER Mathis, DUPERREY Lucas</strong></p>
+              <div>
+                <span>Tags :</span>
+                <span class="tag tag-purple">École</span>
+                <span class="tag">C++</span>
+                <span class="tag">Rider</span>
+                <span class="tag">DirectX12</span>
+                <span class="tag">Équipe de 4</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Image agrandie" aria-hidden="true">
+        <button type="button" class="close" aria-label="Fermer l'image">&times;</button>
+        <img class="modal-content" id="zoomed-image" alt="" />
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 PASCAL Noa. Tous droits réservés.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

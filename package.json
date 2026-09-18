@@ -1,0 +1,32 @@
+{
+  "name": "portfolio",
+  "version": "2.0.0",
+  "description": "Portfolio de Noa Pascal - Développeur Informatique & Moteurs de Jeux",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PASCAL-Noa/Portfolio.git"
+  },
+  "author": "Noa Pascal",
+  "license": "MIT",
+  "dependencies": {
+    "lucide-react": "^1.47.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
+  }
+}

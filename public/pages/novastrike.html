@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova-Strike | Space-Shooter Unity & Firebase - PASCAL Noa</title>
+    <meta
+      name="description"
+      content="Nova-Strike : space-shooter 2D dynamique conçu sur Unity en langage C# avec synchronisation de progression en ligne via Google Firebase."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.noa-pascal.com/pages/novastrike.html" />
+
+    <meta property="og:site_name" content="PASCAL Noa Portfolio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.noa-pascal.com/pages/novastrike.html" />
+    <meta property="og:title" content="Nova-Strike | Space-Shooter Unity & Firebase - PASCAL Noa" />
+    <meta
+      property="og:description"
+      content="Jeu de tir spatial développé sous Unity intégrant la persistance locale et la sauvegarde cloud sécurisée avec Firebase."
+    />
+    <meta property="og:image" content="https://www.noa-pascal.com/assets/NovaStrike/projet-novastrike.webp" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.noa-pascal.com/pages/novastrike.html" />
+    <meta name="twitter:title" content="Nova-Strike | Space-Shooter Unity & Firebase" />
+    <meta
+      name="twitter:description"
+      content="Space-shooter développé avec Unity et Firebase pour la persistance des données."
+    />
+    <meta name="twitter:image" content="https://www.noa-pascal.com/assets/NovaStrike/projet-novastrike.webp" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/Utils/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/Utils/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/Utils/favicon.png" />
+    <link rel="shortcut icon" href="../assets/Utils/favicon.png" />
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../mediaqueries.css" />
+  </head>
+  <body class="project-page">
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <header class="site-header">
+      <nav id="desktop-nav" aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="../index.html#about">À propos</a></li>
+          <li><a href="../index.html#projects">Projets</a></li>
+          <li><a href="../index.html#experience">Compétences</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav id="hamburger-nav" aria-label="Navigation mobile">
+        <div class="hamburger-menu">
+          <button
+            type="button"
+            class="hamburger-icon"
+            aria-label="Ouvrir le menu de navigation"
+            aria-expanded="false"
+            aria-controls="mobile-menu-links"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu-links" id="mobile-menu-links">
+            <li><a href="../index.html#about">À propos</a></li>
+            <li><a href="../index.html#projects">Projets</a></li>
+            <li><a href="../index.html#experience">Compétences</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <nav class="breadcrumb-nav" aria-label="Retour à l'accueil">
+        <a href="../index.html#projects" class="back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Retour aux projets</span>
+        </a>
+      </nav>
+
+      <section id="game-info" aria-labelledby="project-main-title">
+        <div class="game-container">
+          <div class="game-media">
+            <div class="carousel" role="region" aria-label="Galerie média du projet Nova-Strike">
+              <button type="button" class="prev-btn" aria-label="Slide précédente">&#10094;</button>
+              <div class="carousel-container">
+                <div class="carousel-item active">
+                  <div class="video-wrapper">
+                    <iframe
+                      src="https://www.youtube.com/embed/G64r6whfof8?si=mwzch8fMW1CsWJ4C"
+                      title="Vidéo de présentation du jeu Nova-Strike"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/NovaStrike/nova1.png" alt="Écran de sélection des vaisseaux" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/NovaStrike/nova2.png" alt="Vagues d'ennemis et tirs laser" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/NovaStrike/nova3.png" alt="Affrontement avec un boss intermédiaire" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/NovaStrike/nova4.png" alt="Interface d'amélioration des armes" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/NovaStrike/nova5.png" alt="Tableau des scores synchronisé en ligne" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/NovaStrike/nova6.png" alt="Effets visuels lors de la destruction des ennemis" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/NovaStrike/nova7.png" alt="Bouclier d'énergie activé sur le vaisseau joueur" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/NovaStrike/nova8.png" alt="Écran de victoire avec récapitulatif des données de session" loading="lazy" />
+                </div>
+              </div>
+              <button type="button" class="next-btn" aria-label="Slide suivante">&#10095;</button>
+            </div>
+
+            <div class="game-thumbnails" aria-label="Miniatures de la galerie">
+              <img src="../assets/NovaStrike/novastrike-video.png" class="thumbnail active" data-index="0" alt="Miniature vidéo Nova-Strike" />
+              <img src="../assets/NovaStrike/nova1.png" class="thumbnail" data-index="1" alt="Miniature capture 1" />
+              <img src="../assets/NovaStrike/nova2.png" class="thumbnail" data-index="2" alt="Miniature capture 2" />
+              <img src="../assets/NovaStrike/nova3.png" class="thumbnail" data-index="3" alt="Miniature capture 3" />
+              <img src="../assets/NovaStrike/nova4.png" class="thumbnail" data-index="4" alt="Miniature capture 4" />
+              <img src="../assets/NovaStrike/nova5.png" class="thumbnail" data-index="5" alt="Miniature capture 5" />
+              <img src="../assets/NovaStrike/nova6.png" class="thumbnail" data-index="6" alt="Miniature capture 6" />
+              <img src="../assets/NovaStrike/nova7.png" class="thumbnail" data-index="7" alt="Miniature capture 7" />
+              <img src="../assets/NovaStrike/nova8.png" class="thumbnail" data-index="8" alt="Miniature capture 8" />
+            </div>
+
+            <div class="download-section">
+              <a
+                href="https://github.com/PASCAL-Noa/NovaStrike/releases/tag/v0.3"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="download-btn"
+              >
+                &#11015; Télécharger Nova-Strike
+              </a>
+              <a
+                href="../assets/NovaStrike/cdc_novastrike.pdf"
+                class="download-btn-doc"
+                download
+              >
+                &#11015; Télécharger le Cahier des Charges
+              </a>
+            </div>
+          </div>
+
+          <article class="game-details">
+            <img src="../assets/NovaStrike/projet-novastrike.webp" class="game-banner" alt="Logo de Nova-Strike" />
+            <h1 id="project-main-title" class="title-project">Nova-Strike</h1>
+            <p class="game-description">
+              <strong>Nova-Strike</strong> est un space-shooter arcade dynamique conçu avec le moteur Unity, centré sur l'implémentation robuste d'un système de persistance de données en ligne via Google Firebase.<br><br>
+              L'enjeu consistait à maîtriser le cycle de vie des scripts en C#, à sauvegarder les paramètres utilisateurs localement avec les PlayerPrefs et à synchroniser les scores et la progression des joueurs sur une base de données cloud NoSQL temps réel.<br><br>
+              Ce projet a consolidé mes compétences en architecture logicielle sur Unity, gestion d'API distantes et prévention de la corruption de données.
+            </p>
+
+            <div class="game-meta">
+              <p><span>Temps :</span> <strong>1 semaine</strong></p>
+              <p><span>Développement :</span> <strong>PASCAL Noa, VANNIER Hugo</strong></p>
+              <div>
+                <span>Tags :</span>
+                <span class="tag tag-purple">École</span>
+                <span class="tag">Unity</span>
+                <span class="tag">C#</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">Duo</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Image agrandie" aria-hidden="true">
+        <button type="button" class="close" aria-label="Fermer l'image">&times;</button>
+        <img class="modal-content" id="zoomed-image" alt="" />
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 PASCAL Noa. Tous droits réservés.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
