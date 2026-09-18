@@ -1,121 +1,176 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projets | Mr.Beat</title>
+    <title>Mr. Beat | Boîte à rythmes Python - PASCAL Noa</title>
+    <meta
+      name="description"
+      content="Mr. Beat : boîte à rythmes et séquenceur audio développé en Python avec SoundDevice, NumPy et interface graphique moderne Kivy."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.noa-pascal.com/pages/mrbeat.html" />
+
+    <meta property="og:site_name" content="PASCAL Noa Portfolio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.noa-pascal.com/pages/mrbeat.html" />
+    <meta property="og:title" content="Mr. Beat | Boîte à rythmes Python - PASCAL Noa" />
+    <meta
+      property="og:description"
+      content="Découvrez Mr. Beat, une application de création sonore développée en Python avec traitement audio en temps réel via SoundDevice et NumPy."
+    />
+    <meta property="og:image" content="https://www.noa-pascal.com/assets/MrBeat/projet-mrbeat.webp" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.noa-pascal.com/pages/mrbeat.html" />
+    <meta name="twitter:title" content="Mr. Beat | Boîte à rythmes Python" />
+    <meta
+      name="twitter:description"
+      content="Application audio et séquenceur de percussions développé en Python."
+    />
+    <meta name="twitter:image" content="https://www.noa-pascal.com/assets/MrBeat/projet-mrbeat.webp" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/Utils/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/Utils/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/Utils/favicon.png" />
+    <link rel="shortcut icon" href="../assets/Utils/favicon.png" />
+
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../mediaqueries.css" />
-</head>
-<body>
-    <nav id="desktop-nav">
-        <div class="logo">PASCAL Noa</div>
-        <div>
-            <ul class="nav-links">
-                <li><a href="../index.html#about">À propos</a></li>
-                <li><a href="../index.html#projects">Projets</a></li>
-                <li><a href="../index.html#experience">Compétences</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-    <section id="game-info">
-        <div class="game-container">
-            <!-- Partie gauche : Carousel -->
-            <div class="game-media">
-                <div class="carousel">
-                    <button class="prev-btn">&#10094;</button>
-                    <div class="carousel-container">
-                        <!-- Ajout de la vidéo -->
-                        <div class="carousel-item active">
-                            <div class="video-wrapper">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/5GL5LfnhEVU?si=Qa2PmLxvp7eBiF_M" 
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/MrBeat/mrbeat2.webp" alt="Screenshot 1">
-                        </div>  
-                        <div class="carousel-item">
-                            <img src="../assets/MrBeat/mrbeat3.webp" alt="Screenshot 2">
-                        </div>  
-                    </div>
-                    <button class="next-btn">&#10095;</button>
-                </div>
-        
-                <!-- Miniatures -->
-                <div class="game-thumbnails">
-                    <img src="../assets/MrBeat/mrbeat-video.webp" class="thumbnail active" data-index="0" alt="Thumb 1">
-                    <img src="../assets/MrBeat/mrbeat2.webp" class="thumbnail" data-index="1" alt="Thumb 2">
-                    <img src="../assets/MrBeat/mrbeat3.webp" class="thumbnail" data-index="2" alt="Thumb 3">
-                </div>
+  </head>
+  <body class="project-page">
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
-                <div class="download-section">
-                    <a href="https://github.com/PASCAL-Noa/MrBeat" target="_blank" class="download-btn" download>
-                        ⬇ Télécharger Mr.Beat
-                    </a>
-                   <a href="../assets/MrBeat/certificat.jpg" class="download-btn-doc" download>
-                        ⬇ Télécharger le certificat de formation
-                    </a>
-                </div>  
-            </div>
-    
-            <!-- Partie droite : Description -->
-            <div class="game-details">
-                <img src="../assets/MrBeat/projet-mrbeat.webp" class="game-banner" alt="Mr.Beat Logo">
-                <p class="game-description">
-                    Mrbeat est un projet de beatbox simple et efficace en Python, créé dans le cadre d'un exercice de formation.
-                    Il permet de jouer des sons, de contrôler le tempo et de gérer la lecture le tout depuis le code, 
-                    ce qui en fait un excellent terrain d'apprentissage pour découvrir les concepts de programmation audio. </br></br>
-                    La principale difficulté rencontrée dans ce projet provenait de l'utilisation, par le formateur, 
-                    d'une bibliothèque trop ancienne : audiostream. </br></br>
-                    Après de nombreuses galères, j'ai décidé de repartir de zéro en utilisant des bibliothèques plus modernes comme sounddevice et numpy.</br></br>
-                    J'ai donc entièrement retravaillé la partie technique du code. Pour l'interface graphique, 
-                    je l'ai reconstruite en m'appuyant sur Kivy et les enseignements de la formation.   
-                </p>
-                
-                <p class="game-meta">
-                    <span>📅 Temps :</span> <strong>1 semaine</strong> <br>
-                    <span>🛠 Développement :</span> <strong>PASCAL Noa</strong> <br>
-                    <span>🏷 Tags :</span> 
-                    <span class="tag" style="background: purple;">Formation Udemy</span> 
-                    <span class="tag">Python</span> 
-                    <span class="tag">Pycharm</span>
-                    <span class="tag">Kivy</span>
-                    <span class="tag">Sounddevice</span>
-                    <span class="tag">Numpy</span>
-                    <span class="tag">Solo</span> 
-                </p>
-            </div>
+    <header class="site-header">
+      <nav id="desktop-nav" aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="../index.html#about">À propos</a></li>
+          <li><a href="../index.html#projects">Projets</a></li>
+          <li><a href="../index.html#experience">Compétences</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav id="hamburger-nav" aria-label="Navigation mobile">
+        <div class="hamburger-menu">
+          <button
+            type="button"
+            class="hamburger-icon"
+            aria-label="Ouvrir le menu de navigation"
+            aria-expanded="false"
+            aria-controls="mobile-menu-links"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu-links" id="mobile-menu-links">
+            <li><a href="../index.html#about">À propos</a></li>
+            <li><a href="../index.html#projects">Projets</a></li>
+            <li><a href="../index.html#experience">Compétences</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
         </div>
-    </section>
-    
-    <!-- Fenêtre de zoom -->
-    <div id="image-modal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="zoomed-image">
-    </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <nav class="breadcrumb-nav" aria-label="Retour à l'accueil">
+        <a href="../index.html#projects" class="back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Retour aux projets</span>
+        </a>
+      </nav>
+
+      <section id="game-info" aria-labelledby="project-main-title">
+        <div class="game-container">
+          <div class="game-media">
+            <div class="carousel" role="region" aria-label="Galerie média du projet Mr. Beat">
+              <button type="button" class="prev-btn" aria-label="Slide précédente">&#10094;</button>
+              <div class="carousel-container">
+                <div class="carousel-item active">
+                  <div class="video-wrapper">
+                    <iframe
+                      src="https://www.youtube.com/embed/5GL5LfnhEVU?si=Qa2PmLxvp7eBiF_M"
+                      title="Démonstration sonore de l'application Mr. Beat"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/MrBeat/mrbeat2.webp" alt="Interface de contrôle des pistes et du tempo" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/MrBeat/mrbeat3.webp" alt="Grille de séquençage des rythmes" loading="lazy" />
+                </div>
+              </div>
+              <button type="button" class="next-btn" aria-label="Slide suivante">&#10095;</button>
+            </div>
+
+            <div class="game-thumbnails" aria-label="Miniatures de la galerie">
+              <img src="../assets/MrBeat/mrbeat-video.webp" class="thumbnail active" data-index="0" alt="Miniature de la vidéo Mr. Beat" />
+              <img src="../assets/MrBeat/mrbeat2.webp" class="thumbnail" data-index="1" alt="Miniature capture 1 Mr. Beat" />
+              <img src="../assets/MrBeat/mrbeat3.webp" class="thumbnail" data-index="2" alt="Miniature capture 2 Mr. Beat" />
+            </div>
+
+            <div class="download-section">
+              <a
+                href="https://github.com/PASCAL-Noa/MrBeat"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="download-btn"
+              >
+                &#11015; Télécharger Mr.Beat
+              </a>
+              <a
+                href="../assets/MrBeat/certificat.jpg"
+                class="download-btn-doc"
+                download
+              >
+                &#11015; Certificat de formation
+              </a>
+            </div>
+          </div>
+
+          <article class="game-details">
+            <img src="../assets/MrBeat/projet-mrbeat.webp" class="game-banner" alt="Logo de Mr. Beat" />
+            <h1 id="project-main-title" class="title-project">Mr. Beat</h1>
+            <p class="game-description">
+              <strong>Mr. Beat</strong> est un projet de beatbox et de boîte à rythmes interactif développé en langage Python.<br><br>
+              L'application permet d'ordonnancer des échantillons audio, de piloter avec précision le tempo et de gérer les flux sonores en temps réel.<br><br>
+              Face à l'obsolescence de la bibliothèque recommandée dans le support de cours initial, j'ai pris l'initiative de réécrire le moteur audio en m'appuyant sur des technologies modernes : <em>sounddevice</em> et <em>numpy</em> pour le traitement des buffers numériques, tout en refondant l'interface sous Kivy.
+            </p>
+
+            <div class="game-meta">
+              <p><span>Temps :</span> <strong>1 semaine</strong></p>
+              <p><span>Développement :</span> <strong>PASCAL Noa</strong></p>
+              <div>
+                <span>Tags :</span>
+                <span class="tag tag-purple">Formation Udemy</span>
+                <span class="tag">Python</span>
+                <span class="tag">PyCharm</span>
+                <span class="tag">Kivy</span>
+                <span class="tag">Sounddevice</span>
+                <span class="tag">NumPy</span>
+                <span class="tag">Solo</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Image agrandie" aria-hidden="true">
+        <button type="button" class="close" aria-label="Fermer l'image">&times;</button>
+        <img class="modal-content" id="zoomed-image" alt="" />
+      </div>
+    </main>
 
     <footer>
-        <nav>
-          <div class="nav-links-container">
-            <ul class="nav-links">
-              <li><a href="../index.html#About">À propos</a></li>
-                <li><a href="../index.html#projects">Projets</a></li>
-              <li><a href="../index.html#experience">Compétences</a></li>
-              <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
-        <p>Copyright &#169; 2026 PASCAL Noa. Tout droit réservé.</p>
+      <p>&copy; 2026 PASCAL Noa. Tous droits réservés.</p>
     </footer>
 
     <script src="../script.js"></script>
-</body>
+  </body>
 </html>

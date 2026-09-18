@@ -1,117 +1,169 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projets | Physics Engine</title>
+    <title>Physics Engine DX12 | Moteur physique C++ & DirectX12 - PASCAL Noa</title>
+    <meta
+      name="description"
+      content="Physics Engine DX12 : moteur physique 3D temps réel en C++ et DirectX12 avec détection de collisions, intégration numérique et simulation orbitale."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.noa-pascal.com/pages/physicsengine.html" />
+
+    <meta property="og:site_name" content="PASCAL Noa Portfolio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.noa-pascal.com/pages/physicsengine.html" />
+    <meta property="og:title" content="Physics Engine DX12 | Moteur physique C++ & DirectX12 - PASCAL Noa" />
+    <meta
+      property="og:description"
+      content="Simulation physique et moteur 3D développés en C++ avec DirectX12, incluant la détection de collisions et la gravitation orbitale."
+    />
+    <meta property="og:image" content="https://www.noa-pascal.com/assets/PhysicsEngine/projet-physicsengine.jpg" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.noa-pascal.com/pages/physicsengine.html" />
+    <meta name="twitter:title" content="Physics Engine DX12 | Moteur physique C++ & DirectX12" />
+    <meta
+      name="twitter:description"
+      content="Moteur physique 3D développé en C++ avec l'API DirectX12."
+    />
+    <meta name="twitter:image" content="https://www.noa-pascal.com/assets/PhysicsEngine/projet-physicsengine.jpg" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/Utils/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/Utils/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/Utils/favicon.png" />
+    <link rel="shortcut icon" href="../assets/Utils/favicon.png" />
+
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../mediaqueries.css" />
-</head>
-<body>
-    <nav id="desktop-nav">
-        <div class="logo">PASCAL Noa</div>
-        <div>
-            <ul class="nav-links">
-                <li><a href="../index.html#about">À propos</a></li>
-                <li><a href="../index.html#projects">Projets</a></li>
-                <li><a href="../index.html#experience">Compétences</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
+  </head>
+  <body class="project-page">
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <header class="site-header">
+      <nav id="desktop-nav" aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="../index.html#about">À propos</a></li>
+          <li><a href="../index.html#projects">Projets</a></li>
+          <li><a href="../index.html#experience">Compétences</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav id="hamburger-nav" aria-label="Navigation mobile">
+        <div class="hamburger-menu">
+          <button
+            type="button"
+            class="hamburger-icon"
+            aria-label="Ouvrir le menu de navigation"
+            aria-expanded="false"
+            aria-controls="mobile-menu-links"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu-links" id="mobile-menu-links">
+            <li><a href="../index.html#about">À propos</a></li>
+            <li><a href="../index.html#projects">Projets</a></li>
+            <li><a href="../index.html#experience">Compétences</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
         </div>
-    </nav>
-    <section id="game-info">
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <nav class="breadcrumb-nav" aria-label="Retour à l'accueil">
+        <a href="../index.html#projects" class="back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Retour aux projets</span>
+        </a>
+      </nav>
+
+      <section id="game-info" aria-labelledby="project-main-title">
         <div class="game-container">
-            <!-- Partie gauche : Carousel -->
-            <div class="game-media">
-                <div class="carousel">
-                    <button class="prev-btn">&#10094;</button>
-                    <div class="carousel-container">
-                        <!-- Ajout de la vidéo -->
-                        <div class="carousel-item active">
-                            <div class="video-wrapper">
-                                <iframe 
-                                    src="/assets/PhysicsEngine/Standard.mp4"  
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="video-wrapper">
-                                <iframe 
-                                    src="/assets/PhysicsEngine/Orbital.mp4"  
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="next-btn">&#10095;</button>
+          <div class="game-media">
+            <div class="carousel" role="region" aria-label="Galerie média du Physics Engine">
+              <button type="button" class="prev-btn" aria-label="Slide précédente">&#10094;</button>
+              <div class="carousel-container">
+                <div class="carousel-item active">
+                  <div class="video-wrapper">
+                    <video controls playsinline preload="metadata">
+                      <source src="../assets/PhysicsEngine/Standard.mp4" type="video/mp4" />
+                      Votre navigateur ne supporte pas la lecture vidéo.
+                    </video>
+                  </div>
                 </div>
-
-                <div class="game-thumbnails">
-                    <img src="../assets/PhysicsEngine/standard.png" class="thumbnail active" data-index="0" alt="Thumb 1">
-                    <img src="../assets/PhysicsEngine/orbital.png" class="thumbnail" data-index="1" alt="Thumb 2">
+                <div class="carousel-item">
+                  <div class="video-wrapper">
+                    <video controls playsinline preload="metadata">
+                      <source src="../assets/PhysicsEngine/Orbital.mp4" type="video/mp4" />
+                      Votre navigateur ne supporte pas la lecture vidéo.
+                    </video>
+                  </div>
                 </div>
-
-
-                <div class="download-section">
-                    <a href="https://github.com/PASCAL-Noa/Physics-Engine-DX12" target="_blank" class="download-btn" download>
-                        ⬇ Télécharger Physics Engine
-                    </a>
-                </div>  
+              </div>
+              <button type="button" class="next-btn" aria-label="Slide suivante">&#10095;</button>
             </div>
-    
-            <!-- Partie droite : Description -->
-            <div class="game-details">
-                <img src="../assets/PhysicsEngine/projet-physicsengine.jpg" class="game-banner" alt="Physics Engine Logo">
-                <p class="game-description">
-                    <strong>Physics Engine</strong> est un moteur de physique développé en C++ et DirectX12, conçu pour simuler des interactions physiques réalistes dans des environnements 3D. Il intègre des fonctionnalités telles que la détection de collisions et la gestion des forces.
-                    Ce projet m'a permis de mieux comprendre les principes de la physique en informatique, de revoir l'architecture d'un moteur 3D et d'approfondir mes compétences en C++.
-                </p>
-                
-                <p class="game-meta">
-                    <span>📅 Temps :</span> <strong>2 semaines</strong> <br>
-                    <span>🛠 Développement :</span> <strong>PASCAL Noa, VANNIER Hugo, CAPITAINE Hugo</strong> <br>
-                    <span>🏷 Tags :</span> 
-                    <span class="tag" style="background: purple;">École</span> 
-                    <span class="tag">C++</span> 
-                    <span class="tag">Clion</span>
-                    <span class="tag">DirectX12</span>
-                    <span class="tag">Physics</span>
-                    <span class="tag">3D</span>
-                    <span class="tag">Cmake</span>
-                    <span class="tag">Équipe de 3</span> 
-                </p>
+
+            <div class="game-thumbnails" aria-label="Miniatures de la galerie">
+              <img src="../assets/PhysicsEngine/standard.png" class="thumbnail active" data-index="0" alt="Miniature simulation standard" />
+              <img src="../assets/PhysicsEngine/orbital.png" class="thumbnail" data-index="1" alt="Miniature simulation orbitale" />
             </div>
+
+            <div class="download-section">
+              <a
+                href="https://github.com/PASCAL-Noa/Physics-Engine-DX12"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="download-btn"
+              >
+                &#11015; Télécharger Physics Engine
+              </a>
+            </div>
+          </div>
+
+          <article class="game-details">
+            <img src="../assets/PhysicsEngine/projet-physicsengine.jpg" class="game-banner" alt="Logo du Physics Engine" />
+            <h1 id="project-main-title" class="title-project">Physics Engine DX12</h1>
+            <p class="game-description">
+              <strong>Physics Engine</strong> est un moteur physique 3D temps réel conçu en langage C++ et interfacé avec DirectX12.<br><br>
+              Il a pour vocation de simuler des interactions physiques précises : détection et résolution de collisions entre solides, calcul des vecteurs d'impulsion, friction et simulation des forces gravitationnelles (dont la mécanique orbitale).<br><br>
+              Ce projet a permis d'approfondir la dynamique du corps rigide, les méthodes d'intégration numérique temporelle et l'optimisation des structures d'accélération spatiale.
+            </p>
+
+            <div class="game-meta">
+              <p><span>Temps :</span> <strong>2 semaines</strong></p>
+              <p><span>Développement :</span> <strong>PASCAL Noa, VANNIER Hugo, CAPITAINE Hugo</strong></p>
+              <div>
+                <span>Tags :</span>
+                <span class="tag tag-purple">École</span>
+                <span class="tag">C++</span>
+                <span class="tag">CLion</span>
+                <span class="tag">DirectX12</span>
+                <span class="tag">Physics</span>
+                <span class="tag">3D</span>
+                <span class="tag">CMake</span>
+                <span class="tag">Équipe de 3</span>
+              </div>
+            </div>
+          </article>
         </div>
-    </section>
-    
-    <!-- Fenêtre de zoom -->
-    <div id="image-modal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="zoomed-image">
-    </div>
+      </section>
+
+      <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Image agrandie" aria-hidden="true">
+        <button type="button" class="close" aria-label="Fermer l'image">&times;</button>
+        <img class="modal-content" id="zoomed-image" alt="" />
+      </div>
+    </main>
 
     <footer>
-        <nav>
-          <div class="nav-links-container">
-            <ul class="nav-links">
-              <li><a href="../index.html#About">À propos</a></li>
-                <li><a href="../index.html#projects">Projets</a></li>
-              <li><a href="../index.html#experience">Compétences</a></li>
-              <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
-        <p>Copyright &#169; 2026 PASCAL Noa. Tout droit réservé.</p>
+      <p>&copy; 2026 PASCAL Noa. Tous droits réservés.</p>
     </footer>
 
     <script src="../script.js"></script>
-</body>
+  </body>
 </html>
