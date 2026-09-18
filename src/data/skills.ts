@@ -57,13 +57,15 @@ export const skillCategories: SkillCategory[] = [
 
 export const timelineItems: TimelineItem[] = [
   {
-    id: "gaming-campus",
-    period: "2023 - Présent",
-    title: "Bachelor Gaming Campus",
-    subtitle: "Développeur informatique option JV",
-    description: "Pédagogie par projet et travail en équipe pluridisciplinaire (développeurs, game designers, artistes).",
-    image: "/assets/Timeline/gamingcampus.jpg",
-    type: "edu"
+    id: "ecole-du-web",
+    period: "2025 - Présent",
+    title: "École du Web",
+    subtitle: "Formation en ligne en développement web",
+    description: "Perfectionnement HTML, CSS, JavaScript, React, ainsi que les bases back-end (SQL, PHP, Django).",
+    image: "/assets/Timeline/ecoleduweb.png",
+    type: "online",
+    link: "https://www.ecole-du-web.net/",
+    linkText: "Visiter l'École du Web"
   },
   {
     id: "intermarche",
@@ -75,15 +77,13 @@ export const timelineItems: TimelineItem[] = [
     type: "pro"
   },
   {
-    id: "ecole-du-web",
-    period: "2025 - Présent",
-    title: "École du Web",
-    subtitle: "Formation en ligne en développement web",
-    description: "Perfectionnement HTML, CSS, JavaScript, React, ainsi que les bases back-end (SQL, PHP, Django).",
-    image: "/assets/Timeline/ecoleduweb.png",
-    type: "online",
-    link: "https://www.ecole-du-web.net/",
-    linkText: "Visiter l'École du Web"
+    id: "gaming-campus",
+    period: "2023 - 2026",
+    title: "Bachelor Gaming Campus",
+    subtitle: "Développeur informatique option JV",
+    description: "Pédagogie par projet et travail en équipe pluridisciplinaire (développeurs, game designers, artistes).",
+    image: "/assets/Timeline/gamingcampus.jpg",
+    type: "edu"
   },
   {
     id: "piscine-42",

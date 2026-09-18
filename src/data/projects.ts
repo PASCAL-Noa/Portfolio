@@ -43,7 +43,7 @@ export const projects: Project[] = [
   },
   {
     id: "audio-engine",
-    title: "Éditeur Audio (AudioEngine)",
+    title: "Éditeur Audio",
     category: "software",
     image: "/assets/AudioEngine/projet-audioengine.png",
     description: "Système et éditeur audio temps réel exploitant les API audio bas-niveau pour les jeux.",

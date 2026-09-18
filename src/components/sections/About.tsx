@@ -7,7 +7,7 @@ interface AboutProps {
 }
 
 export const About: React.FC<AboutProps> = ({ items }) => {
-  // Mapping du flag/type vers l'icône Lucide et la couleur de la pastille (accent colors préservées ici)
+  // Mapping du flag/type vers l'icône Lucide et la couleur de la pastille (accents préservés)
   const getIconAndBadge = (type: TimelineCategory) => {
     switch (type) {
       case 'edu':
@@ -40,16 +40,16 @@ export const About: React.FC<AboutProps> = ({ items }) => {
   return (
     <section id="about" className="min-h-screen py-24 px-6 max-w-5xl mx-auto flex flex-col justify-center">
       <div className="text-center space-y-2 mb-16">
-        <p className="text-base font-semibold text-[rgb(85,85,85)]">
+        <p className="text-base font-semibold text-[rgb(85,85,85)] dark:text-[#8b949e]">
           Apprenez-en davantage
         </p>
-        <h2 className="text-3xl sm:text-4xl font-semibold text-black tracking-tight">
+        <h2 className="text-3xl sm:text-4xl font-semibold text-black dark:text-[#f0f6fc] tracking-tight">
           Sur moi
         </h2>
       </div>
 
-      {/* Timeline unilatérale (élégante, lisible et avec images en valeur) */}
-      <div className="relative border-l-2 border-gray-200 ml-4 md:ml-36 space-y-12">
+      {/* Timeline unilatérale */}
+      <div className="relative border-l-2 border-gray-200 dark:border-gray-800 ml-4 md:ml-36 space-y-12">
         {items.map((item) => {
           const config = getIconAndBadge(item.type);
 
@@ -57,22 +57,22 @@ export const About: React.FC<AboutProps> = ({ items }) => {
             <div key={item.id} className="relative pl-8 group">
               {/* Bullet / Pastille avec icône colorée & bordure assortie */}
               <div
-                className={`absolute -left-[17px] top-3 w-8 h-8 rounded-full bg-white border-2 flex items-center justify-center transition-transform group-hover:scale-110 z-10 ${config.dotBorder} ${config.dotShadow}`}
+                className={`absolute -left-[17px] top-3 w-8 h-8 rounded-full bg-white dark:bg-[#161b22] border-2 flex items-center justify-center transition-transform group-hover:scale-110 z-10 ${config.dotBorder} ${config.dotShadow}`}
               >
                 {config.icon}
               </div>
 
               {/* Date à gauche de la ligne */}
-              <span className="md:absolute md:-left-40 md:top-4 text-xs font-bold text-gray-500 uppercase tracking-wider block mb-2 md:mb-0 md:text-right md:w-32">
+              <span className="md:absolute md:-left-40 md:top-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider block mb-2 md:mb-0 md:text-right md:w-32">
                 {item.period}
               </span>
 
-              {/* Card blanche soignée avec image agrandie */}
-              <div className="bg-[#fafafa] border border-gray-200 hover:border-gray-300 rounded-2xl p-6 md:p-7 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              {/* Card soignée */}
+              <div className="bg-[#fafafa] dark:bg-[#161b22] border border-gray-200 dark:border-[#30363d] hover:border-gray-300 dark:hover:border-gray-600 rounded-2xl p-6 md:p-7 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div className="flex flex-col lg:flex-row gap-6 items-start">
-                  {/* Image agrandie (format 16:9 généreux) */}
+                  {/* Image agrandie (format 16:9) */}
                   {item.image && (
-                    <div className="w-full lg:w-72 aspect-video shrink-0 rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow">
+                    <div className="w-full lg:w-72 aspect-video shrink-0 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm group-hover:shadow-md transition-shadow">
                       <img
                         src={item.image}
                         alt={item.title}
@@ -85,17 +85,17 @@ export const About: React.FC<AboutProps> = ({ items }) => {
                   {/* Contenu textuel */}
                   <div className="space-y-2.5 flex-1">
                     <div>
-                      <h3 className="text-xl font-semibold text-black group-hover:text-gray-700 transition-colors">
+                      <h3 className="text-xl font-semibold text-black dark:text-[#f0f6fc] group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
                         {item.title}
                       </h3>
                       {item.subtitle && (
-                        <p className="text-xs font-semibold text-gray-500 mt-0.5">
+                        <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mt-0.5">
                           {item.subtitle}
                         </p>
                       )}
                     </div>
 
-                    <p className="text-sm md:text-[0.95rem] text-gray-600 leading-relaxed">
+                    <p className="text-sm md:text-[0.95rem] text-gray-600 dark:text-[#8b949e] leading-relaxed">
                       {item.description}
                     </p>
 
@@ -104,7 +104,7 @@ export const About: React.FC<AboutProps> = ({ items }) => {
                         href={item.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs text-gray-700 hover:text-black hover:underline font-semibold pt-1"
+                        className="inline-flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:underline font-semibold pt-1"
                       >
                         <span>{item.linkText || 'En savoir plus'}</span>
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -121,7 +121,7 @@ export const About: React.FC<AboutProps> = ({ items }) => {
       {/* Down Arrow */}
       <a
         href="#projects"
-        className="mx-auto mt-12 opacity-75 hover:opacity-100 transition-opacity animate-bounce"
+        className="mx-auto mt-12 opacity-75 hover:opacity-100 transition-opacity animate-bounce dark:invert"
         aria-label="Section suivante : Projets"
       >
         <img

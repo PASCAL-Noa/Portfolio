@@ -8,10 +8,10 @@ interface SkillsProps {
 export const Skills: React.FC<SkillsProps> = ({ categories }) => {
   return (
     <section id="experience" className="min-h-screen py-16 px-[5%] max-w-[1200px] mx-auto relative flex flex-col justify-center">
-      <p className="text-base font-semibold text-[rgb(85,85,85)] text-center">
+      <p className="text-base font-semibold text-[rgb(85,85,85)] dark:text-[#8b949e] text-center">
         Découvrez mes
       </p>
-      <h2 className="text-3xl md:text-4xl lg:text-[2.2rem] font-semibold text-black text-center mb-10">
+      <h2 className="text-3xl md:text-4xl lg:text-[2.2rem] font-semibold text-black dark:text-[#f0f6fc] text-center mb-10">
         Compétences
       </h2>
 
@@ -20,9 +20,9 @@ export const Skills: React.FC<SkillsProps> = ({ categories }) => {
         {categories.map((category) => (
           <div
             key={category.title}
-            className="flex flex-col justify-between p-8 bg-[#fafafa] border border-[rgb(163,163,163)] rounded-[20px] text-center shadow-sm"
+            className="flex flex-col justify-between p-8 bg-[#fafafa] dark:bg-[#161b22] border border-[rgb(163,163,163)] dark:border-[#30363d] rounded-[20px] text-center shadow-sm"
           >
-            <h3 className="text-2xl font-semibold text-[rgb(85,85,85)] mb-8">
+            <h3 className="text-2xl font-semibold text-[rgb(85,85,85)] dark:text-[#8b949e] mb-8">
               {category.title}
             </h3>
 
@@ -32,12 +32,12 @@ export const Skills: React.FC<SkillsProps> = ({ categories }) => {
                   <img
                     src="/assets/icons/checkmark.webp"
                     alt=""
-                    className="w-5 h-5 object-contain shrink-0"
+                    className="w-5 h-5 object-contain shrink-0 dark:invert"
                     width="20"
                     height="20"
                     aria-hidden="true"
                   />
-                  <h4 className="text-base font-medium text-black truncate">
+                  <h4 className="text-base font-medium text-black dark:text-[#f0f6fc] truncate">
                     {skill.name}
                   </h4>
                 </div>
@@ -50,7 +50,7 @@ export const Skills: React.FC<SkillsProps> = ({ categories }) => {
       {/* Down Arrow */}
       <a
         href="#contact"
-        className="mx-auto mt-12 opacity-75 hover:opacity-100 transition-opacity animate-bounce"
+        className="mx-auto mt-12 opacity-75 hover:opacity-100 transition-opacity animate-bounce dark:invert"
         aria-label="Section suivante : Contact"
       >
         <img

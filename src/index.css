@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --font-main: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -15,6 +17,18 @@
     --color-primary-hover: #000000;
   }
 
+  .dark {
+    --color-bg: #0d1117;
+    --color-surface: #161b22;
+    --color-surface-hover: #21262d;
+    --color-text-main: #f0f6fc;
+    --color-text-muted: #8b949e;
+    --color-border: #30363d;
+    --color-border-light: #21262d;
+    --color-primary: #e6edf3;
+    --color-primary-hover: #ffffff;
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height);
@@ -28,6 +42,7 @@
     color: var(--color-text-main);
     overflow-x: hidden;
     line-height: 1.6;
+    transition: background-color 250ms ease, color 250ms ease;
   }
 
   section {
@@ -40,14 +55,20 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: var(--color-bg);
   }
   ::-webkit-scrollbar-thumb {
     background: #c1c1c1;
     border-radius: 4px;
   }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #30363d;
+  }
   ::-webkit-scrollbar-thumb:hover {
     background: #888888;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #58a6ff;
   }
 }
 

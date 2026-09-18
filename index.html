@@ -42,8 +42,19 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/Utils/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/Utils/favicon.png" />
     <link rel="shortcut icon" href="/assets/Utils/favicon.png" />
+    <script>
+      (function () {
+        try {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="bg-[#ffffff] text-[#000000] antialiased">
+  <body class="bg-white dark:bg-[#0d1117] text-black dark:text-[#f0f6fc] antialiased transition-colors duration-200">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
