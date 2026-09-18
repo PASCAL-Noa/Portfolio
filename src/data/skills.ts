@@ -33,7 +33,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Outils & Environnement",
     skills: [
-      { name: "JetBrains (CLion/Rider)" },
+      { name: "JetBrains" },
       { name: "Visual Studio 2022" },
       { name: "VS Code" },
       { name: "Git & GitHub" },
@@ -47,7 +47,7 @@ export const skillCategories: SkillCategory[] = [
     title: "Méthodologie & Humain",
     skills: [
       { name: "Gestion de projet" },
-      { name: "Travail d'équipe pluridisciplinaire" },
+      { name: "Travail d'équipe" },
       { name: "Rigueur algorithmique" },
       { name: "Communication" },
       { name: "Sens des responsabilités" }
