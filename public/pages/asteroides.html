@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asteroides | Jeu C++ SFML - PASCAL Noa</title>
+    <meta
+      name="description"
+      content="Jeu d'arcade Asteroides développé en langage C++ avec la bibliothèque multimédia SFML : gestion des collisions, physique vectorielle et tirs spatiaux."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.noa-pascal.com/pages/asteroides.html" />
+
+    <meta property="og:site_name" content="PASCAL Noa Portfolio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.noa-pascal.com/pages/asteroides.html" />
+    <meta property="og:title" content="Asteroides | Jeu C++ SFML - PASCAL Noa" />
+    <meta
+      property="og:description"
+      content="Découvrez Asteroides, le premier projet de jeu en C++ développé par Noa Pascal en autodidacte avec SFML."
+    />
+    <meta property="og:image" content="https://www.noa-pascal.com/assets/Asteroides/projet-asteroides.webp" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.noa-pascal.com/pages/asteroides.html" />
+    <meta name="twitter:title" content="Asteroides | Jeu C++ SFML" />
+    <meta
+      name="twitter:description"
+      content="Premier projet de jeu en C++ et SFML développé en autodidacte."
+    />
+    <meta name="twitter:image" content="https://www.noa-pascal.com/assets/Asteroides/projet-asteroides.webp" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/Utils/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/Utils/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/Utils/favicon.png" />
+    <link rel="shortcut icon" href="../assets/Utils/favicon.png" />
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../mediaqueries.css" />
+  </head>
+  <body class="project-page">
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <header class="site-header">
+      <nav id="desktop-nav" aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="../index.html#about">À propos</a></li>
+          <li><a href="../index.html#projects">Projets</a></li>
+          <li><a href="../index.html#experience">Compétences</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav id="hamburger-nav" aria-label="Navigation mobile">
+        <div class="hamburger-menu">
+          <button
+            type="button"
+            class="hamburger-icon"
+            aria-label="Ouvrir le menu de navigation"
+            aria-expanded="false"
+            aria-controls="mobile-menu-links"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu-links" id="mobile-menu-links">
+            <li><a href="../index.html#about">À propos</a></li>
+            <li><a href="../index.html#projects">Projets</a></li>
+            <li><a href="../index.html#experience">Compétences</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <nav class="breadcrumb-nav" aria-label="Retour à l'accueil">
+        <a href="../index.html#projects" class="back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Retour aux projets</span>
+        </a>
+      </nav>
+
+      <section id="game-info" aria-labelledby="project-main-title">
+        <div class="game-container">
+          <div class="game-media">
+            <div class="carousel" role="region" aria-label="Galerie média d'Asteroides">
+              <button type="button" class="prev-btn" aria-label="Slide précédente">&#10094;</button>
+              <div class="carousel-container">
+                <div class="carousel-item active">
+                  <div class="video-wrapper">
+                    <iframe
+                      src="https://www.youtube.com/embed/uzoz1nUycOs?si=kRX1r70IjMmOk-kP"
+                      title="Vidéo de gameplay du jeu Asteroides"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Asteroides/projet-asteroides.webp" alt="Menu principal et vaisseaux du jeu Asteroides" loading="lazy" />
+                </div>
+                <div class="carousel-item">
+                  <img src="../assets/Asteroides/asteroides.webp" alt="Phase de tir et d'esquive des astéroïdes" loading="lazy" />
+                </div>
+              </div>
+              <button type="button" class="next-btn" aria-label="Slide suivante">&#10095;</button>
+            </div>
+
+            <div class="game-thumbnails" aria-label="Miniatures de la galerie">
+              <img src="../assets/Asteroides/asteroides-video.webp" class="thumbnail active" data-index="0" alt="Miniature vidéo Asteroides" />
+              <img src="../assets/Asteroides/projet-asteroides.webp" class="thumbnail" data-index="1" alt="Miniature menu Asteroides" />
+              <img src="../assets/Asteroides/asteroides.webp" class="thumbnail" data-index="2" alt="Miniature gameplay Asteroides" />
+            </div>
+
+            <div class="download-section">
+              <a
+                href="https://github.com/PASCAL-Noa/Asteroides/releases"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="download-btn"
+              >
+                &#11015; Télécharger Astéroides
+              </a>
+              <a
+                href="../assets/Asteroides/certificat.jpg"
+                class="download-btn-doc"
+                download
+              >
+                &#11015; Certificat de formation
+              </a>
+            </div>
+          </div>
+
+          <article class="game-details">
+            <img src="../assets/Asteroides/projet-asteroides.webp" class="game-banner" alt="Bannière du projet Asteroides" />
+            <h1 id="project-main-title" class="title-project">Astéroides</h1>
+            <p class="game-description">
+              <strong>Astéroides</strong> constitue mon tout premier projet développé en C++ avec la bibliothèque SFML.<br><br>
+              Réalisé en autonomie pour consolider en amont mes compétences avant le démarrage du cursus scolaire, ce projet m'a permis d'appréhender la gestion des dépendances C++, la configuration d'un projet dans Visual Studio et la boucle de jeu temps réel.<br><br>
+              Le gameplay reprend le principe classique du jeu d'arcade : le joueur contrôle un vaisseau spatial en vue du dessus, pivote, accélère grâce à une impulsion inertielle et fait feu sur des fragments d'astéroïdes tout en évitant les collisions.
+            </p>
+
+            <div class="game-meta">
+              <p><span>Temps :</span> <strong>1 semaine</strong></p>
+              <p><span>Développement :</span> <strong>PASCAL Noa</strong></p>
+              <div>
+                <span>Tags :</span>
+                <span class="tag tag-purple">Formation Udemy</span>
+                <span class="tag">C++</span>
+                <span class="tag">Visual Studio 2022</span>
+                <span class="tag">SFML</span>
+                <span class="tag">Solo</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Image agrandie" aria-hidden="true">
+        <button type="button" class="close" aria-label="Fermer l'image">&times;</button>
+        <img class="modal-content" id="zoomed-image" alt="" />
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 PASCAL Noa. Tous droits réservés.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

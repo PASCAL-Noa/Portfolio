@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PASCAL Noa | Développeur Informatique & Moteurs de Jeux</title>
+    <meta
+      name="description"
+      content="Portfolio de Noa Pascal, développeur informatique spécialisé en C++, DirectX12, architecture de moteurs de jeu, Python et développement web."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.noa-pascal.com/" />
+
+    <meta property="og:site_name" content="PASCAL Noa Portfolio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.noa-pascal.com/" />
+    <meta property="og:title" content="PASCAL Noa | Développeur Informatique & Moteurs de Jeux" />
+    <meta
+      property="og:description"
+      content="Découvrez les projets, compétences et réalisations techniques de Noa Pascal en programmation de moteurs 3D, C++, et web."
+    />
+    <meta property="og:image" content="https://www.noa-pascal.com/assets/Utils/profile.webp" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.noa-pascal.com/" />
+    <meta name="twitter:title" content="PASCAL Noa | Développeur Informatique" />
+    <meta
+      name="twitter:description"
+      content="Portfolio de Noa Pascal, développeur informatique : projets de moteurs de jeux, C++ et développement web."
+    />
+    <meta name="twitter:image" content="https://www.noa-pascal.com/assets/Utils/profile.webp" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/Utils/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/Utils/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/Utils/favicon.png" />
+    <link rel="shortcut icon" href="assets/Utils/favicon.png" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <header class="site-header">
+      <nav id="desktop-nav" aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#projects">Projets</a></li>
+          <li><a href="#experience">Compétences</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav id="hamburger-nav" aria-label="Navigation mobile">
+        <div class="hamburger-menu">
+          <button
+            type="button"
+            class="hamburger-icon"
+            aria-label="Ouvrir le menu de navigation"
+            aria-expanded="false"
+            aria-controls="mobile-menu-links"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu-links" id="mobile-menu-links">
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#projects">Projets</a></li>
+            <li><a href="#experience">Compétences</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section id="profile" aria-labelledby="profile-title">
+        <div class="section__pic-container">
+          <img
+            src="assets/Utils/profile.webp"
+            alt="Portrait professionnel de Noa Pascal"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="section__text">
+          <p class="section__text__p1">Bonjour, je suis</p>
+          <h1 id="profile-title" class="title">PASCAL Noa</h1>
+          <p class="section__text__p2">Étudiant en Informatique</p>
+          <div class="btn-container">
+            <a
+              class="btn btn-color-2"
+              href="assets/Utils/PASCAL_Noa_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Télécharger mon CV
+            </a>
+            <a class="btn btn-color-1" href="#contact">Contact</a>
+          </div>
+          <div id="socials-container">
+            <a
+              href="https://www.linkedin.com/in/noa-pascal-97ab67295/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Consulter le profil LinkedIn de Noa Pascal"
+            >
+              <img
+                src="assets/icons/linkedin.webp"
+                alt=""
+                class="icon"
+                aria-hidden="true"
+                width="32"
+                height="32"
+              />
+            </a>
+            <a
+              href="https://github.com/PASCAL-Noa"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Consulter le profil GitHub de Noa Pascal"
+            >
+              <img
+                src="assets/icons/github.webp"
+                alt=""
+                class="icon"
+                aria-hidden="true"
+                width="32"
+                height="32"
+              />
+            </a>
+          </div>
+        </div>
+        <a href="#about" class="scroll-arrow-link" aria-label="Section suivante : À propos">
+          <img src="assets/icons/arrow.webp" alt="" class="icon" aria-hidden="true" width="24" height="24" />
+        </a>
+      </section>
+
+      <section id="about" aria-labelledby="about-title">
+        <p class="section__text__p1">Apprenez-en davantage</p>
+        <h2 id="about-title" class="title">Sur moi</h2>
+
+        <div class="timeline-container">
+          <div class="timeline-line" aria-hidden="true"></div>
+
+          <article class="timeline-item">
+            <div class="timeline-dot dot-edu" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">2023 - Présent</span>
+              <h3>Bachelor Gaming Campus</h3>
+              <p>Développeur informatique option JV : pédagogie par projet et travail en équipe.</p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/Timeline/gamingcampus.jpg"
+                alt="Campus Gaming Campus Lyon"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+
+          <article class="timeline-item right">
+            <div class="timeline-dot dot-pro" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">2024 - Présent</span>
+              <h3>Employé Commercial</h3>
+              <p>Intermarché : Autonomie et sens des responsabilités en milieu professionnel.</p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/Timeline/intermarché.png"
+                alt="Enseigne Intermarché"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-dot dot-online" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">2025 - Présent</span>
+              <h3>École du web</h3>
+              <p>
+                <a href="https://www.ecole-du-web.net/" target="_blank" rel="noopener noreferrer">Formation en ligne</a> en développement web : apprentissage de HTML, CSS et JavaScript, avec React prochainement.<br>
+                Bases en back-end : utilisation de SQL, PHP ainsi que Python avec le framework Django.
+              </p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/Timeline/ecoleduweb.png"
+                alt="Plateforme de formation École du Web"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+
+          <article class="timeline-item right">
+            <div class="timeline-dot dot-edu" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">Août 2025</span>
+              <h3>Piscine 42 Lyon</h3>
+              <p>Immersion intensive en langage C : logique algorithmique poussée.</p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/42/42.webp"
+                alt="Campus 42 Lyon"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-dot dot-tech" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">Juin - Août 2025</span>
+              <h3>Stage de seconde année</h3>
+              <p>Stage de développeur front-end et réalisation d'une maquette Figma, en distanciel. Mission : créer un site vitrine pour un studio d'enregistrement.</p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/Stage-2025/stage.webp"
+                alt="Aperçu du projet de stage studio d'enregistrement"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+
+          <article class="timeline-item right">
+            <div class="timeline-dot dot-online" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">2024</span>
+              <h3>Formation Python</h3>
+              <p>Formation <a href="https://www.udemy.com/share/103uVA3@sadbipKzuP-qI1uvNj9KQXxD2k1rh77IVAGGGIWrb34LyNNXKYxjOmrmemV4P33mbg==/" target="_blank" rel="noopener noreferrer">Udemy</a> : apprentissage des bases de Python et réalisation de deux projets : Galaxy et Mr. Beat.</p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/Timeline/formation_python.jpg"
+                alt="Certificat de formation Python"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-dot dot-online" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">2024</span>
+              <h3>Formation C++</h3>
+              <p>Formation <a href="https://www.udemy.com/share/101vPs3@aI4vzaGtIL0t5rHaRq7f7uvxJ1Ae6FrBgITrVS01Kq9ies0trjRYoc5pH8YvVzxtmQ==/" target="_blank" rel="noopener noreferrer">Udemy</a> : apprentissage des bases du C++ et réalisation de mon tout premier projet en C++, Asteroids.</p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/Timeline/c++.webp"
+                alt="Certificat de formation C++"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+
+          <article class="timeline-item right">
+            <div class="timeline-dot dot-edu" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">2023</span>
+              <h3>Bootcamp</h3>
+              <p>Petit stage de 48 h avec <a href="https://www.linkedin.com/in/dmekersa/?originalSubdomain=fr" target="_blank" rel="noopener noreferrer">David Mekersa</a> : le défi consistait à développer un jeu en Lua.</p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/Timeline/gamingcampus2.jpg"
+                alt="Atelier de création de jeu vidéo en groupe"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-dot dot-online" aria-hidden="true"></div>
+            <div class="timeline-content card-glass">
+              <span class="date-badge">2021</span>
+              <h3>Formation C#</h3>
+              <p>Formation <a href="https://www.udemy.com/share/1047z43@RExX0brDzDUhVY2hJCm_CmfppqTf4s-yJja9lbOciieJLZ9oSllfAcYLG55pHOZZ2w==/" target="_blank" rel="noopener noreferrer">Udemy</a> : apprentissage des bases du C#. Il s’agit de ma toute première formation et du point de départ de mon intérêt pour la programmation.</p>
+            </div>
+            <div class="timeline-media">
+              <img
+                src="assets/Timeline/formation_cs.jpg"
+                alt="Certificat de formation C#"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </article>
+        </div>
+        <a href="#projects" class="scroll-arrow-link" aria-label="Section suivante : Projets">
+          <img src="assets/icons/arrow.webp" alt="" class="icon" aria-hidden="true" width="24" height="24" />
+        </a>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-title">
+        <p class="section__text__p1">Découvrez mes différents</p>
+        <h2 id="projects-title" class="title">Projets</h2>
+
+        <div class="about-containers-bis">
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Rebreaker/projet-rebreaker.webp"
+                alt="Projet Rebreaker"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Rebreaker</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/Razar30/Rebreaker"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/rebreaker.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Ruins%20of%20Hestia/projet-hestia.png"
+                alt="Projet Ruins of Hestia"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Ruins of Hestia</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/Ruins-of-Hestia"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/roh.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Moteur/projet-moteur.webp"
+                alt="Projet Moteur 3D"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Moteur 3D</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/Moteur"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/moteur.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Asteroides/projet-asteroides.webp"
+                alt="Projet Asteroides"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Asteroides</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/Asteroides/releases/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/asteroides.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Stage-2025/stage.webp"
+                alt="Projet Stage 2025"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Stage 2025</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/Stage-2025"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://pascal-noa.github.io/Stage-2025/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Galaxy/projet-galaxy.webp"
+                alt="Projet Galaxy"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Galaxy</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/Galaxy"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/galaxy.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/MrBeat/projet-mrbeat.webp"
+                alt="Projet Mr Beat"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Mr Beat</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/MrBeat"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/mrbeat.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/42/42.webp"
+                alt="Piscine 42"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Piscine 42 (Août 2025)</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/Piscine-42"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/piscine42.html" class="btn btn-color-2 project-btn">
+                Lire l'article
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/NovaStrike/projet-novastrike.webp"
+                alt="Projet Nova-Strike"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Nova-Strike</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/NovaStrike"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/novastrike.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Guide-Kyoto/hero-background-semi-dark.jpg"
+                alt="Projet Guide-Kyoto"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Guide-Kyoto</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/Guide-Kyoto"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://pascal-noa.github.io/Guide-Kyoto/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/AsciiArt/projet-asciiart.png"
+                alt="Projet ASCII ART"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">ASCII ART</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/ASCII-ART"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/asciiart.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/AudioEngine/projet-audioengine.png"
+                alt="Projet Éditeur Audio"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Éditeur Audio</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/AudioEngine/releases/tag/v1.0"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/audioEngine.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/PhysicsEngine/projet-physicsengine.jpg"
+                alt="Projet Physics Engine DX12"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Physics Engine DX12</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa/Physics-Engine-DX12"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="pages/physicsengine.html" class="btn btn-color-2 project-btn">
+                En savoir plus
+              </a>
+            </div>
+          </article>
+
+          <article class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="assets/Utils/projet-prochainement.webp"
+                alt="Projet Stage 2026 Intranet"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Stage 2026 : Projet Intranet</h3>
+            <div class="btn-container">
+              <a
+                href="https://github.com/PASCAL-Noa"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-color-2 project-btn"
+              >
+                GitHub
+              </a>
+              <a href="#contact" class="btn btn-color-2 project-btn">
+                Prochainement
+              </a>
+            </div>
+          </article>
+        </div>
+        <a href="#experience" class="scroll-arrow-link" aria-label="Section suivante : Compétences">
+          <img src="assets/icons/arrow.webp" alt="" class="icon" aria-hidden="true" width="24" height="24" />
+        </a>
+      </section>
+
+      <section id="experience" aria-labelledby="experience-title">
+        <p class="section__text__p1">Découvrez mes</p>
+        <h2 id="experience-title" class="title">Compétences</h2>
+
+        <div class="about-containers">
+          <div class="details-container">
+            <h3 class="experience-sub-title">Game Development</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>C++</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Python</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>C#</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>DirectX12</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>XAudio2</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Vulkan</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>GLM</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>GLFW</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>RtAudio</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>SFML</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>ImGui</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>CMake</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="details-container">
+            <h3 class="experience-sub-title">Web Development</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>ReactJS</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>NodeJS</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>TypeScript</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>TailwindCSS</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Prisma</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Vite</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Django</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>PHP</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>ESLint</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>SQL</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="details-container">
+            <h3 class="experience-sub-title">Social</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Gestion de projet</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Travail d'équipe</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Chef de projet</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Gestion du temps</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Communication</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="details-container">
+            <h3 class="experience-sub-title">Logiciels</h3>
+            <div class="skills-grid">
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>JetBrains</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Unity</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>VS 2022</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>VS Code</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Photoshop</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>GitHub</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>ClickUp</h3>
+              </div>
+              <div class="skill-card">
+                <img src="assets/icons/checkmark.webp" alt="" class="skill-icon" aria-hidden="true" width="20" height="20" />
+                <h3>Miro</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#contact" class="scroll-arrow-link" aria-label="Section suivante : Contact">
+          <img src="assets/icons/arrow.webp" alt="" class="icon" aria-hidden="true" width="24" height="24" />
+        </a>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-title">
+        <div class="contact-wrapper">
+          <p class="section__text__p1">Actuellement en recherche d' Alternance</p>
+          <h2 id="contact-title" class="title">Contactez Moi</h2>
+
+          <div class="contact-info-upper-container">
+            <div class="contact-info-container">
+              <img
+                src="assets/icons/email.webp"
+                alt=""
+                class="icon contact-icon email-icon"
+                aria-hidden="true"
+                width="32"
+                height="32"
+              />
+              <p><a href="mailto:npascal.pro@icloud.com">npascal.pro@icloud.com</a></p>
+            </div>
+            <div class="contact-info-container">
+              <img
+                src="assets/icons/linkedin.webp"
+                alt=""
+                class="icon contact-icon"
+                aria-hidden="true"
+                width="32"
+                height="32"
+              />
+              <p>
+                <a
+                  href="https://www.linkedin.com/in/noa-pascal-97ab67295/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <p>Copyright &#169; 2026 PASCAL Noa. Tous droits réservés.</p>
+        </footer>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

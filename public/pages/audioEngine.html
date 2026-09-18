@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Engine | Moteur audio C++ & DSP - PASCAL Noa</title>
+    <meta
+      name="description"
+      content="Moteur audio temps réel développé en C++ avec XAudio2, X3DAudio et interface ImGui : mixage, effets DSP et spatialisation 3D."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.noa-pascal.com/pages/audioEngine.html" />
+
+    <meta property="og:site_name" content="PASCAL Noa Portfolio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.noa-pascal.com/pages/audioEngine.html" />
+    <meta property="og:title" content="Audio Engine | Moteur audio C++ & DSP - PASCAL Noa" />
+    <meta
+      property="og:description"
+      content="Moteur et éditeur audio temps réel développé en C++ sur Windows avec XAudio2 et spatialisation 3D."
+    />
+    <meta property="og:image" content="https://www.noa-pascal.com/assets/AudioEngine/projet-audioengine.png" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.noa-pascal.com/pages/audioEngine.html" />
+    <meta name="twitter:title" content="Audio Engine | Moteur audio C++ & DSP" />
+    <meta
+      name="twitter:description"
+      content="Moteur audio C++ basé sur l'API bas niveau XAudio2 avec spatialisation sonore."
+    />
+    <meta name="twitter:image" content="https://www.noa-pascal.com/assets/AudioEngine/projet-audioengine.png" />
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/Utils/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/Utils/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/Utils/favicon.png" />
+    <link rel="shortcut icon" href="../assets/Utils/favicon.png" />
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../mediaqueries.css" />
+  </head>
+  <body class="project-page">
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+    <header class="site-header">
+      <nav id="desktop-nav" aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="../index.html#about">À propos</a></li>
+          <li><a href="../index.html#projects">Projets</a></li>
+          <li><a href="../index.html#experience">Compétences</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav id="hamburger-nav" aria-label="Navigation mobile">
+        <div class="hamburger-menu">
+          <button
+            type="button"
+            class="hamburger-icon"
+            aria-label="Ouvrir le menu de navigation"
+            aria-expanded="false"
+            aria-controls="mobile-menu-links"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu-links" id="mobile-menu-links">
+            <li><a href="../index.html#about">À propos</a></li>
+            <li><a href="../index.html#projects">Projets</a></li>
+            <li><a href="../index.html#experience">Compétences</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <nav class="breadcrumb-nav" aria-label="Retour à l'accueil">
+        <a href="../index.html#projects" class="back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          <span>Retour aux projets</span>
+        </a>
+      </nav>
+
+      <section id="game-info" aria-labelledby="project-main-title">
+        <div class="game-container">
+          <div class="game-media">
+            <div class="carousel" role="region" aria-label="Démonstration du moteur audio">
+              <div class="carousel-container">
+                <div class="carousel-item active">
+                  <div class="video-wrapper">
+                    <iframe
+                      src="https://www.youtube.com/embed/VfV3-HmY9aU?si=mZV4AtlpVdp0fUyA"
+                      title="Démonstration du logiciel Audio Engine en C++"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="download-section">
+              <a
+                href="https://github.com/PASCAL-Noa/AudioEngine/releases/tag/v1.0"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="download-btn"
+              >
+                &#11015; Télécharger Audio Engine
+              </a>
+              <a
+                href="../assets/AudioEngine/CDC_EditeurAudio.pdf"
+                class="download-btn-doc"
+                download
+              >
+                &#11015; Télécharger le Cahier des Charges
+              </a>
+            </div>
+          </div>
+
+          <article class="game-details">
+            <img src="../assets/AudioEngine/projet-audioengine.png" class="game-banner" alt="Logo de l'Audio Engine" />
+            <h1 id="project-main-title" class="title-project">Audio Engine</h1>
+            <p class="game-description">
+              <strong>Audio Engine</strong> est un moteur audio temps réel développé en C++, enrichi d'une interface graphique conçue avec Dear ImGui.<br><br>
+              Il propose des fonctionnalités de mixage multicanal, de traitement du signal numérique (DSP) et de spatialisation sonore tridimensionnelle pour les jeux vidéo sur plateforme Windows.<br><br>
+              Bâti nativement sur les API Microsoft XAudio2 et X3DAudio, le moteur est architecturé pour minimiser la latence d'entrée-sortie et offrir un positionnement acoustique précis dans l'espace.
+            </p>
+
+            <div class="game-meta">
+              <p><span>Temps :</span> <strong>1 semaine</strong></p>
+              <p><span>Développement :</span> <strong>PASCAL Noa, GILOTIN Ethan, VILLARD-HERNANDEZ Mithaniel</strong></p>
+              <div>
+                <span>Tags :</span>
+                <span class="tag tag-purple">École</span>
+                <span class="tag">C++</span>
+                <span class="tag">CLion</span>
+                <span class="tag">XAudio2</span>
+                <span class="tag">X3DAudio</span>
+                <span class="tag">ImGui</span>
+                <span class="tag">CMake</span>
+                <span class="tag">Équipe de 3</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Image agrandie" aria-hidden="true">
+        <button type="button" class="close" aria-label="Fermer l'image">&times;</button>
+        <img class="modal-content" id="zoomed-image" alt="" />
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 PASCAL Noa. Tous droits réservés.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
