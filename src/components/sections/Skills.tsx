@@ -26,18 +26,18 @@ export const Skills: React.FC<SkillsProps> = ({ categories }) => {
               {category.title}
             </h3>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-left">
               {category.skills.map((skill) => (
-                <div key={skill.name} className="flex items-center gap-2.5">
+                <div key={skill.name} className="flex items-start gap-2.5">
                   <img
                     src="/assets/icons/checkmark.webp"
                     alt=""
-                    className="w-5 h-5 object-contain shrink-0 dark:invert"
+                    className="w-5 h-5 object-contain shrink-0 mt-0.5 dark:invert"
                     width="20"
                     height="20"
                     aria-hidden="true"
                   />
-                  <h4 className="text-base font-medium text-black dark:text-[#f0f6fc] truncate">
+                  <h4 className="text-base font-medium text-black dark:text-[#f0f6fc] leading-snug">
                     {skill.name}
                   </h4>
                 </div>
