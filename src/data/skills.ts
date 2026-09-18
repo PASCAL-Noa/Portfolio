@@ -73,7 +73,7 @@ export const timelineItems: TimelineItem[] = [
     title: "Employé Commercial",
     subtitle: "Intermarché",
     description: "Autonomie, rigueur et sens des responsabilités au quotidien en milieu professionnel.",
-    image: "/assets/Timeline/intermarché.png",
+    image: "/assets/Timeline/intermarche.png",
     type: "pro"
   },
   {

@@ -314,7 +314,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
       "/assets/Moteur/moteur9.webp",
       "/assets/Moteur/moteur10.webp",
       "/assets/Moteur/moteur11.webp",
-      "/assets/Moteur/moteur12.webp"
+      "/assets/Moteur/moteur12.webp",
+      "/assets/Moteur/moteur13.webp"
     ]
   },
   "physics-engine": {
@@ -362,8 +363,19 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     "downloadLabel": "Télécharger Physics Engine",
     "docUrl": "",
     "docLabel": "",
-    "videoUrl": "",
-    "media": [],
+    "videoUrl": "/assets/PhysicsEngine/Standard.mp4",
+    "media": [
+      {
+        "type": "video",
+        "src": "/assets/PhysicsEngine/Standard.mp4",
+        "alt": "Simulation standard du Physics Engine"
+      },
+      {
+        "type": "video",
+        "src": "/assets/PhysicsEngine/Orbital.mp4",
+        "alt": "Simulation orbitale du Physics Engine"
+      }
+    ],
     "thumbnails": [
       "/assets/PhysicsEngine/standard.png",
       "/assets/PhysicsEngine/orbital.png"
@@ -421,7 +433,9 @@ export const projectDetails: Record<string, ProjectDetailData> = {
         "src": "https://www.youtube.com/embed/VfV3-HmY9aU?si=mZV4AtlpVdp0fUyA"
       }
     ],
-    "thumbnails": []
+    "thumbnails": [
+      "/assets/AudioEngine/projet-audioengine.png"
+    ]
   },
   "mr-beat": {
     "projectId": "mr-beat",
@@ -668,8 +682,19 @@ export const projectDetails: Record<string, ProjectDetailData> = {
     "downloadLabel": "Télécharger ASCII-ART",
     "docUrl": "",
     "docLabel": "",
-    "videoUrl": "",
-    "media": [],
+    "videoUrl": "/assets/AsciiArt/Torus.mp4",
+    "media": [
+      {
+        "type": "video",
+        "src": "/assets/AsciiArt/Torus.mp4",
+        "alt": "Animation de rendu du tore en ASCII"
+      },
+      {
+        "type": "video",
+        "src": "/assets/AsciiArt/Cube.mp4",
+        "alt": "Animation de rendu du cube en ASCII"
+      }
+    ],
     "thumbnails": [
       "/assets/AsciiArt/projet-asciiart.png",
       "/assets/AsciiArt/Cube.png"
@@ -739,18 +764,51 @@ export const projectDetails: Record<string, ProjectDetailData> = {
   },
   "piscine-42": {
     "projectId": "piscine-42",
-    "title": "",
-    "banner": "",
-    "description": "",
-    "duration": "",
-    "team": "",
-    "tags": [],
-    "downloadUrl": "",
-    "downloadLabel": "",
+    "title": "Piscine 42 Lyon",
+    "banner": "/assets/42/42.webp",
+    "description": "<strong>La Piscine 42</strong> est une immersion intensive de quatre semaines consécutives dans le monde de la programmation système et de l'algorithmique.<br><br>Conçue pour évaluer la persévérance et l'adaptabilité, cette expérience m'a confronté à des exercices de logique pure, à la gestion manuelle de la mémoire et à une collaboration continue au sein d'une communauté soudée.<br><br><strong>Pourquoi cette démarche ?</strong><br>Tout juste diplômé de ma deuxième année de bachelor, j'ai pris la décision délibérée de plonger dans la Piscine 42 afin de me challenger dans un environnement d'apprentissage disruptif sans enseignants ni cours magistraux. Cette épreuve a constitué un formidable moyen de sortir de ma zone de confort et de fortifier ma rigueur méthodologique.<br><br><strong>Le bilan :</strong><br>Au-delà de la validation technique, cette immersion m'a permis d'élargir mon réseau professionnel, d'adopter des méthodes de travail collaboratives rigoureuses (évaluation par les pairs, relecture de code croisée) et de vivre une aventure humaine marquante.",
+    "duration": "4 semaines (Août 2025)",
+    "team": "PASCAL Noa (Peer-learning)",
+    "tags": [
+      {
+        "label": "École",
+        "variant": "purple"
+      },
+      {
+        "label": "C",
+        "variant": "default"
+      },
+      {
+        "label": "Shell",
+        "variant": "default"
+      },
+      {
+        "label": "Algorithmique",
+        "variant": "default"
+      },
+      {
+        "label": "Peer-learning",
+        "variant": "default"
+      },
+      {
+        "label": "Système",
+        "variant": "default"
+      }
+    ],
+    "downloadUrl": "https://github.com/PASCAL-Noa/Piscine-42",
+    "downloadLabel": "Voir le dépôt GitHub",
     "docUrl": "",
     "docLabel": "",
     "videoUrl": "",
-    "media": [],
-    "thumbnails": []
+    "media": [
+      {
+        "type": "image",
+        "src": "/assets/42/42.webp",
+        "alt": "Piscine 42 Campus de Lyon"
+      }
+    ],
+    "thumbnails": [
+      "/assets/42/42.webp"
+    ]
   }
 };

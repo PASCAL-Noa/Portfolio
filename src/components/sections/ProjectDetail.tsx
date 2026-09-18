@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ProjectDetailData } from '../../data/projectDetails';
-import { ArrowLeft, ChevronLeft, ChevronRight, Download, FileText, X } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Download, FileText, Play, X } from 'lucide-react';
 import { GithubIcon } from '../common/SocialIcons';
 
 interface ProjectDetailProps {
@@ -8,6 +8,10 @@ interface ProjectDetailProps {
   githubUrl?: string;
   onBack: () => void;
 }
+
+const isEmbedUrl = (src: string) => {
+  return src.includes('youtube.com') || src.includes('youtu.be') || src.includes('vimeo.com');
+};
 
 export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, onBack }) => {
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
@@ -52,15 +56,30 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
           {/* Main Carousel Display */}
           <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black/90 dark:bg-black/60 border border-gray-200 dark:border-[#30363d] shadow-sm flex items-center justify-center group">
             {currentMedia?.type === 'video' ? (
-              <iframe
-                src={currentMedia.src}
-                title={`Vidéo de démonstration - ${data.title}`}
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              isEmbedUrl(currentMedia.src) ? (
+                <iframe
+                  key={`${currentMedia.src}-${activeMediaIndex}`}
+                  src={currentMedia.src}
+                  title={`Vidéo de démonstration - ${data.title}`}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  key={`${currentMedia.src}-${activeMediaIndex}`}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-contain bg-black"
+                >
+                  <source src={currentMedia.src} type={currentMedia.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+                  Votre navigateur ne supporte pas la lecture vidéo.
+                </video>
+              )
             ) : currentMedia?.src ? (
               <img
+                key={`${currentMedia.src}-${activeMediaIndex}`}
                 src={currentMedia.src}
                 alt={currentMedia.alt || data.title}
                 onClick={() => setZoomedImage(currentMedia.src)}
@@ -76,7 +95,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 dark:bg-[#161b22]/80 dark:hover:bg-[#161b22] text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-105"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 dark:bg-[#161b22]/80 dark:hover:bg-[#161b22] text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-105 z-10"
                   aria-label="Média précédent"
                 >
                   <ChevronLeft className="w-5 h-5" />
@@ -84,7 +103,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 dark:bg-[#161b22]/80 dark:hover:bg-[#161b22] text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-105"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/90 dark:bg-[#161b22]/80 dark:hover:bg-[#161b22] text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-105 z-10"
                   aria-label="Média suivant"
                 >
                   <ChevronRight className="w-5 h-5" />
@@ -99,6 +118,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
               {data.media.map((item, idx) => {
                 const thumbSrc = data.thumbnails[idx] || item.src;
                 const isActive = idx === activeMediaIndex;
+                const isVideo = item.type === 'video';
                 return (
                   <button
                     key={idx}
@@ -110,12 +130,23 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
                         : 'border-white/10 opacity-70 hover:opacity-100 hover:scale-102'
                     }`}
                   >
-                    <img
-                      src={thumbSrc}
-                      alt={item.alt || `Miniature ${idx + 1}`}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
+                    {thumbSrc.endsWith('.mp4') || thumbSrc.endsWith('.webm') ? (
+                      <video src={thumbSrc} className="w-full h-full object-cover" muted preload="metadata" />
+                    ) : (
+                      <img
+                        src={thumbSrc}
+                        alt={item.alt || `Miniature ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    {isVideo && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/25 pointer-events-none">
+                        <div className="w-6 h-6 rounded-full bg-black/60 backdrop-blur-xs flex items-center justify-center text-white shadow-sm">
+                          <Play className="w-3 h-3 fill-white ml-0.5" />
+                        </div>
+                      </div>
+                    )}
                   </button>
                 );
               })}
@@ -164,7 +195,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
         {/* Right Column: Project Details & Meta */}
         <article className="lg:col-span-5 bg-[#fafafa] dark:bg-[#161b22] border border-gray-200 dark:border-[#30363d] rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-xs">
           {/* Banner Image */}
-          {data.banner && (
+          {data.banner && !(totalMedia === 1 && currentMedia?.src === data.banner) && (
             <div className="w-full flex items-center justify-start">
               <img
                 src={data.banner}
