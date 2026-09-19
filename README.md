@@ -23,4 +23,4 @@ npm install
 npm run dev
 ```
 
-The site will be available locally at `http://localhost:3000`.
+The site will be available at `www.noa-pascal.com`.
