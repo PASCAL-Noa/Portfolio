@@ -19,6 +19,7 @@ pnpm-debug.log*
 dist/
 dist-ssr/
 build/
+*.tsbuildinfo
 *.local
 
 # Environment Variables & Secrets
