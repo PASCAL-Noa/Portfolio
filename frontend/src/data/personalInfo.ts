@@ -8,5 +8,5 @@ export const personalInfo: PersonalInfo = {
   email: "npascal.pro@icloud.com",
   linkedin: "https://www.linkedin.com/in/noa-pascal-97ab67295/",
   github: "https://github.com/PASCAL-Noa",
-  resumeUrl: "/assets/Utils/PASCAL_Noa_CV.pdf"
+  resumeUrl: "/assets/Utils/npascal_cv.pdf"
 };
