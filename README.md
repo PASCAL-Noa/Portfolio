@@ -4,7 +4,7 @@ Monorepo containing the personal portfolio application ([www.noa-pascal.com](htt
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 The repository is structured as an npm-based monorepo separating client-side presentation from backend services:
 
@@ -33,7 +33,7 @@ Portfolio/
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
 Make sure the following tools are installed on your machine before getting started:
 
@@ -43,7 +43,7 @@ Make sure the following tools are installed on your machine before getting start
 
 ---
 
-## 🚀 Quickstart & Local Setup
+## Quickstart & Local Setup
 
 ### 1. Clone the repository
 
@@ -131,7 +131,7 @@ The backend is a modular NestJS API with global route prefix `/api`, CORS config
 
 ---
 
-## 🔐 Environment Variables
+## Environment Variables
 
 ### Frontend (`frontend/.env`)
 
@@ -147,11 +147,11 @@ The backend is a modular NestJS API with global route prefix `/api`, CORS config
 | `NODE_ENV` | `development` | Application environment (`development`, `production`, `test`) |
 | `FRONTEND_URL` | `http://localhost:3000` | Allowed origin for Cross-Origin Resource Sharing (CORS) |
 
-> 🔒 **Security Notice:** `.env` files are strictly ignored by Git (`.gitignore`). Never commit sensitive secrets or API keys. Always update `.env.example` if adding new variables.
+> **Security Notice:** `.env` files are strictly ignored by Git (`.gitignore`). Never commit sensitive secrets or API keys. Always update `.env.example` if adding new variables.
 
 ---
 
-## 🤝 Git Workflow & Conventions
+## Git Workflow & Conventions
 
 We follow standardized branch naming and the Conventional Commits specification. For complete guidelines, please read our [CONTRIBUTING.md](./CONTRIBUTING.md).
 
@@ -170,6 +170,6 @@ We follow standardized branch naming and the Conventional Commits specification.
 
 ---
 
-## 📄 License
+## License
 
 This repository is licensed under the [MIT License](LICENSE).
