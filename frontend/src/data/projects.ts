@@ -89,7 +89,8 @@ export const projects: Project[] = [
     description: "Site vitrine complet et interactif conçu sur Figma puis développé pour un studio d'enregistrement.",
     technologies: ["HTML5", "CSS3", "JavaScript", "Figma"],
     githubUrl: "https://github.com/PASCAL-Noa/Stage-2025",
-    liveUrl: "https://pascal-noa.github.io/Stage-2025/"
+    detailUrl: "https://pascal-noa.github.io/Stage-2025/",
+    detailLabel: "Voir le site"
   },
   {
     id: "guide-kyoto",
@@ -99,7 +100,8 @@ export const projects: Project[] = [
     description: "Guide touristique immersif et interactif sur la ville de Kyoto avec design soigné.",
     technologies: ["Web", "Responsive", "UI/UX"],
     githubUrl: "https://github.com/PASCAL-Noa/Guide-Kyoto",
-    liveUrl: "https://pascal-noa.github.io/Guide-Kyoto/"
+    detailUrl: "https://pascal-noa.github.io/Guide-Kyoto/",
+    detailLabel: "Voir le site"
   },
   {
     id: "ascii-art",

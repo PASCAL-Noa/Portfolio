@@ -100,52 +100,64 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onSelectProject })
                   ))}
                 </div>
 
-                {/* Card actions avec boutons stylisés et accents */}
+                {/* Card actions : Uniquement GitHub + Bouton vers la page/détail du projet */}
                 <div className="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-white/5">
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white transition-all duration-200 shadow-xs group/btn"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#161b22] text-gray-800 dark:text-gray-200 hover:bg-gray-900 dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-gray-900 dark:hover:border-white transition-all duration-200 shadow-xs group/btn"
                     >
                       <GithubIcon className="w-4 h-4 text-gray-700 dark:text-gray-300 group-hover/btn:text-white dark:group-hover/btn:text-black transition-colors" />
                       GitHub
                     </a>
                   )}
 
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full border border-[#007bff]/30 bg-[#007bff]/10 text-[#0069d9] dark:text-[#58a6ff] hover:bg-[#007bff] hover:text-white hover:border-[#007bff] transition-all duration-200 ml-auto shadow-xs group/link"
-                    >
-                      Voir le site
-                      <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                    </a>
-                  )}
+                  {(() => {
+                    const targetLink = project.detailUrl || project.liveUrl;
+                    const label = project.detailLabel || (project.liveUrl && !project.detailUrl ? 'Voir le site' : 'En savoir plus');
+                    const isExternal = targetLink && (targetLink.startsWith('http://') || targetLink.startsWith('https://'));
 
-                  {project.detailUrl && (
-                    onSelectProject ? (
-                      <button
-                        type="button"
-                        onClick={() => onSelectProject(project.id)}
-                        className={`inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-300 hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all duration-200 ${!project.liveUrl ? 'ml-auto' : ''} shadow-xs group/link cursor-pointer`}
-                      >
-                        En savoir plus
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                      </button>
-                    ) : (
+                    if (!targetLink && !onSelectProject) return null;
+
+                    if (isExternal) {
+                      return (
+                        <a
+                          href={targetLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] transition-all duration-200 ml-auto shadow-xs group/link"
+                        >
+                          <span>{label}</span>
+                          <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                        </a>
+                      );
+                    }
+
+                    if (onSelectProject) {
+                      return (
+                        <button
+                          type="button"
+                          onClick={() => onSelectProject(project.id)}
+                          className="inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] transition-all duration-200 ml-auto shadow-xs group/link cursor-pointer"
+                        >
+                          <span>{label}</span>
+                          <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                        </button>
+                      );
+                    }
+
+                    return (
                       <a
-                        href={project.detailUrl}
-                        className={`inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-300 hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all duration-200 ${!project.liveUrl ? 'ml-auto' : ''} shadow-xs group/link`}
+                        href={targetLink || `#/project/${project.id}`}
+                        className="inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] transition-all duration-200 ml-auto shadow-xs group/link"
                       >
-                        En savoir plus
+                        <span>{label}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                       </a>
-                    )
-                  )}
+                    );
+                  })()}
                 </div>
               </div>
             </div>

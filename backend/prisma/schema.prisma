@@ -27,6 +27,7 @@ model Project {
   githubUrl    String?
   liveUrl      String?
   detailUrl    String?
+  detailLabel  String?
   featured     Boolean        @default(false)
   order        Int            @default(0)
   createdAt    DateTime       @default(now())

@@ -49,6 +49,7 @@ export class ProjectsService {
         githubUrl: dto.githubUrl,
         liveUrl: dto.liveUrl,
         detailUrl: dto.detailUrl || `/pages/${dto.id}.html`,
+        detailLabel: dto.detailLabel,
         featured: dto.featured || false,
         order: dto.order ?? dto.orderIndex ?? 0,
         detail: {
@@ -88,6 +89,7 @@ export class ProjectsService {
         ...(dto.githubUrl !== undefined && { githubUrl: dto.githubUrl }),
         ...(dto.liveUrl !== undefined && { liveUrl: dto.liveUrl }),
         ...(dto.detailUrl !== undefined && { detailUrl: dto.detailUrl }),
+        ...(dto.detailLabel !== undefined && { detailLabel: dto.detailLabel }),
         ...(dto.featured !== undefined && { featured: dto.featured }),
         ...(dto.order !== undefined || dto.orderIndex !== undefined
           ? { order: dto.order ?? dto.orderIndex }

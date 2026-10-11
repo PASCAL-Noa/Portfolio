@@ -78,6 +78,10 @@ export class CreateProjectDto {
   @IsOptional()
   detailUrl?: string;
 
+  @IsString()
+  @IsOptional()
+  detailLabel?: string;
+
   @IsBoolean()
   @IsOptional()
   featured?: boolean;

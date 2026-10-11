@@ -65,6 +65,8 @@ export const AdminProjectManager: React.FC = () => {
     technologies: [],
     githubUrl: '',
     liveUrl: '',
+    detailUrl: '',
+    detailLabel: 'En savoir plus',
     featured: false,
     orderIndex: 0,
     detail: {
@@ -202,6 +204,8 @@ export const AdminProjectManager: React.FC = () => {
       technologies: [],
       githubUrl: '',
       liveUrl: '',
+      detailUrl: '',
+      detailLabel: 'En savoir plus',
       featured: false,
       orderIndex: projectsList.length,
       detail: {
@@ -234,6 +238,8 @@ export const AdminProjectManager: React.FC = () => {
       technologies: p.technologies || [],
       githubUrl: p.githubUrl || '',
       liveUrl: p.liveUrl || '',
+      detailUrl: p.detailUrl || (p.liveUrl ? p.liveUrl : ''),
+      detailLabel: p.detailLabel || (p.liveUrl && !p.detailUrl ? 'Voir le site' : 'En savoir plus'),
       featured: p.featured || false,
       orderIndex: p.orderIndex,
       detail: p.detail
@@ -488,6 +494,8 @@ export const AdminProjectManager: React.FC = () => {
     try {
       const payload: ProjectPayload = {
         ...formData,
+        detailUrl: formData.detailUrl || `/pages/${formData.id}.html`,
+        detailLabel: formData.detailLabel || 'En savoir plus',
         technologies: techInput
           ? techInput
               .split(',')
@@ -929,16 +937,44 @@ export const AdminProjectManager: React.FC = () => {
                     />
                   </div>
 
-                  {/* Links & Featured Checkbox */}
+                  {/* Links & Buttons Configuration */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
+                        Lien GitHub (Optionnel)
+                      </label>
+                      <input
+                        type="url"
+                        value={formData.githubUrl}
+                        onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
+                        placeholder="https://github.com/..."
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
+                        Lien du Bouton (Page Projet ou Web)
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.detailUrl}
+                        onChange={(e) => setFormData({ ...formData, detailUrl: e.target.value })}
+                        placeholder={`#/project/${formData.id || 'slug'} ou https://...`}
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
-                      Lien GitHub
+                      Texte du Bouton Projet (Libellé)
                     </label>
                     <input
-                      type="url"
-                      value={formData.githubUrl}
-                      onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
-                      placeholder="https://github.com/..."
+                      type="text"
+                      value={formData.detailLabel}
+                      onChange={(e) => setFormData({ ...formData, detailLabel: e.target.value })}
+                      placeholder="En savoir plus (ou 'Voir le site')"
                       className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                     />
                   </div>
@@ -1297,6 +1333,18 @@ export const AdminProjectManager: React.FC = () => {
                               {t.trim()}
                             </span>
                           ))}
+                        </div>
+
+                        {/* Action buttons preview */}
+                        <div className="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+                          {formData.githubUrl && (
+                            <span className="text-2xs font-semibold px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#161b22] text-gray-800 dark:text-gray-200">
+                              GitHub
+                            </span>
+                          )}
+                          <span className="text-2xs font-semibold px-3 py-1 rounded-full bg-[rgb(53,53,53)] text-white dark:bg-[#f0f6fc] dark:text-[#0d1117] ml-auto">
+                            {formData.detailLabel || 'En savoir plus'}
+                          </span>
                         </div>
                       </div>
                     </div>

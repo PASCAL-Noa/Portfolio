@@ -33,6 +33,7 @@ export interface ProjectPayload {
   githubUrl?: string;
   liveUrl?: string;
   detailUrl?: string;
+  detailLabel?: string;
   featured?: boolean;
   orderIndex?: number;
   detail?: ProjectDetailPayload;

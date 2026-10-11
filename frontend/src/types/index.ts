@@ -12,6 +12,7 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   detailUrl?: string;
+  detailLabel?: string;
   featured?: boolean;
 }
 
