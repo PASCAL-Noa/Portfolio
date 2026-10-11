@@ -2,7 +2,7 @@ import { AdminUser, AuthResponse, ProjectPayload, TimelinePayload } from '../typ
 import { Project, TimelineItem } from '../types';
 import { ProjectDetailData } from '../data/projectDetails';
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3001/api').replace(/\/+$/, '');
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:4000/api').replace(/\/+$/, '');
 
 class ApiError extends Error {
   constructor(public status: number, message: string) {
