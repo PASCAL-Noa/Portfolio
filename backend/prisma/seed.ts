@@ -3,6 +3,9 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import pg from 'pg';
 import * as argon2 from 'argon2';
+import { projects } from '../../frontend/src/data/projects.ts';
+import { projectDetails } from '../../frontend/src/data/projectDetails.ts';
+import { timelineItems } from '../../frontend/src/data/skills.ts';
 
 const connectionString =
   process.env.DATABASE_URL ||
@@ -13,12 +16,12 @@ const prisma = new PrismaClient({ adapter });
 
 async function main() {
   const adminEmail = process.env.ADMIN_EMAIL || 'npascal.pro@icloud.com';
-  const rawPassword = process.env.ADMIN_PASSWORD || 'temporary_admin_secret_123';
+  const rawPassword = process.env.ADMIN_PASSWORD || 'npascal2004';
   const passwordHash = await argon2.hash(rawPassword);
 
-  console.log(`Seeding database...`);
+  console.log(`Seeding database with full portfolio data...`);
 
-  // Provision single admin user
+  // 1. Provision single admin user
   const admin = await prisma.adminUser.upsert({
     where: { email: adminEmail },
     update: {
@@ -32,67 +35,130 @@ async function main() {
   });
   console.log(`Admin user provisioned: ${admin.email}`);
 
-  // Seed sample initial project
-  await prisma.project.upsert({
-    where: { id: 'rebreaker' },
-    update: {},
-    create: {
-      id: 'rebreaker',
-      title: 'Rebreaker',
-      category: 'game',
-      image: '/assets/Rebreaker/projet-rebreaker.webp',
-      description: 'Casse-brique moderne développé en équipe avec moteur physique et mécaniques revisitées.',
-      technologies: ['C++', 'SFML', 'Game Dev'],
-      githubUrl: 'https://github.com/Razar30/Rebreaker',
-      detailUrl: '/pages/rebreaker.html',
-      featured: true,
-      order: 1,
-      detail: {
-        create: {
-          title: 'Rebreaker',
-          banner: '/assets/Rebreaker/projet-rebreaker.webp',
-          description: '<p>Rebreaker est l\'un de mes projets d\'école les plus ambitieux.</p>',
-          duration: '2 semaines',
-          team: 'PASCAL Noa, GILOTIN Ethan, VILLARD-HERNANDEZ Mithaniel',
-          tags: [
-            { label: 'École', variant: 'purple' },
-            { label: 'C++', variant: 'default' },
-            { label: 'SFML', variant: 'default' },
-          ],
-          downloadUrl: 'https://github.com/Razar30/Rebreaker/releases',
-          downloadLabel: 'Télécharger Rebreaker',
-          docUrl: '/assets/Rebreaker/cdc-rebreaker.pdf',
-          docLabel: 'Télécharger le Cahier des Charges',
-          videoUrl: 'https://www.youtube.com/embed/RJzi27_0S90',
-          media: [
-            { type: 'video', src: 'https://www.youtube.com/embed/RJzi27_0S90' },
-            { type: 'image', src: '/assets/Rebreaker/rebreaker2.webp', alt: 'Gameplay Rebreaker' },
-          ],
-          thumbnails: ['/assets/Rebreaker/rebreaker2.webp'],
-        },
+  // 2. Seed ALL projects and their project details
+  for (let i = 0; i < projects.length; i++) {
+    const p = projects[i];
+    const detail = projectDetails[p.id];
+
+    await prisma.project.upsert({
+      where: { id: p.id },
+      update: {
+        title: p.title,
+        category: p.category,
+        image: p.image,
+        description: p.description,
+        technologies: p.technologies,
+        githubUrl: p.githubUrl,
+        liveUrl: p.liveUrl,
+        detailUrl: p.detailUrl,
+        featured: p.featured ?? false,
+        order: i,
+        detail: detail
+          ? {
+              upsert: {
+                create: {
+                  title: detail.title,
+                  banner: detail.banner,
+                  description: detail.description,
+                  duration: detail.duration,
+                  team: detail.team,
+                  tags: detail.tags as any,
+                  downloadUrl: detail.downloadUrl,
+                  downloadLabel: detail.downloadLabel,
+                  docUrl: detail.docUrl,
+                  docLabel: detail.docLabel,
+                  videoUrl: detail.videoUrl,
+                  media: detail.media as any,
+                  thumbnails: detail.thumbnails as any,
+                },
+                update: {
+                  title: detail.title,
+                  banner: detail.banner,
+                  description: detail.description,
+                  duration: detail.duration,
+                  team: detail.team,
+                  tags: detail.tags as any,
+                  downloadUrl: detail.downloadUrl,
+                  downloadLabel: detail.downloadLabel,
+                  docUrl: detail.docUrl,
+                  docLabel: detail.docLabel,
+                  videoUrl: detail.videoUrl,
+                  media: detail.media as any,
+                  thumbnails: detail.thumbnails as any,
+                },
+              },
+            }
+          : undefined,
       },
-    },
-  });
-  console.log(`Initial projects seeded.`);
+      create: {
+        id: p.id,
+        title: p.title,
+        category: p.category,
+        image: p.image,
+        description: p.description,
+        technologies: p.technologies,
+        githubUrl: p.githubUrl,
+        liveUrl: p.liveUrl,
+        detailUrl: p.detailUrl,
+        featured: p.featured ?? false,
+        order: i,
+        detail: detail
+          ? {
+              create: {
+                title: detail.title,
+                banner: detail.banner,
+                description: detail.description,
+                duration: detail.duration,
+                team: detail.team,
+                tags: detail.tags as any,
+                downloadUrl: detail.downloadUrl,
+                downloadLabel: detail.downloadLabel,
+                docUrl: detail.docUrl,
+                docLabel: detail.docLabel,
+                videoUrl: detail.videoUrl,
+                media: detail.media as any,
+                thumbnails: detail.thumbnails as any,
+              },
+            }
+          : undefined,
+      },
+    });
+  }
+  console.log(`Seeded ${projects.length} projects with full detail pages.`);
 
-  // Seed sample timeline item
-  await prisma.timelineItem.upsert({
-    where: { id: 'gaming-campus-bachelor' },
-    update: {},
-    create: {
-      id: 'gaming-campus-bachelor',
-      period: 'Sept. 2023 - 2026',
-      title: 'Bachelor Développeur Informatique',
-      subtitle: 'Gaming Campus / Lyon',
-      description: 'Formation spécialisée en programmation informatique, bas niveau, architecture C++ et conception de moteurs de jeux.',
-      image: '/assets/Timeline/gamingcampus.jpg',
-      type: 'edu',
-      order: 1,
-    },
-  });
-  console.log(`Timeline seeded.`);
+  // 3. Seed ALL timeline items
+  for (let i = 0; i < timelineItems.length; i++) {
+    const t = timelineItems[i];
+    await prisma.timelineItem.upsert({
+      where: { id: t.id },
+      update: {
+        period: t.period,
+        title: t.title,
+        subtitle: t.subtitle,
+        description: t.description,
+        image: t.image,
+        type: t.type,
+        link: t.link,
+        linkText: t.linkText,
+        order: i,
+      },
+      create: {
+        id: t.id,
+        period: t.period,
+        title: t.title,
+        subtitle: t.subtitle,
+        description: t.description,
+        image: t.image,
+        type: t.type,
+        link: t.link,
+        linkText: t.linkText,
+        order: i,
+      },
+    });
+  }
+  console.log(`Seeded ${timelineItems.length} timeline milestones.`);
 
-  console.log(`Database seeding completed.`);
+  console.log(`Database seeding completed successfully! All data is fully preserved and synchronized.`);
 }
 
 main()
