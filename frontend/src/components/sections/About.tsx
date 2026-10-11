@@ -1,6 +1,7 @@
 import React from 'react';
 import { TimelineItem, TimelineCategory } from '../../types';
 import { GraduationCap, Briefcase, Globe, Code2, ExternalLink } from 'lucide-react';
+import { getAssetUrl } from '../../utils/imageUrl';
 
 interface AboutProps {
   items: TimelineItem[];
@@ -74,7 +75,7 @@ export const About: React.FC<AboutProps> = ({ items }) => {
                   {item.image && (
                     <div className="w-full lg:w-72 aspect-video shrink-0 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm group-hover:shadow-md transition-shadow">
                       <img
-                        src={item.image}
+                        src={getAssetUrl(item.image)}
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"

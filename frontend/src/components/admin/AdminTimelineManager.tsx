@@ -21,6 +21,7 @@ import {
   Eye,
   Calendar,
 } from 'lucide-react';
+import { getAssetUrl } from '../../utils/imageUrl';
 
 interface TimelineItemWithOrder extends TimelineItem {
   orderIndex: number;
@@ -343,7 +344,7 @@ export const AdminTimelineManager: React.FC = () => {
                     {/* Thumbnail preview if available */}
                     {item.image && (
                       <div className="w-20 h-14 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 border border-gray-200 dark:border-gray-700 hidden md:block">
-                        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                        <img src={getAssetUrl(item.image)} alt={item.title} className="w-full h-full object-cover" />
                       </div>
                     )}
 
@@ -549,7 +550,7 @@ export const AdminTimelineManager: React.FC = () => {
                 </div>
                 {formData.image && (
                   <div className="mt-2 w-48 aspect-video rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-black">
-                    <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                    <img src={getAssetUrl(formData.image)} alt="Preview" className="w-full h-full object-cover" />
                   </div>
                 )}
               </div>

@@ -10,6 +10,12 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
-    open: true
+    open: true,
+    proxy: {
+      '/uploads': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      },
+    },
   }
 });

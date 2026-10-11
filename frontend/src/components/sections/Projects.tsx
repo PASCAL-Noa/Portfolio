@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Project, ProjectCategory } from '../../types';
 import { GithubIcon } from '../common/SocialIcons';
 import { ArrowUpRight } from 'lucide-react';
+import { getAssetUrl } from '../../utils/imageUrl';
 
 interface ProjectsProps {
   projects: Project[];
@@ -66,7 +67,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onSelectProject })
             {/* Image banner 16:9 nette */}
             <div className="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-xl mb-4 sm:mb-5">
               <img
-                src={project.image}
+                src={getAssetUrl(project.image)}
                 alt={project.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"

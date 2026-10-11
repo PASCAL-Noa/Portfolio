@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ProjectDetailData } from '../../data/projectDetails';
 import { ArrowLeft, ChevronLeft, ChevronRight, Download, FileText, Play, X } from 'lucide-react';
 import { GithubIcon } from '../common/SocialIcons';
+import { getAssetUrl } from '../../utils/imageUrl';
 
 interface ProjectDetailProps {
   data: ProjectDetailData;
@@ -73,14 +74,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
                   preload="metadata"
                   className="w-full h-full object-contain bg-black"
                 >
-                  <source src={currentMedia.src} type={currentMedia.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+                  <source src={getAssetUrl(currentMedia.src)} type={currentMedia.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
                   Votre navigateur ne supporte pas la lecture vidéo.
                 </video>
               )
             ) : currentMedia?.src ? (
               <img
                 key={`${currentMedia.src}-${activeMediaIndex}`}
-                src={currentMedia.src}
+                src={getAssetUrl(currentMedia.src)}
                 alt={currentMedia.alt || data.title}
                 onClick={() => setZoomedImage(currentMedia.src)}
                 className="w-full h-full object-cover cursor-zoom-in transition-transform duration-300 group-hover:scale-[1.02]"
@@ -131,10 +132,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
                     }`}
                   >
                     {thumbSrc.endsWith('.mp4') || thumbSrc.endsWith('.webm') ? (
-                      <video src={thumbSrc} className="w-full h-full object-cover" muted preload="metadata" />
+                      <video src={getAssetUrl(thumbSrc)} className="w-full h-full object-cover" muted preload="metadata" />
                     ) : (
                       <img
-                        src={thumbSrc}
+                        src={getAssetUrl(thumbSrc)}
                         alt={item.alt || `Miniature ${idx + 1}`}
                         className="w-full h-full object-cover"
                         loading="lazy"

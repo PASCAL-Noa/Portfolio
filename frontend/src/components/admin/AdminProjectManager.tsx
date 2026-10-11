@@ -4,12 +4,11 @@ import { Project, ProjectCategory } from '../../types';
 import { ProjectPayload } from '../../types/admin';
 import { projects as fallbackProjects } from '../../data/projects';
 import { projectDetails as fallbackProjectDetails } from '../../data/projectDetails';
+import { getAssetUrl } from '../../utils/imageUrl';
 import {
   Plus,
   Trash2,
   Edit,
-  ArrowUp,
-  ArrowDown,
   ExternalLink,
   Upload,
   Eye,
@@ -17,7 +16,9 @@ import {
   AlertCircle,
   Loader2,
   X,
-  Sparkles,
+  GripVertical,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
 interface ProjectWithDetail extends Project {
@@ -41,6 +42,10 @@ export const AdminProjectManager: React.FC = () => {
   const [projectsList, setProjectsList] = useState<ProjectWithDetail[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  // Drag and drop state
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,6 +116,79 @@ export const AdminProjectManager: React.FC = () => {
   const showNotification = (type: 'success' | 'error', text: string) => {
     setStatusMessage({ type, text });
     setTimeout(() => setStatusMessage(null), 4000);
+  };
+
+  // Drag and drop handlers
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+    // Transparent ghost image style
+    e.dataTransfer.setData('text/plain', `${index}`);
+  };
+
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+    e.preventDefault();
+    if (draggedIndex !== null && draggedIndex !== index) {
+      setDragOverIndex(index);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>, targetIndex: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === targetIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const updated = [...projectsList];
+    const [moved] = updated.splice(draggedIndex, 1);
+    updated.splice(targetIndex, 0, moved);
+
+    const reordered = updated.map((item, idx) => ({ ...item, orderIndex: idx }));
+    setProjectsList(reordered);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+
+    try {
+      await api.reorderProjects(reordered.map((p) => ({ id: p.id, orderIndex: p.orderIndex })));
+      showNotification('success', `Projet déplacé à la position #${targetIndex + 1} ! Grille mise à jour.`);
+    } catch (err: unknown) {
+      showNotification('error', err instanceof Error ? err.message : 'Erreur lors de la réorganisation.');
+    }
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleQuickMove = async (index: number, direction: 'prev' | 'next') => {
+    const targetIndex = direction === 'prev' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= projectsList.length) return;
+
+    const updated = [...projectsList];
+    const [moved] = updated.splice(index, 1);
+    updated.splice(targetIndex, 0, moved);
+
+    const reordered = updated.map((item, idx) => ({ ...item, orderIndex: idx }));
+    setProjectsList(reordered);
+
+    try {
+      await api.reorderProjects(reordered.map((p) => ({ id: p.id, orderIndex: p.orderIndex })));
+      showNotification('success', `Position #${targetIndex + 1} mise à jour !`);
+    } catch (err: unknown) {
+      showNotification('error', err instanceof Error ? err.message : 'Erreur lors du déplacement.');
+    }
   };
 
   const openAddModal = () => {
@@ -193,7 +271,6 @@ export const AdminProjectManager: React.FC = () => {
 
   const handleTitleChange = (val: string) => {
     setFormData((prev) => {
-      // Auto-generate slug if new project and slug not explicitly modified
       const autoSlug = !editingProjectId
         ? val
             .toLowerCase()
@@ -323,7 +400,6 @@ export const AdminProjectManager: React.FC = () => {
           : [],
         detail: {
           ...formData.detail!,
-          // if banner was not explicitly set, use card image
           description: formData.detail?.description || formData.description || '',
           media:
             formData.detail?.media && formData.detail.media.length > 0
@@ -371,38 +447,19 @@ export const AdminProjectManager: React.FC = () => {
     }
   };
 
-  const handleMove = async (index: number, direction: 'up' | 'down') => {
-    const newIdx = direction === 'up' ? index - 1 : index + 1;
-    if (newIdx < 0 || newIdx >= projectsList.length) return;
-
-    const updated = [...projectsList];
-    const [moved] = updated.splice(index, 1);
-    updated.splice(newIdx, 0, moved);
-
-    const reordered = updated.map((item, idx) => ({ ...item, orderIndex: idx }));
-    setProjectsList(reordered);
-
-    try {
-      await api.reorderProjects(reordered.map((p) => ({ id: p.id, orderIndex: p.orderIndex })));
-      showNotification('success', 'Ordre de la grille mis à jour !');
-    } catch (err: unknown) {
-      showNotification('error', err instanceof Error ? err.message : 'Erreur lors de la réorganisation.');
-    }
-  };
-
   return (
     <div className="space-y-6">
       {/* Top Banner and Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white dark:bg-[#161b22] p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs">
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold tracking-tight">Gestion des Projets</h2>
+          <div className="flex items-center gap-2.5">
+            <h2 className="text-xl font-bold tracking-tight">Grille des Projets</h2>
             <span className="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">
               {projectsList.length} projets
             </span>
           </div>
           <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Gérez l'ordre de la CSS grid, ajoutez de nouveaux projets et personnalisez leurs pages de détails générées automatiquement.
+            <strong>Glissez-déposez (Drag & Drop)</strong> les cartes directement pour réorganiser l'affichage de votre grille CSS, ou utilisez les boutons d'action.
           </p>
         </div>
 
@@ -428,148 +485,184 @@ export const AdminProjectManager: React.FC = () => {
         </div>
       )}
 
-      {/* Projects List / Grid Order Manager */}
+      {/* Grid Drag & Drop View */}
       {isLoading ? (
         <div className="py-20 flex flex-col items-center justify-center text-gray-500">
           <Loader2 className="w-8 h-8 animate-spin text-purple-600 mb-2" />
           <p className="text-sm">Chargement des projets...</p>
         </div>
-      ) : projectsList.length === 0 ? (
-        <div className="text-center py-16 bg-white dark:bg-[#161b22] rounded-2xl border border-dashed border-gray-300 dark:border-gray-800 p-8">
-          <Sparkles className="w-10 h-10 text-gray-400 mx-auto mb-3" />
-          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">Aucun projet enregistré</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 mb-4">
-            Commencez par ajouter votre premier projet pour l'afficher sur votre portfolio.
-          </p>
-          <button
-            onClick={openAddModal}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium transition cursor-pointer"
-          >
-            <Plus className="w-4 h-4" />
-            Créer un projet
-          </button>
-        </div>
       ) : (
-        <div className="bg-white dark:bg-[#161b22] rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-xs">
-          <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-              Ordre d'affichage dans la CSS Grid
-            </h3>
-            <span className="text-xs text-gray-400">
-              Utilisez les flèches pour modifier la position dans la grille
-            </span>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projectsList.map((project, index) => {
+            const isDraggingThis = draggedIndex === index;
+            const isTargetOfDrag = dragOverIndex === index;
 
-          <div className="divide-y divide-gray-100 dark:divide-gray-800">
-            {projectsList.map((project, index) => (
+            return (
               <div
                 key={project.id}
-                className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50/60 dark:hover:bg-[#1c2129]/60 transition"
+                draggable
+                onDragStart={(e) => handleDragStart(e, index)}
+                onDragEnter={(e) => handleDragEnter(e, index)}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={(e) => handleDrop(e, index)}
+                onDragEnd={handleDragEnd}
+                className={`group relative flex flex-col bg-[#fafafa] dark:bg-[#161b22] rounded-2xl overflow-hidden border transition-all duration-200 p-5 shadow-xs select-none cursor-grab active:cursor-grabbing ${
+                  isDraggingThis
+                    ? 'opacity-40 scale-95 border-dashed border-purple-500 ring-2 ring-purple-500/30'
+                    : isTargetOfDrag
+                    ? 'scale-105 border-purple-500 ring-4 ring-purple-500/40 z-20 shadow-xl'
+                    : 'border-gray-200 dark:border-[#30363d] hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-md'
+                }`}
               >
-                {/* Left: Reorder controls + Thumbnail + Info */}
-                <div className="flex items-center gap-4">
-                  {/* Position Badge & Up/Down Arrows */}
-                  <div className="flex flex-col items-center gap-1">
-                    <button
-                      onClick={() => handleMove(index, 'up')}
-                      disabled={index === 0}
-                      className="p-1 rounded-md text-gray-400 hover:text-purple-600 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer"
-                      title="Monter d'un rang"
-                    >
-                      <ArrowUp className="w-4 h-4" />
-                    </button>
-                    <span className="text-xs font-mono font-bold w-6 text-center text-gray-600 dark:text-gray-400">
-                      #{index + 1}
-                    </span>
-                    <button
-                      onClick={() => handleMove(index, 'down')}
-                      disabled={index === projectsList.length - 1}
-                      className="p-1 rounded-md text-gray-400 hover:text-purple-600 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer"
-                      title="Descendre d'un rang"
-                    >
-                      <ArrowDown className="w-4 h-4" />
-                    </button>
+                {/* Image Banner 16:9 with Badges */}
+                <div className="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-xl mb-4 border border-gray-200 dark:border-gray-700">
+                  <img
+                    src={getAssetUrl(project.image)}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+
+                  {/* Order Index & Drag Indicator */}
+                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-xs font-mono font-bold shadow-md">
+                    <GripVertical className="w-3.5 h-3.5 text-purple-400" />
+                    <span>#{index + 1}</span>
                   </div>
 
-                  {/* Thumbnail */}
-                  <div className="w-20 h-14 sm:w-24 sm:h-16 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 border border-gray-200 dark:border-gray-700">
-                    {project.image ? (
-                      <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">No img</div>
+                  {/* Category & Featured Badge */}
+                  <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
+                    {project.featured && (
+                      <span className="text-2xs px-2 py-0.5 rounded-full font-bold uppercase bg-amber-500/90 text-white shadow-xs">
+                        Featured
+                      </span>
+                    )}
+                    <span className="text-2xs px-2.5 py-0.5 rounded-full font-bold uppercase bg-black/60 backdrop-blur-md text-white border border-white/20">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 flex flex-col justify-between space-y-3">
+                  <div>
+                    <h3 className="text-lg font-bold text-black dark:text-[#f0f6fc] group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors leading-snug">
+                      {project.title}
+                    </h3>
+                    <p className="text-2xs font-mono text-gray-400 mt-0.5">id: {project.id}</p>
+                    {project.description && (
+                      <p className="text-xs text-gray-600 dark:text-[#8b949e] line-clamp-2 leading-relaxed mt-2">
+                        {project.description}
+                      </p>
                     )}
                   </div>
 
-                  {/* Info */}
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h4 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-gray-100 truncate">
-                        {project.title}
-                      </h4>
-                      <span className="text-2xs px-2 py-0.5 rounded-md font-semibold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 uppercase">
-                        {project.category}
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {project.technologies?.slice(0, 4).map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-2xs font-semibold px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200/50 dark:border-purple-800/40 font-mono"
+                      >
+                        {tech}
                       </span>
-                      {project.featured && (
-                        <span className="text-2xs px-2 py-0.5 rounded-md font-semibold bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300">
-                          Mis en avant
-                        </span>
-                      )}
+                    ))}
+                    {(project.technologies?.length || 0) > 4 && (
+                      <span className="text-2xs text-gray-400 font-mono self-center">
+                        +{project.technologies.length - 4}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Card Admin Actions */}
+                  <div className="pt-3 border-t border-gray-100 dark:border-gray-800/80 flex items-center justify-between gap-2">
+                    {/* Quick Move Left / Right buttons */}
+                    <div className="flex items-center gap-1">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleQuickMove(index, 'prev');
+                        }}
+                        disabled={index === 0}
+                        className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 disabled:opacity-20 cursor-pointer"
+                        title="Déplacer vers la gauche / avant"
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleQuickMove(index, 'next');
+                        }}
+                        disabled={index === projectsList.length - 1}
+                        className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 disabled:opacity-20 cursor-pointer"
+                        title="Déplacer vers la droite / après"
+                      >
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </button>
                     </div>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-mono mt-0.5">
-                      id: {project.id}
-                    </p>
-                    <div className="flex flex-wrap gap-1 mt-1.5">
-                      {project.technologies?.slice(0, 4).map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-2xs px-1.5 py-0.5 rounded bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 font-mono"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {(project.technologies?.length || 0) > 4 && (
-                        <span className="text-2xs text-gray-400 font-mono self-center">
-                          +{project.technologies.length - 4}
-                        </span>
-                      )}
+
+                    <div className="flex items-center gap-1.5">
+                      <a
+                        href={`#/project/${project.id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="p-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
+                        title="Ouvrir la page de détail"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openEditModal(project);
+                        }}
+                        className="p-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-lg transition flex items-center gap-1 cursor-pointer"
+                        title="Modifier ce projet"
+                      >
+                        <Edit className="w-4 h-4" />
+                        <span className="text-xs">Modifier</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(project.id, project.title);
+                        }}
+                        className="p-1.5 text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg transition flex items-center gap-1 cursor-pointer"
+                        title="Supprimer ce projet"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </div>
                   </div>
                 </div>
-
-                {/* Right: Quick Actions */}
-                <div className="flex items-center gap-2 self-end sm:self-center">
-                  <a
-                    href={`#/project/${project.id}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-2 text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition flex items-center gap-1.5"
-                    title="Voir la page de détail"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span className="hidden md:inline">Voir la page</span>
-                  </a>
-
-                  <button
-                    onClick={() => openEditModal(project)}
-                    className="p-2 text-xs font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
-                    title="Modifier"
-                  >
-                    <Edit className="w-4 h-4" />
-                    <span className="hidden md:inline">Modifier</span>
-                  </button>
-
-                  <button
-                    onClick={() => handleDelete(project.id, project.title)}
-                    className="p-2 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
-                    title="Supprimer"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                    <span className="hidden md:inline">Supprimer</span>
-                  </button>
-                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
+
+          {/* "+ Ajouter un projet" dashed Card in Grid */}
+          <button
+            type="button"
+            onClick={openAddModal}
+            className="flex flex-col items-center justify-center p-8 rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 bg-white/50 dark:bg-[#161b22]/50 hover:bg-purple-50/40 dark:hover:bg-purple-950/20 text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-200 cursor-pointer min-h-[320px] group"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <Plus className="w-7 h-7" />
+            </div>
+            <span className="font-bold text-base text-gray-900 dark:text-gray-100 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+              Ajouter un nouveau projet
+            </span>
+            <span className="text-xs text-gray-400 text-center mt-1 max-w-xs">
+              Créez une carte et générez automatiquement sa page de détail complète.
+            </span>
+          </button>
         </div>
       )}
 
@@ -727,7 +820,7 @@ export const AdminProjectManager: React.FC = () => {
                     </div>
                     {formData.image && (
                       <div className="mt-2 w-48 aspect-video rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-black">
-                        <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                        <img src={getAssetUrl(formData.image)} alt="Preview" className="w-full h-full object-cover" />
                       </div>
                     )}
                   </div>
@@ -1032,7 +1125,7 @@ export const AdminProjectManager: React.FC = () => {
                               Vidéo: {m.src.slice(0, 20)}...
                             </div>
                           ) : (
-                            <img src={m.src} alt={`Media ${idx}`} className="w-full h-full object-cover" />
+                            <img src={getAssetUrl(m.src)} alt={`Media ${idx}`} className="w-full h-full object-cover" />
                           )}
                           <button
                             type="button"
@@ -1059,7 +1152,7 @@ export const AdminProjectManager: React.FC = () => {
                     <div className="max-w-sm rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#161b22] shadow-md">
                       <div className="aspect-video w-full bg-black overflow-hidden relative">
                         {formData.image ? (
-                          <img src={formData.image} alt={formData.title} className="w-full h-full object-cover" />
+                          <img src={getAssetUrl(formData.image)} alt={formData.title} className="w-full h-full object-cover" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-500 text-sm">
                             Image manquante
