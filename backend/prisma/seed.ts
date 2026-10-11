@@ -1,7 +1,15 @@
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import pg from 'pg';
 import * as argon2 from 'argon2';
 
-const prisma = new PrismaClient();
+const connectionString =
+  process.env.DATABASE_URL ||
+  'postgresql://postgres:postgres@localhost:5433/portfolio_db?schema=public';
+const pool = new pg.Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
   const adminEmail = process.env.ADMIN_EMAIL || 'npascal.pro@icloud.com';
@@ -13,7 +21,9 @@ async function main() {
   // Provision single admin user
   const admin = await prisma.adminUser.upsert({
     where: { email: adminEmail },
-    update: {},
+    update: {
+      passwordHash,
+    },
     create: {
       email: adminEmail,
       passwordHash,
@@ -92,4 +102,5 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
+    await pool.end();
   });
