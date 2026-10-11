@@ -1,12 +1,12 @@
 import { PrismaClient } from '@prisma/client';
-import crypto from 'node:crypto';
+import * as argon2 from 'argon2';
 
 const prisma = new PrismaClient();
 
 async function main() {
   const adminEmail = process.env.ADMIN_EMAIL || 'npascal.pro@icloud.com';
   const rawPassword = process.env.ADMIN_PASSWORD || 'temporary_admin_secret_123';
-  const passwordHash = crypto.createHash('sha256').update(rawPassword).digest('hex');
+  const passwordHash = await argon2.hash(rawPassword);
 
   console.log(`Seeding database...`);
 
