@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from './hooks/useTheme';
+import { usePortfolioData } from './hooks/usePortfolioData';
 import { Navbar } from './components/layout/Navbar';
 import { Hero } from './components/sections/Hero';
 import { About } from './components/sections/About';
@@ -16,13 +17,14 @@ import { AdminProjectManager } from './components/admin/AdminProjectManager';
 import { AdminTimelineManager } from './components/admin/AdminTimelineManager';
 
 import { personalInfo } from './data/personalInfo';
-import { timelineItems, skillCategories } from './data/skills';
-import { projects } from './data/projects';
-import { projectDetails } from './data/projectDetails';
+import { skillCategories } from './data/skills';
 
 export const AppContent: React.FC = () => {
   // Automatically syncs dark/light theme according to OS preference
   useTheme();
+
+  // Dynamic portfolio data fetched from backend with seamless fallback
+  const { projects, projectDetails, timelineItems } = usePortfolioData();
 
   const [currentHash, setCurrentHash] = useState<string>(() => {
     return typeof window !== 'undefined' ? window.location.hash : '';

@@ -125,12 +125,12 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onSelectProject })
                     </a>
                   )}
 
-                  {project.detailUrl && !project.liveUrl && (
+                  {project.detailUrl && (
                     onSelectProject ? (
                       <button
                         type="button"
                         onClick={() => onSelectProject(project.id)}
-                        className="inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full border border-[#007bff]/30 bg-[#007bff]/10 text-[#0069d9] dark:text-[#58a6ff] hover:bg-[#007bff] hover:text-white hover:border-[#007bff] transition-all duration-200 ml-auto shadow-xs group/link cursor-pointer"
+                        className={`inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-300 hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all duration-200 ${!project.liveUrl ? 'ml-auto' : ''} shadow-xs group/link cursor-pointer`}
                       >
                         En savoir plus
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
@@ -138,7 +138,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onSelectProject })
                     ) : (
                       <a
                         href={project.detailUrl}
-                        className="inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full border border-[#007bff]/30 bg-[#007bff]/10 text-[#0069d9] dark:text-[#58a6ff] hover:bg-[#007bff] hover:text-white hover:border-[#007bff] transition-all duration-200 ml-auto shadow-xs group/link"
+                        className={`inline-flex items-center gap-1 text-xs font-semibold px-3.5 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-300 hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all duration-200 ${!project.liveUrl ? 'ml-auto' : ''} shadow-xs group/link`}
                       >
                         En savoir plus
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
