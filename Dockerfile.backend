@@ -49,6 +49,7 @@ COPY --from=builder /app/backend/package*.json ./
 COPY --from=builder /app/backend/prisma ./prisma
 COPY --from=builder /app/backend/prisma7.config.ts ./
 COPY --from=builder /app/frontend ./frontend
+COPY --from=builder /app/frontend /frontend
 
 # Create uploads directory
 RUN mkdir -p /app/uploads

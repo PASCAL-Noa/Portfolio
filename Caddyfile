@@ -1,7 +1,7 @@
 # Configuration Caddy avec HTTPS Let's Encrypt automatique
 # Remplacez {$DOMAIN} par votre domaine ou sous-domaine OVH (ex: api.noa-pascal.com ou noa-pascal.com)
 
-{$DOMAIN} {
+noa-pascal.com, www.noa-pascal.com {
     # Compression gzip & zstd automatique
     encode gzip zstd
 
