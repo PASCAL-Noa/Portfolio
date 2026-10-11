@@ -1,11 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'node:path';
+import { existsSync, mkdirSync } from 'node:fs';
 import { AppModule } from './app.module.js';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
+
+  // Ensure uploads directory exists and serve static assets
+  const uploadDir = join(process.cwd(), 'uploads');
+  if (!existsSync(uploadDir)) {
+    mkdirSync(uploadDir, { recursive: true });
+  }
+  app.useStaticAssets(uploadDir, {
+    prefix: '/uploads/',
+  });
 
   // Enable global validation pipe for DTOs
   app.useGlobalPipes(
