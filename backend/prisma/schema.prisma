@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admin_users")
+}
+
+model Project {
+  id           String         @id
+  title        String
+  category     String         @default("other")
+  image        String
+  description  String?
+  technologies String[]       @default([])
+  githubUrl    String?
+  liveUrl      String?
+  detailUrl    String?
+  featured     Boolean        @default(false)
+  order        Int            @default(0)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  detail       ProjectDetail?
+
+  @@map("projects")
+}
+
+model ProjectDetail {
+  id            String   @id @default(uuid())
+  projectId     String   @unique
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title         String
+  banner        String
+  description   String
+  duration      String?
+  team          String?
+  tags          Json     @default("[]")
+  downloadUrl   String?
+  downloadLabel String?
+  docUrl        String?
+  docLabel      String?
+  videoUrl      String?
+  media         Json     @default("[]")
+  thumbnails    Json     @default("[]")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("project_details")
+}
+
+model TimelineItem {
+  id          String   @id
+  period      String
+  title       String
+  subtitle    String?
+  description String
+  image       String?
+  type        String   @default("tech")
+  link        String?
+  linkText    String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("timeline_items")
+}
