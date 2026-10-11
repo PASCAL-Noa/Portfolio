@@ -2,7 +2,20 @@ import { AdminUser, AuthResponse, ProjectPayload, TimelinePayload } from '../typ
 import { Project, TimelineItem } from '../types';
 import { ProjectDetailData } from '../data/projectDetails';
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:4000/api').replace(/\/+$/, '');
+const getBaseUrl = (): string => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/+$/, '');
+  }
+  if (typeof window !== 'undefined') {
+    // If running in production (domain or non-localhost), call relative /api directly
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      return '/api';
+    }
+  }
+  return 'http://localhost:4000/api';
+};
+
+const API_BASE_URL = getBaseUrl();
 
 class ApiError extends Error {
   constructor(public status: number, message: string) {
