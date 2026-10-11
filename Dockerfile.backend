@@ -1,0 +1,57 @@
+# Multi-stage Dockerfile for NestJS backend with Prisma & Argon2
+FROM node:22-bookworm-slim AS builder
+
+WORKDIR /app
+
+# Install build dependencies for argon2 and native bindings
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    make \
+    g++ \
+    openssl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy backend package files
+COPY backend/package*.json ./backend/
+COPY frontend/package*.json ./frontend/
+
+WORKDIR /app/backend
+RUN npm ci
+
+# Copy backend and frontend source files (needed for seed and build)
+WORKDIR /app
+COPY backend ./backend
+COPY frontend ./frontend
+
+WORKDIR /app/backend
+RUN npx prisma generate
+RUN npm run build
+
+# Stage 2: Production runner
+FROM node:22-bookworm-slim AS runner
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openssl \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV NODE_ENV=production
+ENV PORT=4000
+
+# Copy node_modules and built dist from builder
+COPY --from=builder /app/backend/node_modules ./node_modules
+COPY --from=builder /app/backend/dist ./dist
+COPY --from=builder /app/backend/package*.json ./
+COPY --from=builder /app/backend/prisma ./prisma
+COPY --from=builder /app/backend/prisma7.config.ts ./
+COPY --from=builder /app/frontend ./frontend
+
+# Create uploads directory
+RUN mkdir -p /app/uploads
+
+EXPOSE 4000
+
+# Start script
+CMD ["node", "dist/main.js"]

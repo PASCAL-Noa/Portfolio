@@ -1,0 +1,25 @@
+# Configuration Caddy avec HTTPS Let's Encrypt automatique
+# Remplacez {$DOMAIN} par votre domaine ou sous-domaine OVH (ex: api.noa-pascal.com ou noa-pascal.com)
+
+{$DOMAIN} {
+    # Compression gzip & zstd automatique
+    encode gzip zstd
+
+    # Servir les fichiers uploads directement avec mise en cache
+    handle /uploads/* {
+        root * /srv
+        file_server
+    }
+
+    # Rediriger l'API vers le conteneur NestJS
+    handle /api/* {
+        reverse_proxy backend:4000
+    }
+
+    # Si le frontend est hébergé sur le VPS (Option tout-en-un) :
+    handle {
+        root * /srv/frontend
+        file_server
+        try_files {path} /index.html
+    }
+}
