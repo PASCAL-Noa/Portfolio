@@ -32,6 +32,7 @@ echo "🐳 Lancement des conteneurs avec Docker Compose..."
 docker compose pull || true
 docker compose build --no-cache backend
 docker compose up -d
+docker compose restart caddy
 
 # 5. Appliquer les migrations de base de données et initialiser les données si vierge
 echo "🗄️ Application des migrations Prisma..."
