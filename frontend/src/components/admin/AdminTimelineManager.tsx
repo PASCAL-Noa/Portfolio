@@ -233,22 +233,24 @@ export const AdminTimelineManager: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Banner and Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white dark:bg-[#161b22] p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#fafafa] dark:bg-[#161b22] p-5 sm:p-6 rounded-2xl border border-gray-200 dark:border-[#30363d] shadow-xs">
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold tracking-tight">Gestion de la Timeline</h2>
-            <span className="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">
-              {itemsList.length} étapes
+          <div className="flex items-center gap-3">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-black dark:text-[#f0f6fc]">
+              Gestion de la Timeline
+            </h2>
+            <span className="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-gray-200/80 dark:bg-white/10 text-[rgb(53,53,53)] dark:text-[#f0f6fc]">
+              {itemsList.length}
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Personnalisez votre parcours affiché dans la section "Sur moi" avec dates, médias 16:9 et badges colorés.
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-[#8b949e] mt-1">
+            Gérez vos étapes affichées dans la section &quot;Sur moi&quot; (ordre, dates, descriptions et médias).
           </p>
         </div>
 
         <button
           onClick={openAddModal}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold shadow-md shadow-purple-600/20 transition cursor-pointer self-start sm:self-auto"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] text-xs sm:text-sm font-semibold shadow-xs hover:shadow-md transition cursor-pointer self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Ajouter une Étape</span>
@@ -271,35 +273,26 @@ export const AdminTimelineManager: React.FC = () => {
       {/* Timeline Items List */}
       {isLoading ? (
         <div className="py-20 flex flex-col items-center justify-center text-gray-500">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-600 mb-2" />
+          <Loader2 className="w-8 h-8 animate-spin text-[rgb(53,53,53)] dark:text-white mb-2" />
           <p className="text-sm">Chargement de la timeline...</p>
         </div>
       ) : itemsList.length === 0 ? (
-        <div className="text-center py-16 bg-white dark:bg-[#161b22] rounded-2xl border border-dashed border-gray-300 dark:border-gray-800 p-8">
+        <div className="text-center py-16 bg-[#fafafa] dark:bg-[#161b22] rounded-2xl border border-dashed border-gray-300 dark:border-[#30363d] p-8">
           <Calendar className="w-10 h-10 text-gray-400 mx-auto mb-3" />
           <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">Aucune étape enregistrée</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 mb-4">
-            Ajoutez votre premier diplôme, projet d'école ou expérience professionnelle.
+            Ajoutez votre premier diplôme, projet d&apos;école ou expérience professionnelle.
           </p>
           <button
             onClick={openAddModal}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium transition cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] text-sm font-semibold transition cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Créer une étape
           </button>
         </div>
       ) : (
-        <div className="bg-white dark:bg-[#161b22] rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-xs">
-          <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-              Ordre d'affichage chronologique
-            </h3>
-            <span className="text-xs text-gray-400">
-              Le premier élément apparaît tout en haut de la timeline
-            </span>
-          </div>
-
+        <div className="bg-[#fafafa] dark:bg-[#161b22] rounded-2xl border border-gray-200 dark:border-[#30363d] overflow-hidden shadow-xs">
           <div className="divide-y divide-gray-100 dark:divide-gray-800">
             {itemsList.map((item, index) => {
               const cfg = getCategoryConfig(item.type);
@@ -307,16 +300,16 @@ export const AdminTimelineManager: React.FC = () => {
               return (
                 <div
                   key={item.id}
-                  className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50/60 dark:hover:bg-[#1c2129]/60 transition"
+                  className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50/80 dark:hover:bg-[#1c2129]/60 transition"
                 >
                   {/* Left: Reorder controls + Category Icon + Info */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-start sm:items-center gap-3 sm:gap-4 min-w-0 flex-1">
                     {/* Position and arrows */}
-                    <div className="flex flex-col items-center gap-1">
+                    <div className="flex flex-col items-center gap-0.5 shrink-0">
                       <button
                         onClick={() => handleMove(index, 'up')}
                         disabled={index === 0}
-                        className="p-1 rounded-md text-gray-400 hover:text-purple-600 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer"
+                        className="p-1 rounded-md text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer"
                         title="Monter d'un rang"
                       >
                         <ArrowUp className="w-4 h-4" />
@@ -327,37 +320,32 @@ export const AdminTimelineManager: React.FC = () => {
                       <button
                         onClick={() => handleMove(index, 'down')}
                         disabled={index === itemsList.length - 1}
-                        className="p-1 rounded-md text-gray-400 hover:text-purple-600 hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer"
+                        className="p-1 rounded-md text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-20 disabled:hover:bg-transparent cursor-pointer"
                         title="Descendre d'un rang"
                       >
                         <ArrowDown className="w-4 h-4" />
                       </button>
                     </div>
 
-                    {/* Bullet badge preview */}
+                    {/* Bullet badge preview (illuminated neon bullet icon preserved) */}
                     <div
-                      className={`w-10 h-10 rounded-full bg-white dark:bg-[#0d1117] border-2 flex items-center justify-center shrink-0 ${cfg.dotBorder} ${cfg.dotShadow}`}
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white dark:bg-[#0d1117] border-2 flex items-center justify-center shrink-0 ${cfg.dotBorder} ${cfg.dotShadow}`}
                     >
                       {cfg.icon}
                     </div>
 
                     {/* Thumbnail preview if available */}
                     {item.image && (
-                      <div className="w-20 h-14 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 border border-gray-200 dark:border-gray-700 hidden md:block">
+                      <div className="w-16 h-11 sm:w-20 sm:h-14 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 border border-gray-200 dark:border-gray-700 hidden sm:block">
                         <img src={getAssetUrl(item.image)} alt={item.title} className="w-full h-full object-cover" />
                       </div>
                     )}
 
                     {/* Info */}
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-xs font-bold font-mono text-purple-600 dark:text-purple-400">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold font-mono text-[rgb(85,85,85)] dark:text-[#8b949e]">
                           {item.period}
-                        </span>
-                        <span
-                          className={`text-2xs px-2 py-0.5 rounded-full font-bold border uppercase ${cfg.badgeBg}`}
-                        >
-                          {cfg.label}
                         </span>
                       </div>
                       <h4 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-gray-100 mt-0.5 truncate">
@@ -368,30 +356,30 @@ export const AdminTimelineManager: React.FC = () => {
                           {item.subtitle}
                         </p>
                       )}
-                      <p className="text-xs text-gray-600 dark:text-gray-300 line-clamp-1 mt-1 max-w-xl">
+                      <p className="text-xs text-gray-600 dark:text-[#8b949e] line-clamp-2 sm:line-clamp-1 mt-1 max-w-xl">
                         {item.description}
                       </p>
                     </div>
                   </div>
 
                   {/* Right Actions */}
-                  <div className="flex items-center gap-2 self-end sm:self-center">
+                  <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
                     <button
                       onClick={() => openEditModal(item)}
-                      className="p-2 text-xs font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
+                      className="px-3 py-1.5 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
                       title="Modifier"
                     >
                       <Edit className="w-4 h-4" />
-                      <span className="hidden md:inline">Modifier</span>
+                      <span>Modifier</span>
                     </button>
 
                     <button
                       onClick={() => handleDelete(item.id, item.title)}
-                      className="p-2 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
+                      className="px-3 py-1.5 text-xs font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
                       title="Supprimer"
                     >
                       <Trash2 className="w-4 h-4" />
-                      <span className="hidden md:inline">Supprimer</span>
+                      <span>Supprimer</span>
                     </button>
                   </div>
                 </div>
@@ -424,7 +412,7 @@ export const AdminTimelineManager: React.FC = () => {
             </div>
 
             {/* Modal Form */}
-            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-5">
+            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-5">
               {/* Category Selector with live bullet preview */}
               <div>
                 <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-2">
@@ -442,8 +430,8 @@ export const AdminTimelineManager: React.FC = () => {
                         onClick={() => setFormData({ ...formData, type: cat })}
                         className={`p-3 rounded-xl border flex flex-col items-center gap-2 transition cursor-pointer ${
                           isSelected
-                            ? 'border-purple-600 bg-purple-50 dark:bg-purple-950/40 ring-2 ring-purple-500/20'
-                            : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0d1117] hover:border-gray-300 dark:hover:border-gray-700'
+                            ? 'border-black dark:border-white bg-gray-100 dark:bg-white/10 ring-2 ring-black/10 dark:ring-white/20'
+                            : 'border-gray-200 dark:border-[#30363d] bg-white dark:bg-[#0d1117] hover:border-gray-300 dark:hover:border-gray-700'
                         }`}
                       >
                         <div
@@ -475,7 +463,7 @@ export const AdminTimelineManager: React.FC = () => {
                     value={formData.period}
                     onChange={(e) => setFormData({ ...formData, period: e.target.value })}
                     placeholder="Ex: Sept. 2024 - Présent"
-                    className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-[#30363d] bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                   />
                 </div>
 
@@ -489,7 +477,7 @@ export const AdminTimelineManager: React.FC = () => {
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     placeholder="Ex: Gaming Campus"
-                    className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-[#30363d] bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                   />
                 </div>
               </div>
@@ -504,7 +492,7 @@ export const AdminTimelineManager: React.FC = () => {
                   value={formData.subtitle}
                   onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
                   placeholder="Ex: G. Tech - Bachelor Développeur informatique & Moteur de jeux"
-                  className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-[#30363d] bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                 />
               </div>
 
@@ -519,7 +507,7 @@ export const AdminTimelineManager: React.FC = () => {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Description détaillée de l'expérience, des acquis ou des objectifs..."
-                  className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-[#30363d] bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                 />
               </div>
 
@@ -534,7 +522,7 @@ export const AdminTimelineManager: React.FC = () => {
                     value={formData.image}
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                     placeholder="/assets/GamingCampus/gamingcampus.webp ou URL"
-                    className="flex-1 px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="flex-1 px-3.5 py-2 rounded-lg border border-gray-300 dark:border-[#30363d] bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                   />
                   <label className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-sm font-medium cursor-pointer transition">
                     <Upload className="w-4 h-4" />
@@ -566,7 +554,7 @@ export const AdminTimelineManager: React.FC = () => {
                     value={formData.link}
                     onChange={(e) => setFormData({ ...formData, link: e.target.value })}
                     placeholder="https://gamingcampus.fr/..."
-                    className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-[#30363d] bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                   />
                 </div>
 
@@ -579,13 +567,13 @@ export const AdminTimelineManager: React.FC = () => {
                     value={formData.linkText}
                     onChange={(e) => setFormData({ ...formData, linkText: e.target.value })}
                     placeholder="En savoir plus"
-                    className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-[#30363d] bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                   />
                 </div>
               </div>
 
               {/* Live Preview Box */}
-              <div className="p-4 rounded-xl bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-gray-800 space-y-2">
+              <div className="p-4 rounded-xl bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-[#30363d] space-y-2">
                 <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-gray-500">
                   <Eye className="w-3.5 h-3.5" />
                   <span>Aperçu en Direct de la Pastille</span>
@@ -602,7 +590,7 @@ export const AdminTimelineManager: React.FC = () => {
                     );
                   })()}
                   <div>
-                    <span className="text-xs font-bold font-mono text-purple-600 dark:text-purple-400 block">
+                    <span className="text-xs font-bold font-mono text-[rgb(85,85,85)] dark:text-[#8b949e] block">
                       {formData.period || 'Date / Période'}
                     </span>
                     <span className="font-semibold text-sm text-gray-900 dark:text-gray-100 block">
@@ -624,7 +612,7 @@ export const AdminTimelineManager: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || isUploading}
-                  className="px-5 py-2 rounded-lg text-sm font-semibold text-white bg-purple-600 hover:bg-purple-700 disabled:opacity-60 disabled:cursor-not-allowed shadow-md shadow-purple-600/20 cursor-pointer transition flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-white dark:text-[#0d1117] bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white disabled:opacity-60 disabled:cursor-not-allowed shadow-xs hover:shadow-md cursor-pointer transition flex items-center gap-2"
                 >
                   {isSubmitting ? (
                     <>

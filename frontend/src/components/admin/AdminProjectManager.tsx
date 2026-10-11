@@ -122,7 +122,6 @@ export const AdminProjectManager: React.FC = () => {
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, index: number) => {
     setDraggedIndex(index);
     e.dataTransfer.effectAllowed = 'move';
-    // Transparent ghost image style
     e.dataTransfer.setData('text/plain', `${index}`);
   };
 
@@ -161,7 +160,7 @@ export const AdminProjectManager: React.FC = () => {
 
     try {
       await api.reorderProjects(reordered.map((p) => ({ id: p.id, orderIndex: p.orderIndex })));
-      showNotification('success', `Projet déplacé à la position #${targetIndex + 1} ! Grille mise à jour.`);
+      showNotification('success', `Projet déplacé à la position #${targetIndex + 1}.`);
     } catch (err: unknown) {
       showNotification('error', err instanceof Error ? err.message : 'Erreur lors de la réorganisation.');
     }
@@ -185,7 +184,7 @@ export const AdminProjectManager: React.FC = () => {
 
     try {
       await api.reorderProjects(reordered.map((p) => ({ id: p.id, orderIndex: p.orderIndex })));
-      showNotification('success', `Position #${targetIndex + 1} mise à jour !`);
+      showNotification('success', `Position #${targetIndex + 1} mise à jour.`);
     } catch (err: unknown) {
       showNotification('error', err instanceof Error ? err.message : 'Erreur lors du déplacement.');
     }
@@ -313,7 +312,7 @@ export const AdminProjectManager: React.FC = () => {
           },
         }));
       }
-      showNotification('success', `Fichier ${file.name} téléversé avec succès !`);
+      showNotification('success', `Fichier ${file.name} téléversé avec succès.`);
     } catch (err: unknown) {
       showNotification('error', err instanceof Error ? err.message : 'Erreur lors du téléversement.');
     } finally {
@@ -421,7 +420,7 @@ export const AdminProjectManager: React.FC = () => {
         showNotification('success', 'Projet mis à jour avec succès.');
       } else {
         await api.createProject(payload);
-        showNotification('success', 'Projet et page de détail créés avec succès !');
+        showNotification('success', 'Projet créé avec succès.');
       }
 
       setIsModalOpen(false);
@@ -449,23 +448,20 @@ export const AdminProjectManager: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Top Banner and Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white dark:bg-[#161b22] p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xs">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <h2 className="text-xl font-bold tracking-tight">Grille des Projets</h2>
-            <span className="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">
-              {projectsList.length} projets
-            </span>
-          </div>
-          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
-            <strong>Glissez-déposez (Drag & Drop)</strong> les cartes directement pour réorganiser l'affichage de votre grille CSS, ou utilisez les boutons d'action.
-          </p>
+      {/* Top Banner and Actions - Clean, minimal & responsive */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-[#fafafa] dark:bg-[#161b22] p-5 sm:p-6 rounded-2xl border border-gray-200 dark:border-[#30363d] shadow-xs">
+        <div className="flex items-center gap-3">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-black dark:text-[#f0f6fc]">
+            Grille des Projets
+          </h2>
+          <span className="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-gray-200/80 dark:bg-white/10 text-[rgb(53,53,53)] dark:text-[#f0f6fc]">
+            {projectsList.length}
+          </span>
         </div>
 
         <button
           onClick={openAddModal}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold shadow-md shadow-purple-600/20 transition cursor-pointer self-start sm:self-auto"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] text-xs sm:text-sm font-semibold shadow-xs hover:shadow-md transition cursor-pointer self-start sm:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Ajouter un Projet</span>
@@ -485,14 +481,14 @@ export const AdminProjectManager: React.FC = () => {
         </div>
       )}
 
-      {/* Grid Drag & Drop View */}
+      {/* Grid Drag & Drop View - Matching portfolio cards */}
       {isLoading ? (
         <div className="py-20 flex flex-col items-center justify-center text-gray-500">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-600 mb-2" />
+          <Loader2 className="w-8 h-8 animate-spin text-[rgb(53,53,53)] dark:text-white mb-2" />
           <p className="text-sm">Chargement des projets...</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {projectsList.map((project, index) => {
             const isDraggingThis = draggedIndex === index;
             const isTargetOfDrag = dragOverIndex === index;
@@ -509,10 +505,10 @@ export const AdminProjectManager: React.FC = () => {
                 onDragEnd={handleDragEnd}
                 className={`group relative flex flex-col bg-[#fafafa] dark:bg-[#161b22] rounded-2xl overflow-hidden border transition-all duration-200 p-5 shadow-xs select-none cursor-grab active:cursor-grabbing ${
                   isDraggingThis
-                    ? 'opacity-40 scale-95 border-dashed border-purple-500 ring-2 ring-purple-500/30'
+                    ? 'opacity-40 scale-95 border-dashed border-black dark:border-white ring-2 ring-black/20 dark:ring-white/20'
                     : isTargetOfDrag
-                    ? 'scale-105 border-purple-500 ring-4 ring-purple-500/40 z-20 shadow-xl'
-                    : 'border-gray-200 dark:border-[#30363d] hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-md'
+                    ? 'scale-[1.02] border-black dark:border-white ring-4 ring-black/20 dark:ring-white/20 z-20 shadow-xl'
+                    : 'border-gray-200 dark:border-[#30363d] hover:border-gray-400 dark:hover:border-gray-600 hover:shadow-md'
                 }`}
               >
                 {/* Image Banner 16:9 with Badges */}
@@ -524,9 +520,9 @@ export const AdminProjectManager: React.FC = () => {
                     loading="lazy"
                   />
 
-                  {/* Order Index & Drag Indicator */}
-                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-xs font-mono font-bold shadow-md">
-                    <GripVertical className="w-3.5 h-3.5 text-purple-400" />
+                  {/* Order Index & Drag Grip */}
+                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md text-white text-xs font-mono font-bold shadow-md border border-white/10">
+                    <GripVertical className="w-3.5 h-3.5 text-gray-300" />
                     <span>#{index + 1}</span>
                   </div>
 
@@ -537,7 +533,7 @@ export const AdminProjectManager: React.FC = () => {
                         Featured
                       </span>
                     )}
-                    <span className="text-2xs px-2.5 py-0.5 rounded-full font-bold uppercase bg-black/60 backdrop-blur-md text-white border border-white/20">
+                    <span className="text-2xs px-2.5 py-0.5 rounded-full font-bold uppercase bg-black/70 backdrop-blur-md text-white border border-white/20">
                       {project.category}
                     </span>
                   </div>
@@ -546,10 +542,10 @@ export const AdminProjectManager: React.FC = () => {
                 {/* Content */}
                 <div className="flex-1 flex flex-col justify-between space-y-3">
                   <div>
-                    <h3 className="text-lg font-bold text-black dark:text-[#f0f6fc] group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors leading-snug">
+                    <h3 className="text-lg font-bold text-black dark:text-[#f0f6fc] group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors leading-snug">
                       {project.title}
                     </h3>
-                    <p className="text-2xs font-mono text-gray-400 mt-0.5">id: {project.id}</p>
+                    <p className="text-2xs font-mono text-gray-400 dark:text-gray-500 mt-0.5">id: {project.id}</p>
                     {project.description && (
                       <p className="text-xs text-gray-600 dark:text-[#8b949e] line-clamp-2 leading-relaxed mt-2">
                         {project.description}
@@ -557,12 +553,12 @@ export const AdminProjectManager: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Technologies */}
+                  {/* Technologies - Exact portfolio tags styling */}
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {project.technologies?.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="text-2xs font-semibold px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200/50 dark:border-purple-800/40 font-mono"
+                        className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-gray-200/80 text-[rgb(53,53,53)] border border-gray-300/60 dark:bg-white/10 dark:text-[#f0f6fc] dark:border-white/20 transition-colors"
                       >
                         {tech}
                       </span>
@@ -586,7 +582,7 @@ export const AdminProjectManager: React.FC = () => {
                         }}
                         disabled={index === 0}
                         className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 disabled:opacity-20 cursor-pointer"
-                        title="Déplacer vers la gauche / avant"
+                        title="Déplacer vers la gauche"
                       >
                         <ChevronLeft className="w-3.5 h-3.5" />
                       </button>
@@ -598,7 +594,7 @@ export const AdminProjectManager: React.FC = () => {
                         }}
                         disabled={index === projectsList.length - 1}
                         className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 disabled:opacity-20 cursor-pointer"
-                        title="Déplacer vers la droite / après"
+                        title="Déplacer vers la droite"
                       >
                         <ChevronRight className="w-3.5 h-3.5" />
                       </button>
@@ -610,7 +606,7 @@ export const AdminProjectManager: React.FC = () => {
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="p-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
+                        className="p-1.5 text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
                         title="Ouvrir la page de détail"
                       >
                         <ExternalLink className="w-4 h-4" />
@@ -622,7 +618,7 @@ export const AdminProjectManager: React.FC = () => {
                           e.stopPropagation();
                           openEditModal(project);
                         }}
-                        className="p-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 rounded-lg transition flex items-center gap-1 cursor-pointer"
+                        className="p-1.5 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition flex items-center gap-1 cursor-pointer"
                         title="Modifier ce projet"
                       >
                         <Edit className="w-4 h-4" />
@@ -651,16 +647,16 @@ export const AdminProjectManager: React.FC = () => {
           <button
             type="button"
             onClick={openAddModal}
-            className="flex flex-col items-center justify-center p-8 rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-400 bg-white/50 dark:bg-[#161b22]/50 hover:bg-purple-50/40 dark:hover:bg-purple-950/20 text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-200 cursor-pointer min-h-[320px] group"
+            className="flex flex-col items-center justify-center p-8 rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white bg-white/50 dark:bg-[#161b22]/50 hover:bg-gray-50 dark:hover:bg-[#21262d] text-gray-500 hover:text-black dark:hover:text-white transition-all duration-200 cursor-pointer min-h-[300px] group"
           >
-            <div className="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <Plus className="w-7 h-7" />
+            <div className="w-12 h-12 rounded-xl bg-[rgb(53,53,53)] dark:bg-white text-white dark:text-[#0d1117] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <Plus className="w-6 h-6" />
             </div>
-            <span className="font-bold text-base text-gray-900 dark:text-gray-100 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+            <span className="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 group-hover:text-black dark:group-hover:text-white">
               Ajouter un nouveau projet
             </span>
-            <span className="text-xs text-gray-400 text-center mt-1 max-w-xs">
-              Créez une carte et générez automatiquement sa page de détail complète.
+            <span className="text-2xs text-gray-400 text-center mt-1 max-w-xs">
+              Créez une carte et personnalisez sa page de détail complète.
             </span>
           </button>
         </div>
@@ -668,17 +664,14 @@ export const AdminProjectManager: React.FC = () => {
 
       {/* Editor Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
-          <div className="bg-white dark:bg-[#161b22] border border-gray-200 dark:border-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col my-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white dark:bg-[#161b22] border border-gray-200 dark:border-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[92vh] flex flex-col my-4">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+            <div className="px-5 sm:px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100">
+                <h3 className="font-bold text-base sm:text-lg text-gray-900 dark:text-gray-100">
                   {editingProjectId ? `Modifier : ${formData.title}` : 'Nouveau Projet'}
                 </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Configurez la carte du portfolio et la page de présentation complète.
-                </p>
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -689,36 +682,36 @@ export const AdminProjectManager: React.FC = () => {
             </div>
 
             {/* Modal Navigation Tabs */}
-            <div className="flex border-b border-gray-100 dark:border-gray-800 px-6 gap-4 bg-gray-50/50 dark:bg-[#0d1117]/50">
+            <div className="flex border-b border-gray-100 dark:border-gray-800 px-5 sm:px-6 gap-3 sm:gap-4 bg-gray-50/50 dark:bg-[#0d1117]/50 overflow-x-auto scrollbar-none">
               <button
                 type="button"
                 onClick={() => setModalTab('card')}
-                className={`py-3 text-sm font-semibold border-b-2 cursor-pointer transition ${
+                className={`py-3 text-xs sm:text-sm font-semibold border-b-2 cursor-pointer transition whitespace-nowrap ${
                   modalTab === 'card'
-                    ? 'border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+                    ? 'border-black text-black dark:border-white dark:text-white'
+                    : 'border-transparent text-gray-500 hover:text-black dark:text-[#8b949e] dark:hover:text-white'
                 }`}
               >
-                1. Carte Portfolio (CSS Grid)
+                1. Carte Portfolio
               </button>
               <button
                 type="button"
                 onClick={() => setModalTab('detail')}
-                className={`py-3 text-sm font-semibold border-b-2 cursor-pointer transition ${
+                className={`py-3 text-xs sm:text-sm font-semibold border-b-2 cursor-pointer transition whitespace-nowrap ${
                   modalTab === 'detail'
-                    ? 'border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+                    ? 'border-black text-black dark:border-white dark:text-white'
+                    : 'border-transparent text-gray-500 hover:text-black dark:text-[#8b949e] dark:hover:text-white'
                 }`}
               >
-                2. Page de Détail Automatique
+                2. Page de Détail
               </button>
               <button
                 type="button"
                 onClick={() => setModalTab('preview')}
-                className={`py-3 text-sm font-semibold border-b-2 cursor-pointer transition flex items-center gap-1.5 ${
+                className={`py-3 text-xs sm:text-sm font-semibold border-b-2 cursor-pointer transition whitespace-nowrap flex items-center gap-1.5 ${
                   modalTab === 'preview'
-                    ? 'border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400'
-                    : 'border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+                    ? 'border-black text-black dark:border-white dark:text-white'
+                    : 'border-transparent text-gray-500 hover:text-black dark:text-[#8b949e] dark:hover:text-white'
                 }`}
               >
                 <Eye className="w-4 h-4" />
@@ -727,12 +720,12 @@ export const AdminProjectManager: React.FC = () => {
             </div>
 
             {/* Modal Body */}
-            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-6">
+            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-5">
               {modalTab === 'card' && (
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                         Titre du Projet *
                       </label>
                       <input
@@ -741,13 +734,13 @@ export const AdminProjectManager: React.FC = () => {
                         value={formData.title}
                         onChange={(e) => handleTitleChange(e.target.value)}
                         placeholder="Ex: Mon Super Projet"
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
-                        Identifiant / Slug URL (Unique) *
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
+                        Identifiant / Slug URL *
                       </label>
                       <input
                         type="text"
@@ -756,20 +749,20 @@ export const AdminProjectManager: React.FC = () => {
                         value={formData.id}
                         onChange={(e) => setFormData({ ...formData, id: e.target.value })}
                         placeholder="ex: mon-super-projet"
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm font-mono disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm font-mono disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                         Catégorie *
                       </label>
                       <select
                         value={formData.category}
                         onChange={(e) => setFormData({ ...formData, category: e.target.value as ProjectCategory })}
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       >
                         <option value="game">Jeux Vidéo (Game)</option>
                         <option value="software">Logiciel / Moteur (Software)</option>
@@ -779,7 +772,7 @@ export const AdminProjectManager: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                         Technologies (séparées par une virgule)
                       </label>
                       <input
@@ -787,14 +780,14 @@ export const AdminProjectManager: React.FC = () => {
                         value={techInput}
                         onChange={(e) => setTechInput(e.target.value)}
                         placeholder="C++, SFML, CMake, OpenGL"
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       />
                     </div>
                   </div>
 
                   {/* Banner / Card Image Upload & URL */}
                   <div>
-                    <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                    <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                       Image Principale (Format 16:9 recommandé) *
                     </label>
                     <div className="flex gap-2">
@@ -804,9 +797,9 @@ export const AdminProjectManager: React.FC = () => {
                         value={formData.image}
                         onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                         placeholder="https://... ou /assets/MonProjet/image.webp"
-                        className="flex-1 px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="flex-1 px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       />
-                      <label className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-sm font-medium cursor-pointer transition">
+                      <label className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-xs sm:text-sm font-semibold cursor-pointer transition">
                         <Upload className="w-4 h-4" />
                         <span>{isUploading ? 'Upload...' : 'Téléverser'}</span>
                         <input
@@ -827,22 +820,22 @@ export const AdminProjectManager: React.FC = () => {
 
                   {/* Short Description */}
                   <div>
-                    <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                    <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                       Description Courte (Affichée sur la carte)
                     </label>
                     <textarea
                       rows={2}
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      placeholder="Court résumé du projet en une ou deux phrases..."
-                      className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      placeholder="Court résumé du projet..."
+                      className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                     />
                   </div>
 
                   {/* Links & Featured Checkbox */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                         Lien GitHub
                       </label>
                       <input
@@ -850,12 +843,12 @@ export const AdminProjectManager: React.FC = () => {
                         value={formData.githubUrl}
                         onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
                         placeholder="https://github.com/..."
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                         Lien Démo / Live
                       </label>
                       <input
@@ -863,20 +856,20 @@ export const AdminProjectManager: React.FC = () => {
                         value={formData.liveUrl}
                         onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })}
                         placeholder="https://..."
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       />
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 pt-2">
+                  <div className="flex items-center gap-2 pt-1">
                     <input
                       type="checkbox"
                       id="featured"
                       checked={formData.featured}
                       onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                      className="rounded text-purple-600 focus:ring-purple-500 h-4 w-4"
+                      className="rounded text-black dark:text-white h-4 w-4"
                     />
-                    <label htmlFor="featured" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label htmlFor="featured" className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
                       Mettre ce projet en avant (Badge "Featured")
                     </label>
                   </div>
@@ -887,8 +880,8 @@ export const AdminProjectManager: React.FC = () => {
                 <div className="space-y-5">
                   {/* Rich Description */}
                   <div>
-                    <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
-                      Description Détaillée (Supporte balises HTML &lt;strong&gt;, &lt;br&gt;, etc.)
+                    <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
+                      Description Détaillée (HTML supporté)
                     </label>
                     <textarea
                       rows={5}
@@ -899,15 +892,15 @@ export const AdminProjectManager: React.FC = () => {
                           detail: { ...formData.detail!, description: e.target.value },
                         })
                       }
-                      placeholder="<strong>Description complète du projet...</strong><br>Explication des choix d'architecture, technologies SFML, ECS, shaders..."
-                      className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm font-mono focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      placeholder="<strong>Description complète...</strong>"
+                      className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm font-mono focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                     />
                   </div>
 
                   {/* Duration and Team */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                         Durée de réalisation
                       </label>
                       <input
@@ -920,12 +913,12 @@ export const AdminProjectManager: React.FC = () => {
                           })
                         }
                         placeholder="Ex: 2 semaines / 3 mois"
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300 mb-1">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
                         Équipe / Membres
                       </label>
                       <input
@@ -938,17 +931,17 @@ export const AdminProjectManager: React.FC = () => {
                           })
                         }
                         placeholder="Ex: PASCAL Noa (Solo) ou PASCAL Noa, Nom1, Nom2..."
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                       />
                     </div>
                   </div>
 
                   {/* Detail Tags Manager */}
                   <div className="p-4 rounded-xl bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-gray-800 space-y-3">
-                    <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300">
-                      Badges & Spécifications de la fiche
+                    <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300">
+                      Badges de la fiche
                     </label>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <input
                         type="text"
                         value={tagLabelInput}
@@ -961,16 +954,16 @@ export const AdminProjectManager: React.FC = () => {
                         onChange={(e) => setTagVariantInput(e.target.value)}
                         className="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#161b22] text-sm"
                       >
-                        <option value="default">Default (Gris)</option>
-                        <option value="purple">Purple (Violet)</option>
-                        <option value="blue">Blue (Bleu)</option>
-                        <option value="emerald">Emerald (Vert)</option>
-                        <option value="amber">Amber (Orange)</option>
+                        <option value="default">Default</option>
+                        <option value="purple">Violet</option>
+                        <option value="blue">Bleu</option>
+                        <option value="emerald">Vert</option>
+                        <option value="amber">Orange</option>
                       </select>
                       <button
                         type="button"
                         onClick={handleAddTag}
-                        className="px-3 py-1.5 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-xs font-semibold cursor-pointer"
+                        className="px-4 py-1.5 rounded-lg bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] text-xs font-semibold cursor-pointer"
                       >
                         Ajouter
                       </button>
@@ -980,10 +973,9 @@ export const AdminProjectManager: React.FC = () => {
                       {formData.detail?.tags?.map((tag, idx) => (
                         <span
                           key={idx}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-white dark:bg-[#161b22] border border-gray-200 dark:border-gray-700"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-white dark:bg-[#161b22] border border-gray-200 dark:border-gray-700"
                         >
                           <span>{tag.label}</span>
-                          <span className="text-2xs text-gray-400 font-mono">({tag.variant || 'default'})</span>
                           <button
                             type="button"
                             onClick={() => handleRemoveTag(idx)}
@@ -998,9 +990,8 @@ export const AdminProjectManager: React.FC = () => {
 
                   {/* Documents & Download Links */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Build download */}
                     <div className="space-y-2">
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300">
                         Téléchargement Build / Releases
                       </label>
                       <input
@@ -1029,10 +1020,9 @@ export const AdminProjectManager: React.FC = () => {
                       />
                     </div>
 
-                    {/* PDF Spec doc */}
                     <div className="space-y-2">
-                      <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300">
-                        Cahier des Charges / Spécifications (PDF)
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300">
+                        Cahier des Charges (PDF)
                       </label>
                       <div className="flex gap-2">
                         <input
@@ -1074,16 +1064,13 @@ export const AdminProjectManager: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Media Gallery (YouTube Video & Screenshots) */}
+                  {/* Media Gallery */}
                   <div className="p-4 rounded-xl bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-gray-800 space-y-3">
-                    <label className="block text-xs font-semibold uppercase text-gray-600 dark:text-gray-300">
+                    <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300">
                       Galerie Médias (Carousel & Lightbox)
                     </label>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      Ajoutez des vidéos YouTube embed (ex: https://www.youtube.com/embed/...) ou des captures d'écran.
-                    </p>
 
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <select
                         value={mediaTypeInput}
                         onChange={(e) => setMediaTypeInput(e.target.value as 'image' | 'video')}
@@ -1108,7 +1095,7 @@ export const AdminProjectManager: React.FC = () => {
                       <button
                         type="button"
                         onClick={handleAddMedia}
-                        className="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold cursor-pointer"
+                        className="px-4 py-1.5 rounded-lg bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] text-xs font-semibold cursor-pointer"
                       >
                         Ajouter
                       </button>
@@ -1121,7 +1108,7 @@ export const AdminProjectManager: React.FC = () => {
                           className="relative aspect-video rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-black group"
                         >
                           {m.type === 'video' ? (
-                            <div className="w-full h-full flex items-center justify-center text-xs text-white bg-red-950/80 p-2 text-center">
+                            <div className="w-full h-full flex items-center justify-center text-xs text-white bg-gray-900 p-2 text-center">
                               Vidéo: {m.src.slice(0, 20)}...
                             </div>
                           ) : (
@@ -1144,13 +1131,12 @@ export const AdminProjectManager: React.FC = () => {
 
               {modalTab === 'preview' && (
                 <div className="space-y-6">
-                  {/* Card Preview */}
                   <div>
                     <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">
-                      Aperçu de la Carte dans la Grille
+                      Aperçu de la Carte
                     </h4>
-                    <div className="max-w-sm rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#161b22] shadow-md">
-                      <div className="aspect-video w-full bg-black overflow-hidden relative">
+                    <div className="max-w-sm rounded-2xl overflow-hidden border border-gray-200 dark:border-[#30363d] bg-[#fafafa] dark:bg-[#161b22] shadow-md p-5">
+                      <div className="aspect-video w-full bg-black overflow-hidden rounded-xl relative mb-3">
                         {formData.image ? (
                           <img src={getAssetUrl(formData.image)} alt={formData.title} className="w-full h-full object-cover" />
                         ) : (
@@ -1158,22 +1144,22 @@ export const AdminProjectManager: React.FC = () => {
                             Image manquante
                           </div>
                         )}
-                        <span className="absolute top-3 right-3 text-2xs px-2.5 py-1 rounded-full font-bold uppercase bg-black/60 backdrop-blur text-white">
+                        <span className="absolute top-2.5 right-2.5 text-2xs px-2.5 py-0.5 rounded-full font-bold uppercase bg-black/70 backdrop-blur text-white border border-white/20">
                           {formData.category}
                         </span>
                       </div>
-                      <div className="p-4 space-y-2">
+                      <div className="space-y-2">
                         <h5 className="font-bold text-base text-gray-900 dark:text-gray-100">
                           {formData.title || 'Sans titre'}
                         </h5>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
-                          {formData.description || formData.detail?.description?.replace(/<[^>]+>/g, '') || 'Description...'}
+                        <p className="text-xs text-gray-600 dark:text-[#8b949e] line-clamp-2">
+                          {formData.description || 'Description courte...'}
                         </p>
                         <div className="flex flex-wrap gap-1 pt-1">
                           {techInput.split(',').filter(Boolean).map((t) => (
                             <span
                               key={t}
-                              className="text-2xs px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-mono"
+                              className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-gray-200/80 text-[rgb(53,53,53)] border border-gray-300/60 dark:bg-white/10 dark:text-[#f0f6fc] dark:border-white/20"
                             >
                               {t.trim()}
                             </span>
@@ -1181,29 +1167,6 @@ export const AdminProjectManager: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Detail Specs Preview */}
-                  <div className="p-4 rounded-xl bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-gray-800 space-y-2">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                      Aperçu des Métadonnées de la Page de Détail
-                    </h4>
-                    <p className="text-sm">
-                      <strong className="text-gray-700 dark:text-gray-300">Durée :</strong>{' '}
-                      {formData.detail?.duration || 'Non renseignée'}
-                    </p>
-                    <p className="text-sm">
-                      <strong className="text-gray-700 dark:text-gray-300">Équipe :</strong>{' '}
-                      {formData.detail?.team || 'Non renseignée'}
-                    </p>
-                    <p className="text-sm">
-                      <strong className="text-gray-700 dark:text-gray-300">Lien Build :</strong>{' '}
-                      {formData.detail?.downloadUrl || 'Aucun'}
-                    </p>
-                    <p className="text-sm">
-                      <strong className="text-gray-700 dark:text-gray-300">Cahier des charges :</strong>{' '}
-                      {formData.detail?.docUrl || 'Aucun'}
-                    </p>
                   </div>
                 </div>
               )}
@@ -1213,14 +1176,14 @@ export const AdminProjectManager: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition"
+                  className="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition"
                 >
                   Annuler
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting || isUploading}
-                  className="px-5 py-2 rounded-lg text-sm font-semibold text-white bg-purple-600 hover:bg-purple-700 disabled:opacity-60 disabled:cursor-not-allowed shadow-md shadow-purple-600/20 cursor-pointer transition flex items-center gap-2"
+                  className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-white dark:text-[#0d1117] bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white shadow-xs hover:shadow-md cursor-pointer transition flex items-center gap-2 disabled:opacity-60"
                 >
                   {isSubmitting ? (
                     <>
