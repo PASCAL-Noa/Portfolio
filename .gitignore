@@ -19,6 +19,7 @@ pnpm-debug.log*
 dist/
 dist-ssr/
 build/
+uploads/
 *.tsbuildinfo
 *.local
 
