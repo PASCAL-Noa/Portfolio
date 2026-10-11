@@ -35,10 +35,16 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       frontendUrl,
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'http://localhost:5173',
+      'http://127.0.0.1:5173',
       'https://www.noa-pascal.com',
       'https://noa-pascal.com',
+      'https://pascal-noa.github.io',
     ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true,
   });
 
