@@ -2,7 +2,6 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateTimelineItemDto } from './dto/create-timeline-item.dto.js';
 import { UpdateTimelineItemDto } from './dto/update-timeline-item.dto.js';
-import { ReorderTimelineEntryDto } from './dto/reorder-timeline.dto.js';
 
 @Injectable()
 export class TimelineService {
@@ -27,17 +26,25 @@ export class TimelineService {
   }
 
   async create(dto: CreateTimelineItemDto) {
+    const generatedId =
+      dto.id ||
+      dto.title
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-') + `-${Date.now()}`;
+
     const existing = await this.prisma.timelineItem.findUnique({
-      where: { id: dto.id },
+      where: { id: generatedId },
     });
 
     if (existing) {
-      throw new ConflictException(`Un élément avec l'identifiant '${dto.id}' existe déjà.`);
+      throw new ConflictException(`Un élément avec l'identifiant '${generatedId}' existe déjà.`);
     }
 
     return this.prisma.timelineItem.create({
       data: {
-        id: dto.id,
+        id: generatedId,
         period: dto.period,
         title: dto.title,
         subtitle: dto.subtitle,
@@ -46,7 +53,7 @@ export class TimelineService {
         type: dto.type,
         link: dto.link,
         linkText: dto.linkText,
-        order: dto.order || 0,
+        order: dto.order ?? dto.orderIndex ?? 0,
       },
     });
   }
@@ -65,7 +72,9 @@ export class TimelineService {
         ...(dto.type && { type: dto.type }),
         ...(dto.link !== undefined && { link: dto.link }),
         ...(dto.linkText !== undefined && { linkText: dto.linkText }),
-        ...(dto.order !== undefined && { order: dto.order }),
+        ...(dto.order !== undefined || dto.orderIndex !== undefined
+          ? { order: dto.order ?? dto.orderIndex }
+          : {}),
       },
     });
   }
@@ -77,12 +86,13 @@ export class TimelineService {
     });
   }
 
-  async reorder(items: ReorderTimelineEntryDto[]) {
+  async reorder(items: { id: string; order?: number; orderIndex?: number }[]) {
+    const list = items || [];
     return this.prisma.$transaction(
-      items.map((item) =>
+      list.map((item) =>
         this.prisma.timelineItem.update({
           where: { id: item.id },
-          data: { order: item.order },
+          data: { order: item.order ?? item.orderIndex ?? 0 },
         }),
       ),
     );

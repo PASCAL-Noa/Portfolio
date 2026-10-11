@@ -86,6 +86,13 @@ export class CreateProjectDto {
   @IsOptional()
   order?: number;
 
+  @IsInt()
+  @IsOptional()
+  orderIndex?: number;
+
+  @IsOptional()
+  detail?: any;
+
   // Detail Page Fields
   @IsString()
   @IsOptional()

@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   UseGuards,
@@ -39,8 +40,16 @@ export class ProjectsController {
 
   @UseGuards(JwtAuthGuard)
   @Put('reorder')
-  reorder(@Body() dto: ReorderProjectsDto) {
-    return this.projectsService.reorder(dto.items);
+  reorderPut(@Body() dto: ReorderProjectsDto) {
+    const items = dto.items || dto.orders || [];
+    return this.projectsService.reorder(items);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('reorder')
+  reorderPatch(@Body() dto: ReorderProjectsDto) {
+    const items = dto.items || dto.orders || [];
+    return this.projectsService.reorder(items);
   }
 
   @UseGuards(JwtAuthGuard)

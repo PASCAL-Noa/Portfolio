@@ -9,8 +9,8 @@ export enum TimelineCategoryEnum {
 
 export class CreateTimelineItemDto {
   @IsString()
-  @IsNotEmpty()
-  id: string;
+  @IsOptional()
+  id?: string;
 
   @IsString()
   @IsNotEmpty()
@@ -46,4 +46,8 @@ export class CreateTimelineItemDto {
   @IsInt()
   @IsOptional()
   order?: number;
+
+  @IsInt()
+  @IsOptional()
+  orderIndex?: number;
 }

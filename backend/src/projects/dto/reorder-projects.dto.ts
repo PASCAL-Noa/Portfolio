@@ -1,18 +1,11 @@
-import { IsArray, IsInt, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
-
-export class ReorderProjectItemDto {
-  @IsString()
-  @IsNotEmpty()
-  id: string;
-
-  @IsInt()
-  order: number;
-}
+import { IsArray, IsOptional } from 'class-validator';
 
 export class ReorderProjectsDto {
   @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => ReorderProjectItemDto)
-  items: ReorderProjectItemDto[];
+  @IsOptional()
+  items?: { id: string; order?: number; orderIndex?: number }[];
+
+  @IsArray()
+  @IsOptional()
+  orders?: { id: string; order?: number; orderIndex?: number }[];
 }

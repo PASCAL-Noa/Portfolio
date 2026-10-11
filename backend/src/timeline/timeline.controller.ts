@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   UseGuards,
@@ -39,8 +40,16 @@ export class TimelineController {
 
   @UseGuards(JwtAuthGuard)
   @Put('reorder')
-  reorder(@Body() dto: ReorderTimelineDto) {
-    return this.timelineService.reorder(dto.items);
+  reorderPut(@Body() dto: ReorderTimelineDto) {
+    const items = dto.items || dto.orders || [];
+    return this.timelineService.reorder(items);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('reorder')
+  reorderPatch(@Body() dto: ReorderTimelineDto) {
+    const items = dto.items || dto.orders || [];
+    return this.timelineService.reorder(items);
   }
 
   @UseGuards(JwtAuthGuard)

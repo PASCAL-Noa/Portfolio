@@ -126,10 +126,11 @@ export const api = {
     return request(`/projects/${id}`, { method: 'DELETE' });
   },
 
-  async reorderProjects(orders: { id: string; orderIndex: number }[]): Promise<{ success: boolean }> {
+  async reorderProjects(orders: { id: string; orderIndex: number }[]): Promise<any> {
+    const items = orders.map((o) => ({ id: o.id, order: o.orderIndex, orderIndex: o.orderIndex }));
     return request('/projects/reorder', {
-      method: 'PATCH',
-      body: JSON.stringify({ orders }),
+      method: 'PUT',
+      body: JSON.stringify({ items, orders }),
     });
   },
 
@@ -156,10 +157,11 @@ export const api = {
     return request(`/timeline/${id}`, { method: 'DELETE' });
   },
 
-  async reorderTimeline(orders: { id: string; orderIndex: number }[]): Promise<{ success: boolean }> {
+  async reorderTimeline(orders: { id: string; orderIndex: number }[]): Promise<any> {
+    const items = orders.map((o) => ({ id: o.id, order: o.orderIndex, orderIndex: o.orderIndex }));
     return request('/timeline/reorder', {
-      method: 'PATCH',
-      body: JSON.stringify({ orders }),
+      method: 'PUT',
+      body: JSON.stringify({ items, orders }),
     });
   },
 };
