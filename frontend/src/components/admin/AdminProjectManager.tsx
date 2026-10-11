@@ -5,6 +5,7 @@ import { ProjectPayload } from '../../types/admin';
 import { projects as fallbackProjects } from '../../data/projects';
 import { projectDetails as fallbackProjectDetails } from '../../data/projectDetails';
 import { getAssetUrl } from '../../utils/imageUrl';
+import { MarkdownView } from '../common/MarkdownView';
 import {
   Plus,
   Trash2,
@@ -294,15 +295,39 @@ export const AdminProjectManager: React.FC = () => {
     try {
       const uploaded = await api.uploadMedia(file);
       if (targetField === 'image') {
-        setFormData((prev) => ({
-          ...prev,
-          image: uploaded.url,
-          detail: {
-            ...prev.detail!,
-            banner: uploaded.url,
-            thumbnails: prev.detail?.thumbnails?.length ? prev.detail.thumbnails : [uploaded.url],
-          },
-        }));
+        setFormData((prev) => {
+          const detail = prev.detail || {
+            description: '',
+            duration: '',
+            team: '',
+            tags: [],
+            downloadUrl: '',
+            downloadLabel: '',
+            docUrl: '',
+            docLabel: '',
+            videoUrl: '',
+            media: [],
+            thumbnails: [],
+          };
+          const hasMainInMedia = detail.media?.some((m) => m.src === uploaded.url);
+          const nextMedia = hasMainInMedia
+            ? detail.media
+            : [{ type: 'image' as const, src: uploaded.url }, ...(detail.media || [])];
+          const nextThumbnails = detail.thumbnails?.includes(uploaded.url)
+            ? detail.thumbnails
+            : [uploaded.url, ...(detail.thumbnails || [])];
+
+          return {
+            ...prev,
+            image: uploaded.url,
+            detail: {
+              ...detail,
+              banner: uploaded.url,
+              media: nextMedia,
+              thumbnails: nextThumbnails,
+            },
+          };
+        });
       } else if (targetField === 'docUrl') {
         setFormData((prev) => ({
           ...prev,
@@ -317,38 +342,110 @@ export const AdminProjectManager: React.FC = () => {
       showNotification('error', err instanceof Error ? err.message : 'Erreur lors du téléversement.');
     } finally {
       setIsUploading(false);
+      e.target.value = '';
+    }
+  };
+
+  const handleMediaFilesUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    setIsUploading(true);
+    try {
+      const addedMedia: { type: 'image' | 'video'; src: string }[] = [];
+      const addedThumbs: string[] = [];
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const uploaded = await api.uploadMedia(file);
+        addedMedia.push({ type: 'image', src: uploaded.url });
+        addedThumbs.push(uploaded.url);
+      }
+
+      setFormData((prev) => {
+        const curDetail = prev.detail || {
+          description: '',
+          duration: '',
+          team: '',
+          tags: [],
+          downloadUrl: '',
+          downloadLabel: '',
+          docUrl: '',
+          docLabel: '',
+          videoUrl: '',
+          media: [],
+          thumbnails: [],
+        };
+        return {
+          ...prev,
+          detail: {
+            ...curDetail,
+            media: [...(curDetail.media || []), ...addedMedia],
+            thumbnails: [...(curDetail.thumbnails || []), ...addedThumbs],
+          },
+        };
+      });
+
+      showNotification('success', `${files.length} image(s) téléversée(s) et ajoutée(s) à la galerie !`);
+    } catch (err: unknown) {
+      showNotification('error', err instanceof Error ? err.message : 'Erreur lors du téléversement.');
+    } finally {
+      setIsUploading(false);
+      e.target.value = '';
     }
   };
 
   const handleAddMedia = () => {
-    if (!mediaSrcInput.trim()) return;
-    const newMedia = {
+    if (!mediaSrcInput.trim()) {
+      showNotification('error', 'Veuillez saisir une URL ou utiliser le bouton Téléverser.');
+      return;
+    }
+    const newMedia: { type: 'image' | 'video'; src: string } = {
       type: mediaTypeInput,
       src: mediaSrcInput.trim(),
     };
-    setFormData((prev) => ({
-      ...prev,
-      detail: {
-        ...prev.detail!,
-        media: [...(prev.detail?.media || []), newMedia],
-        thumbnails:
-          mediaTypeInput === 'image'
-            ? [...(prev.detail?.thumbnails || []), mediaSrcInput.trim()]
-            : prev.detail?.thumbnails || [],
-      },
-    }));
+    setFormData((prev) => {
+      const curDetail = prev.detail || {
+        description: '',
+        duration: '',
+        team: '',
+        tags: [],
+        downloadUrl: '',
+        downloadLabel: '',
+        docUrl: '',
+        docLabel: '',
+        videoUrl: '',
+        media: [],
+        thumbnails: [],
+      };
+      return {
+        ...prev,
+        detail: {
+          ...curDetail,
+          media: [...(curDetail.media || []), newMedia],
+          thumbnails:
+            mediaTypeInput === 'image'
+              ? [...(curDetail.thumbnails || []), mediaSrcInput.trim()]
+              : curDetail.thumbnails || [],
+        },
+      };
+    });
     setMediaSrcInput('');
+    showNotification('success', 'Média ajouté à la galerie !');
   };
 
   const handleRemoveMedia = (index: number) => {
     setFormData((prev) => {
-      const nextMedia = [...(prev.detail?.media || [])];
-      nextMedia.splice(index, 1);
+      if (!prev.detail) return prev;
+      const nextMedia = [...(prev.detail.media || [])];
+      const removed = nextMedia.splice(index, 1)[0];
+      const nextThumbs = (prev.detail.thumbnails || []).filter((t) => t !== removed?.src);
       return {
         ...prev,
         detail: {
-          ...prev.detail!,
+          ...prev.detail,
           media: nextMedia,
+          thumbnails: nextThumbs,
         },
       };
     });
@@ -833,32 +930,17 @@ export const AdminProjectManager: React.FC = () => {
                   </div>
 
                   {/* Links & Featured Checkbox */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
-                        Lien GitHub
-                      </label>
-                      <input
-                        type="url"
-                        value={formData.githubUrl}
-                        onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
-                        placeholder="https://github.com/..."
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
-                        Lien Démo / Live
-                      </label>
-                      <input
-                        type="url"
-                        value={formData.liveUrl}
-                        onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })}
-                        placeholder="https://..."
-                        className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
-                      />
-                    </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
+                      Lien GitHub
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.githubUrl}
+                      onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
+                      placeholder="https://github.com/..."
+                      className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+                    />
                   </div>
 
                   <div className="flex items-center gap-2 pt-1">
@@ -880,20 +962,39 @@ export const AdminProjectManager: React.FC = () => {
                 <div className="space-y-5">
                   {/* Rich Description */}
                   <div>
-                    <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300 mb-1">
-                      Description Détaillée (HTML supporté)
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300">
+                        Description Détaillée (Support Markdown & HTML)
+                      </label>
+                      <span className="text-2xs text-gray-500 dark:text-[#8b949e]">
+                        Gras: **texte**, Titres: ## Titre, Listes: - puce
+                      </span>
+                    </div>
                     <textarea
-                      rows={5}
+                      rows={6}
                       value={formData.detail?.description}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          detail: { ...formData.detail!, description: e.target.value },
+                          detail: {
+                            ...(formData.detail || {
+                              duration: '',
+                              team: '',
+                              tags: [],
+                              downloadUrl: '',
+                              downloadLabel: '',
+                              docUrl: '',
+                              docLabel: '',
+                              videoUrl: '',
+                              media: [],
+                              thumbnails: [],
+                            }),
+                            description: e.target.value,
+                          },
                         })
                       }
-                      placeholder="<strong>Description complète...</strong>"
-                      className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d1117] text-sm font-mono focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
+                      placeholder="## À propos du projet&#10;&#10;Description rédigée en **Markdown** ou HTML...&#10;&#10;- Fonctionnalité 1&#10;- Fonctionnalité 2"
+                      className="w-full px-3.5 py-2 rounded-lg border border-gray-300 dark:border-[#30363d] bg-white dark:bg-[#0d1117] text-sm font-mono focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                     />
                   </div>
 
@@ -1065,19 +1166,40 @@ export const AdminProjectManager: React.FC = () => {
                   </div>
 
                   {/* Media Gallery */}
-                  <div className="p-4 rounded-xl bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-gray-800 space-y-3">
-                    <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300">
-                      Galerie Médias (Carousel & Lightbox)
-                    </label>
+                  <div className="p-4 sm:p-5 rounded-xl bg-gray-50 dark:bg-[#0d1117] border border-gray-200 dark:border-[#30363d] space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      <div>
+                        <label className="block text-xs font-semibold uppercase text-gray-700 dark:text-gray-300">
+                          Galerie Médias (Carousel & Lightbox)
+                        </label>
+                        <p className="text-2xs text-gray-500 dark:text-[#8b949e]">
+                          Ajoutez vos captures d&apos;écran ou vidéos pour la page de détail.
+                        </p>
+                      </div>
 
-                    <div className="flex flex-col sm:flex-row gap-2">
+                      <label className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] text-xs font-semibold cursor-pointer transition shadow-xs">
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>{isUploading ? 'Téléversement...' : 'Téléverser des captures'}</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          className="hidden"
+                          onChange={handleMediaFilesUpload}
+                          disabled={isUploading}
+                        />
+                      </label>
+                    </div>
+
+                    {/* Manual URL / Video Embed Add */}
+                    <div className="flex flex-col sm:flex-row gap-2 pt-2 border-t border-gray-200 dark:border-gray-800">
                       <select
                         value={mediaTypeInput}
                         onChange={(e) => setMediaTypeInput(e.target.value as 'image' | 'video')}
-                        className="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#161b22] text-sm"
+                        className="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#161b22] text-xs sm:text-sm font-medium"
                       >
-                        <option value="image">Image / Screenshot</option>
-                        <option value="video">Vidéo (YouTube Embed)</option>
+                        <option value="image">Image par URL</option>
+                        <option value="video">Vidéo YouTube (Embed URL)</option>
                       </select>
 
                       <input
@@ -1087,44 +1209,55 @@ export const AdminProjectManager: React.FC = () => {
                         placeholder={
                           mediaTypeInput === 'video'
                             ? 'https://www.youtube.com/embed/...'
-                            : '/assets/screenshot.webp ou URL'
+                            : '/assets/screenshot.webp ou https://...'
                         }
-                        className="flex-1 px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#161b22] text-sm"
+                        className="flex-1 px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#161b22] text-xs sm:text-sm font-mono"
                       />
 
                       <button
                         type="button"
                         onClick={handleAddMedia}
-                        className="px-4 py-1.5 rounded-lg bg-[rgb(53,53,53)] hover:bg-black dark:bg-[#f0f6fc] dark:hover:bg-white text-white dark:text-[#0d1117] text-xs font-semibold cursor-pointer"
+                        className="px-4 py-1.5 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200 text-xs font-semibold cursor-pointer transition whitespace-nowrap"
                       >
-                        Ajouter
+                        Ajouter par URL
                       </button>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                      {formData.detail?.media?.map((m, idx) => (
-                        <div
-                          key={idx}
-                          className="relative aspect-video rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-black group"
-                        >
-                          {m.type === 'video' ? (
-                            <div className="w-full h-full flex items-center justify-center text-xs text-white bg-gray-900 p-2 text-center">
-                              Vidéo: {m.src.slice(0, 20)}...
-                            </div>
-                          ) : (
-                            <img src={getAssetUrl(m.src)} alt={`Media ${idx}`} className="w-full h-full object-cover" />
-                          )}
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveMedia(idx)}
-                            className="absolute top-1 right-1 p-1 rounded-full bg-black/70 text-white hover:bg-red-600 transition cursor-pointer"
-                            title="Retirer ce média"
+                    {/* Media Grid Preview */}
+                    {formData.detail?.media && formData.detail.media.length > 0 ? (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 pt-2">
+                        {formData.detail.media.map((m, idx) => (
+                          <div
+                            key={idx}
+                            className="relative aspect-video rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-black group"
                           >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
+                            {m.type === 'video' ? (
+                              <div className="w-full h-full flex flex-col items-center justify-center text-2xs text-white bg-gray-900 p-2 text-center">
+                                <span className="font-bold mb-1">Vidéo</span>
+                                <span className="truncate w-full opacity-70">{m.src}</span>
+                              </div>
+                            ) : (
+                              <img src={getAssetUrl(m.src)} alt={`Media ${idx}`} className="w-full h-full object-cover" />
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveMedia(idx)}
+                              className="absolute top-1 right-1 p-1 rounded-full bg-black/80 hover:bg-red-600 text-white transition cursor-pointer"
+                              title="Retirer ce média"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                            <span className="absolute bottom-1 left-1 text-3xs px-1.5 py-0.5 rounded bg-black/70 text-white uppercase font-mono">
+                              #{idx + 1} {m.type}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="py-6 text-center border border-dashed border-gray-200 dark:border-gray-800 rounded-lg text-gray-400 text-xs">
+                        Aucun média dans la galerie pour le moment. Cliquez sur &quot;Téléverser des captures&quot; ci-dessus ou ajoutez un lien.
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -1166,6 +1299,21 @@ export const AdminProjectManager: React.FC = () => {
                           ))}
                         </div>
                       </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">
+                      Aperçu du Rendu Markdown (Page de Détail)
+                    </h4>
+                    <div className="rounded-2xl border border-gray-200 dark:border-[#30363d] bg-[#fafafa] dark:bg-[#161b22] p-5">
+                      {formData.detail?.description ? (
+                        <MarkdownView content={formData.detail.description} />
+                      ) : (
+                        <p className="text-xs text-gray-400 italic">
+                          Rédigez du contenu dans l&apos;onglet &quot;2. Page de Détail&quot; pour voir le rendu Markdown ici.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>

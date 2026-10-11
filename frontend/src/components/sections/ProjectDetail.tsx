@@ -3,6 +3,7 @@ import { ProjectDetailData } from '../../data/projectDetails';
 import { ArrowLeft, ChevronLeft, ChevronRight, Download, FileText, Play, X } from 'lucide-react';
 import { GithubIcon } from '../common/SocialIcons';
 import { getAssetUrl } from '../../utils/imageUrl';
+import { MarkdownView } from '../common/MarkdownView';
 
 interface ProjectDetailProps {
   data: ProjectDetailData;
@@ -212,10 +213,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ data, githubUrl, o
             </h1>
           </div>
 
-          {/* Description */}
-          <div
+          {/* Description (Markdown compatible) */}
+          <MarkdownView
+            content={data.description}
             className="text-gray-700 dark:text-[#8b949e] text-sm sm:text-base leading-relaxed space-y-3"
-            dangerouslySetInnerHTML={{ __html: data.description }}
           />
 
           {/* Metadata Box */}

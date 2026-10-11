@@ -87,3 +87,80 @@
 .animate-project-fade-in {
   animation: projectFadeIn 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* Markdown Content Styling */
+.markdown-content h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-main);
+}
+.markdown-content h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-text-main);
+}
+.markdown-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  margin-bottom: 0.35rem;
+  color: var(--color-text-main);
+}
+.markdown-content p {
+  margin-bottom: 0.75rem;
+  line-height: 1.65;
+}
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+.markdown-content ul {
+  list-style-type: disc;
+  margin-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.markdown-content ol {
+  list-style-type: decimal;
+  margin-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.markdown-content li {
+  margin-bottom: 0.25rem;
+}
+.markdown-content strong {
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+.markdown-content a {
+  color: #0969da;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.dark .markdown-content a {
+  color: #58a6ff;
+}
+.markdown-content code {
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background-color: rgba(125, 125, 125, 0.15);
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+.markdown-content pre {
+  background-color: #161b22;
+  color: #f0f6fc;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+}
+.markdown-content blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: 0.75rem;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
