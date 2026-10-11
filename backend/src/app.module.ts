@@ -7,6 +7,8 @@ import { HealthModule } from './health/health.module.js';
 import { PrismaModule } from './prisma/prisma.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { MediaModule } from './media/media.module.js';
+import { ProjectsModule } from './projects/projects.module.js';
+import { TimelineModule } from './timeline/timeline.module.js';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { MediaModule } from './media/media.module.js';
     PrismaModule,
     AuthModule,
     MediaModule,
+    ProjectsModule,
+    TimelineModule,
     HealthModule,
   ],
   controllers: [AppController],
