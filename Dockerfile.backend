@@ -11,8 +11,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     openssl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy backend package files
+# Copy backend package files and prisma schema
 COPY backend/package*.json ./backend/
+COPY backend/prisma ./backend/prisma/
+COPY backend/prisma7.config.ts ./backend/
 COPY frontend/package*.json ./frontend/
 
 WORKDIR /app/backend
