@@ -58,11 +58,17 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onSelectProject })
 
       {/* Projects Grid avec transition fluide progressive par carte */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProjects.map((project, index) => (
+        {filteredProjects.map((project, index) => {
+          const isCrtShowcase = project.id === 'rebreaker-reloaded';
+          return (
           <article
             key={`${filter}-${project.id}`}
             style={{ animationDelay: `${Math.min(index * 40, 240)}ms` }}
-            className="animate-project-fade-in group flex flex-col bg-[#fafafa] dark:bg-[#161b22] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md p-5 sm:p-6"
+            className={`animate-project-fade-in group flex flex-col bg-[#fafafa] dark:bg-[#161b22] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md p-5 sm:p-6 ${
+              isCrtShowcase
+                ? 'ring-1 ring-cyan-500/40 dark:ring-[#50dcff]/45 hover:ring-[#50dcff] hover:shadow-[0_10px_30px_rgba(80,220,255,0.18)]'
+                : ''
+            }`}
           >
             {/* Image banner 16:9 nette */}
             <div className="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-xl mb-4 sm:mb-5">
@@ -72,6 +78,12 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onSelectProject })
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
+              {isCrtShowcase && (
+                <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#0a0e16]/90 text-[#50dcff] border border-[#50dcff]/60 shadow-[0_0_12px_rgba(80,220,255,0.35)] backdrop-blur-xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#32e18c] animate-pulse" />
+                  Expérience CRT
+                </span>
+              )}
             </div>
 
             {/* Content body avec aération mobile renforcée */}
@@ -162,7 +174,8 @@ export const Projects: React.FC<ProjectsProps> = ({ projects, onSelectProject })
               </div>
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
 
       {/* Down Arrow */}

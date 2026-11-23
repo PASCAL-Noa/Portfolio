@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { useTheme } from './hooks/useTheme';
 import { usePortfolioData } from './hooks/usePortfolioData';
 import { Navbar } from './components/layout/Navbar';
@@ -8,6 +8,12 @@ import { Projects } from './components/sections/Projects';
 import { Skills } from './components/sections/Skills';
 import { Contact } from './components/sections/Contact';
 import { ProjectDetail } from './components/sections/ProjectDetail';
+
+const RebreakerReloadedPage = lazy(() =>
+  import('./components/projects/rebreaker-reloaded/RebreakerReloadedPage').then((m) => ({
+    default: m.RebreakerReloadedPage,
+  }))
+);
 
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/admin/ProtectedRoute';
@@ -83,9 +89,26 @@ export const AppContent: React.FC = () => {
     );
   }
 
-  // Route 3: Project Detail
+  // Route 3: Project Detail (with bespoke full-screen CRT TV showcase for Rebreaker Reloaded)
   const activeProjectDetail = currentProjectId ? projectDetails[currentProjectId] : null;
   const activeProjectSummary = currentProjectId ? projects.find((p) => p.id === currentProjectId) : null;
+
+  if (currentProjectId === 'rebreaker-reloaded') {
+    return (
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-[#18120e] flex items-center justify-center text-[#50dcff] font-mono text-sm tracking-widest">
+            WARMING UP CRT TUBE...
+          </div>
+        }
+      >
+        <RebreakerReloadedPage
+          githubUrl={activeProjectSummary?.githubUrl}
+          onBack={handleBackToProjects}
+        />
+      </Suspense>
+    );
+  }
 
   if (activeProjectDetail) {
     return (

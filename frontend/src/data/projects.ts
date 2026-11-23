@@ -2,6 +2,18 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: "rebreaker-reloaded",
+    title: "Rebreaker Reloaded",
+    category: "game",
+    image: "/assets/RebreakerReloaded/banner.jpg",
+    description: "Réinvention complète en C++20 & SFML 3 avec téléviseur CRT 1980s interactif, moteur ECS maison, 12 power-ups, 3 ultimates et 155 tests unitaires.",
+    technologies: ["C++20", "SFML 3", "ECS", "Shaders GLSL", "Game Engine"],
+    githubUrl: "https://github.com/PASCAL-Noa/REBREAKER-Reloaded",
+    detailUrl: "#/project/rebreaker-reloaded",
+    detailLabel: "Allumer la TV CRT",
+    featured: true
+  },
+  {
     id: "rebreaker",
     title: "Rebreaker",
     category: "game",

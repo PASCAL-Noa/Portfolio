@@ -63,9 +63,16 @@ export function usePortfolioData(): PortfolioData {
             githubUrl: p.githubUrl,
             liveUrl: p.liveUrl,
             detailUrl: p.detailUrl || `#/project/${p.id}`,
+            detailLabel: p.detailLabel,
             featured: p.featured,
           };
         });
+
+        const hasRebreakerReloaded = cleanProjects.some((p) => p.id === 'rebreaker-reloaded');
+        const staticReloaded = staticProjects.find((p) => p.id === 'rebreaker-reloaded');
+        if (!hasRebreakerReloaded && staticReloaded) {
+          cleanProjects.unshift(staticReloaded);
+        }
 
         setProjects(cleanProjects);
         setProjectDetails(dynamicDetails);

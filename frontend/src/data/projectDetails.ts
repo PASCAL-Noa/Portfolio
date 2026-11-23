@@ -16,6 +16,36 @@ export interface ProjectDetailData {
 }
 
 export const projectDetails: Record<string, ProjectDetailData> = {
+  "rebreaker-reloaded": {
+    "projectId": "rebreaker-reloaded",
+    "title": "Rebreaker Reloaded",
+    "banner": "/assets/RebreakerReloaded/banner.jpg",
+    "description": "<strong>Rebreaker Reloaded</strong> est la réinvention complète en solo de mon projet de Bachelor Rebreaker, bâtie de zéro en <strong>C++20</strong> avec <strong>SFML 3.0.2</strong>.<br><br>Son interface emblématique plonge le joueur dans un <strong>téléviseur CRT en bois des années 1980</strong> doté de molettes rotatives physiques, d'une grille de chaînes inspirée de la Wii, de 9 shaders GLSL cathodiques et d'une séquence d'extinction CRT en 3 phases.<br><br>Sous le capot, le jeu repose sur un moteur maison en 5 modules découplés (Core, Render, Audio, Engine ECS Sparse-Set, Game), 12 power-ups améliorables en Workshop, 3 capacités Ultimes, un Level Maker et une suite de 155 tests unitaires doctest (2 122 assertions).",
+    "duration": "~7 mois (240+ commits)",
+    "team": "PASCAL Noa (Solo)",
+    "tags": [
+      { "label": "Personnel", "variant": "purple" },
+      { "label": "C++20", "variant": "default" },
+      { "label": "SFML 3", "variant": "default" },
+      { "label": "ECS Maison", "variant": "default" },
+      { "label": "Shaders GLSL", "variant": "default" },
+      { "label": "155 Tests", "variant": "default" }
+    ],
+    "downloadUrl": "https://github.com/PASCAL-Noa/REBREAKER-Reloaded",
+    "downloadLabel": "Voir le dépôt GitHub",
+    "docUrl": "https://github.com/PASCAL-Noa/REBREAKER-Reloaded/tree/main/Docs",
+    "docLabel": "Documentation Technique",
+    "media": [
+      {
+        "type": "image",
+        "src": "/assets/RebreakerReloaded/banner.jpg",
+        "alt": "Rebreaker Reloaded — Téléviseur CRT 1980s et arène néon"
+      }
+    ],
+    "thumbnails": [
+      "/assets/RebreakerReloaded/banner.jpg"
+    ]
+  },
   "rebreaker": {
     "projectId": "rebreaker",
     "title": "Rebreaker",

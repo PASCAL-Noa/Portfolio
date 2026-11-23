@@ -1,0 +1,364 @@
+@font-face {
+  font-family: 'VT323';
+  src: url('/assets/RebreakerReloaded/vt323.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.rr-crt-root {
+  --rr-wood-base: #18120e;
+  --rr-wood-bevel-top: #41342a;
+  --rr-wood-bevel-left: #372c23;
+  --rr-wood-bevel-dark: #0c0907;
+  --rr-panel-bg: #20242c;
+  --rr-panel-border: #373e4b;
+  --rr-gold-fill: #2a2212;
+  --rr-gold-stroke: #dcb446;
+  --rr-power-red: #b4282d;
+  --rr-power-glow: #f05055;
+  --rr-tube-bg: #0a0e16;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  color: #e6f0ff;
+  background-color: var(--rr-wood-base);
+}
+
+.rr-font-retro {
+  font-family: 'VT323', ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.04em;
+}
+
+/* Authentic 1980s Dark Walnut Woodgrain Cabinet */
+.rr-wood-cabinet {
+  background-color: var(--rr-wood-base);
+  background-image:
+    repeating-linear-gradient(
+      92deg,
+      rgba(65, 52, 42, 0.14) 0px,
+      rgba(65, 52, 42, 0.14) 2px,
+      transparent 2px,
+      transparent 9px,
+      rgba(12, 9, 7, 0.25) 9px,
+      rgba(12, 9, 7, 0.25) 11px
+    ),
+    radial-gradient(ellipse at 35% 20%, rgba(90, 68, 50, 0.22), transparent 65%),
+    linear-gradient(160deg, #211914 0%, #18120e 50%, #100c09 100%);
+  box-shadow:
+    inset 0 10px 0 var(--rr-wood-bevel-top),
+    inset 10px 0 0 var(--rr-wood-bevel-left),
+    inset 0 -10px 0 var(--rr-wood-bevel-dark),
+    inset -10px 0 0 #0e0b08;
+}
+
+@media (max-width: 1023px) {
+  .rr-wood-cabinet {
+    box-shadow:
+      inset 0 6px 0 var(--rr-wood-bevel-top),
+      inset 6px 0 0 var(--rr-wood-bevel-left),
+      inset 0 -6px 0 var(--rr-wood-bevel-dark),
+      inset -6px 0 0 #0e0b08;
+  }
+}
+
+/* Brushed Gunmetal Right Control Panel */
+.rr-control-panel {
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    linear-gradient(180deg, #252a34 0%, #1d2129 55%, #181b22 100%);
+  border: 2px solid var(--rr-panel-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.rr-panel-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0f1218 12%, #0f1218 88%, transparent);
+  box-shadow: 0 1px 0 rgba(96, 108, 130, 0.35);
+}
+
+/* Curved CRT Bezel */
+.rr-crt-bezel {
+  background: linear-gradient(145deg, #1b1e26 0%, #0d1016 45%, #07090d 100%);
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, 0.07),
+    inset 0 -6px 18px rgba(0, 0, 0, 0.9),
+    0 12px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* Inner Cathode Tube */
+.rr-crt-tube {
+  background-color: var(--rr-tube-bg);
+  background-image: radial-gradient(circle at 50% 45%, #11192b 0%, #0a0e16 70%, #05070c 100%);
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.85),
+    inset 0 0 14px rgba(80, 220, 255, 0.08);
+}
+
+/* CRT Optical Layers (disabled when .rr-fx-off is applied) */
+.rr-crt-scanlines {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.28) 0px,
+      rgba(0, 0, 0, 0.28) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.025) 0px,
+      rgba(0, 255, 0, 0.025) 1px,
+      rgba(0, 128, 255, 0.025) 2px,
+      transparent 3px
+    );
+}
+
+.rr-crt-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(3, 6, 14, 0.45) 85%,
+    rgba(2, 4, 10, 0.88) 100%
+  );
+}
+
+.rr-crt-glass-sheen {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.065) 0%,
+      rgba(255, 255, 255, 0.015) 26%,
+      transparent 48%
+    );
+}
+
+/* Channel Switch Static Snow & Sync Tearing Glitch */
+@keyframes rrStaticJitter {
+  0% {
+    background-position: 0 0;
+    transform: translateX(0);
+  }
+  25% {
+    background-position: 40px -25px;
+    transform: translateX(-3px);
+  }
+  50% {
+    background-position: -30px 45px;
+    transform: translateX(4px);
+  }
+  75% {
+    background-position: 20px 15px;
+    transform: translateX(-2px);
+  }
+  100% {
+    background-position: -15px -35px;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rrVHoldRoll {
+  0% {
+    transform: translateY(-20%);
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}
+
+.rr-static-burst {
+  background-image:
+    repeating-radial-gradient(circle at 17% 32%, rgba(255, 255, 255, 0.85) 0, rgba(30, 35, 45, 0.85) 1px, transparent 2px),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.35) 0px,
+      rgba(0, 0, 0, 0.45) 2px,
+      rgba(160, 220, 255, 0.25) 4px
+    );
+  background-size: 6px 6px, 100% 6px;
+  animation: rrStaticJitter 90ms steps(2) infinite;
+}
+
+.rr-vhold-bar {
+  height: 18%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.42) 45%,
+    rgba(80, 220, 255, 0.35) 55%,
+    transparent
+  );
+  animation: rrVHoldRoll 260ms linear infinite;
+}
+
+/* Authentic 3-Phase CRT Power-Off Collapse Animation (matching MenuScene::RenderPowerOffAnimation)
+   Phase 1 (0%–47%): Vertical collapse into intensely bright horizontal white line
+   Phase 2 (47%–76%): Horizontal beam retraction into single bright phosphor center dot
+   Phase 3 (76%–100%): Center phosphor dot dissipates into total darkness */
+@keyframes rrCrtPowerOffBeam {
+  0% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 0.95;
+    filter: brightness(1.4);
+  }
+  44% {
+    transform: scaleX(1.02) scaleY(0.014);
+    opacity: 1;
+    filter: brightness(3.2);
+  }
+  75% {
+    transform: scaleX(0.018) scaleY(0.018);
+    opacity: 1;
+    filter: brightness(3.5);
+    border-radius: 9999px;
+  }
+  100% {
+    transform: scaleX(0) scaleY(0);
+    opacity: 0;
+    filter: brightness(0.5);
+    border-radius: 9999px;
+  }
+}
+
+.rr-poweroff-beam {
+  animation: rrCrtPowerOffBeam 820ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Authentic CRT Power-On Warm-Up & Boot Screen */
+@keyframes rrCrtPowerOnBeam {
+  0% {
+    transform: scaleX(0.01) scaleY(0.01);
+    opacity: 0;
+    filter: brightness(3.5);
+  }
+  18% {
+    transform: scaleX(0.025) scaleY(0.025);
+    opacity: 1;
+    filter: brightness(3.5);
+  }
+  42% {
+    transform: scaleX(1.04) scaleY(0.016);
+    opacity: 1;
+    filter: brightness(2.8);
+  }
+  78% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 0.25;
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 0;
+    filter: brightness(1);
+  }
+}
+
+@keyframes rrBootContentReveal {
+  0%,
+  18% {
+    opacity: 0;
+    transform: scale(0.96);
+    filter: blur(4px);
+  }
+  36% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  84% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+}
+
+@keyframes rrBootOverlayFade {
+  0%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rrBootBarFill {
+  0%,
+  22% {
+    width: 0%;
+  }
+  48% {
+    width: 42%;
+  }
+  72% {
+    width: 78%;
+  }
+  92%,
+  100% {
+    width: 100%;
+  }
+}
+
+.rr-boot-overlay {
+  animation: rrBootOverlayFade 2150ms ease-out forwards;
+}
+
+.rr-boot-beam {
+  animation: rrCrtPowerOnBeam 780ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.rr-boot-content {
+  animation: rrBootContentReveal 2100ms ease-out forwards;
+}
+
+.rr-boot-bar {
+  animation: rrBootBarFill 1700ms cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* Custom CRT Scrollbar inside screen */
+.rr-crt-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.rr-crt-scroll::-webkit-scrollbar-track {
+  background: rgba(10, 14, 22, 0.8);
+}
+
+.rr-crt-scroll::-webkit-scrollbar-thumb {
+  background: rgba(80, 220, 255, 0.35);
+  border-radius: 9999px;
+}
+
+.rr-crt-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(80, 220, 255, 0.7);
+}
+
+/* Speaker Grille Perforations */
+.rr-speaker-grille {
+  background-image:
+    radial-gradient(circle, #080a0e 36%, transparent 41%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+  background-size: 7px 7px, 100% 100%;
+}
+
+/* Honor prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .rr-static-burst,
+  .rr-vhold-bar,
+  .rr-boot-overlay,
+  .rr-boot-beam,
+  .rr-boot-content,
+  .rr-boot-bar {
+    animation: none !important;
+  }
+}
